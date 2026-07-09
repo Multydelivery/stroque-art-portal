@@ -1,0 +1,94 @@
+import { ArtistCard } from "@/components/ArtistCard";
+import { EmptyState } from "@/components/EmptyState";
+import { connectToDatabase } from "@/lib/db";
+import { getTestArtists } from "@/lib/test-data";
+import { isTestDataEnabled } from "@/lib/test-mode";
+import ArtistProfile from "@/models/ArtistProfile";
+import type { ArtistProfile as ArtistProfileType } from "@/types/entities";
+
+export const dynamic = "force-dynamic";
+
+export default async function ArtistsPage({
+  searchParams
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
+  const params = await searchParams;
+  if (isTestDataEnabled()) {
+    const artists = getTestArtists(params);
+
+    return (
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
+            <p className="mt-2 text-stone-700">Search by style, city, service, and starting price.</p>
+          </div>
+        </div>
+        <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-5">
+          <input name="q" placeholder="Search artists" defaultValue={params.q} />
+          <input name="style" placeholder="Style" defaultValue={params.style} />
+          <input name="location" placeholder="Location" defaultValue={params.location} />
+          <input name="service" placeholder="Service type" defaultValue={params.service} />
+          <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
+          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
+            Apply filters
+          </button>
+        </form>
+        <div className="mt-8">
+          {artists.length ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {artists.map((artist) => (
+                <ArtistCard artist={artist} key={artist._id} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState title="No artists found" body="Try broader filters, or sign up as an artist to create the first profile." />
+          )}
+        </div>
+      </main>
+    );
+  }
+
+  await connectToDatabase();
+  const filters: Record<string, unknown> = {};
+  if (params.q) filters.$text = { $search: params.q };
+  if (params.style) filters.styles = params.style;
+  if (params.location) filters.location = new RegExp(params.location, "i");
+  if (params.service) filters.services = params.service;
+  if (params.maxBudget) filters.startingPrice = { $lte: Number(params.maxBudget) };
+
+  const artists = JSON.parse(JSON.stringify(await ArtistProfile.find(filters).sort({ updatedAt: -1 }).lean())) as ArtistProfileType[];
+
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
+          <p className="mt-2 text-stone-700">Search by style, city, service, and starting price.</p>
+        </div>
+      </div>
+      <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-5">
+        <input name="q" placeholder="Search artists" defaultValue={params.q} />
+        <input name="style" placeholder="Style" defaultValue={params.style} />
+        <input name="location" placeholder="Location" defaultValue={params.location} />
+        <input name="service" placeholder="Service type" defaultValue={params.service} />
+        <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
+        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
+          Apply filters
+        </button>
+      </form>
+      <div className="mt-8">
+        {artists.length ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {artists.map((artist) => (
+              <ArtistCard artist={artist} key={artist._id} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState title="No artists found" body="Try broader filters, or sign up as an artist to create the first profile." />
+        )}
+      </div>
+    </main>
+  );
+}
