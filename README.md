@@ -70,6 +70,15 @@ Email: business@example.com
 Password: password123
 ```
 
+Administrator account:
+
+```text
+Email: admin@example.com
+Password: password123
+```
+
+Administrator accounts are not available through public signup. In MongoDB mode, create an administrator user directly with a bcrypt-hashed password and `role: "admin"`.
+
 ## MongoDB Mode
 
 To use a real database, set `USE_TEST_DATA=false` or remove it, then provide a valid MongoDB connection string:

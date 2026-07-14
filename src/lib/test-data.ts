@@ -59,7 +59,8 @@ function createStore(): TestStore {
   return {
     users: [
       { id: "test-user-artist", name: "Mara Ellis", email: "artist@example.com", password: "password123", role: "artist" },
-      { id: "test-user-business", name: "Stroque Buyer", email: "business@example.com", password: "password123", role: "business" }
+      { id: "test-user-business", name: "Stroque Buyer", email: "business@example.com", password: "password123", role: "business" },
+      { id: "test-user-admin", name: "Stroque Administrator", email: "admin@example.com", password: "password123", role: "admin" }
     ],
     artists,
     businesses,
@@ -113,6 +114,16 @@ export function findTestUserByEmail(email: string) {
 
 export function findTestUserById(id: string) {
   return store().users.find((user) => user.id === id) ?? null;
+}
+
+export function getTestAdminDashboard() {
+  const data = store();
+  return {
+    users: data.users.map(({ id, name, email, role }) => ({ id, name, email, role })),
+    artists: data.artists,
+    businesses: data.businesses,
+    requests: data.requests
+  };
 }
 
 export function createTestUser(data: z.infer<typeof signupSchema>) {

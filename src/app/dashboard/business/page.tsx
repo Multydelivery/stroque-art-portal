@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export default async function BusinessDashboardPage() {
   const user = await getSessionUser();
   if (!user) redirect("/auth/login");
-  if (user.role !== "business") redirect("/dashboard/artist");
+  if (user.role !== "business") redirect(`/dashboard/${user.role}`);
 
   if (isTestDataEnabled()) {
     const profile = getTestBusinessProfile(user.id) as BusinessProfileType;

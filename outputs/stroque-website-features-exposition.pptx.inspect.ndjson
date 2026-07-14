@@ -1,0 +1,115 @@
+{"kind":"deck","id":"pr/b290kc","name":"Deck"}
+{"kind":"layout","layoutId":"8acded40-1585-4ebf-a97a-adc7b8190ea9","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"1f26ffee-956e-45b6-b947-27c3950eef6f","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/bvulz5","slide":1,"title":"WEBSITE FEATURE EXPOSITION","textShapes":4}
+{"kind":"shape","id":"sh/tkbudgvm","slide":1,"name":"cover-left-field","bbox":[0,0,704,720]}
+{"kind":"textbox","id":"sh/sjidkbe1","slide":1,"name":"cover-kicker","text":"WEBSITE FEATURE EXPOSITION","textPreview":"WEBSITE FEATURE EXPOSITION","textChars":26,"textLines":1,"bbox":[64,56,500,28]}
+{"kind":"textbox","id":"sh/je9c76dk","slide":1,"name":"cover-title","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[64,178,560,136]}
+{"kind":"textbox","id":"sh/it0be1wz","slide":1,"name":"cover-subtitle","text":"A marketplace website that helps commercial spaces find artists, compare fit, and send clear custom-art project requests.","textPreview":"A marketplace website that helps commercial spaces find artists, compare fit, and send clear custom-art project requests.","textChars":121,"textLines":1,"bbox":[64,336,540,120]}
+{"kind":"textbox","id":"sh/5gru9gvq","slide":1,"name":"cover-foot","text":"Next.js app overview","textPreview":"Next.js app overview","textChars":20,"textLines":1,"bbox":[64,626,360,30]}
+{"kind":"image","id":"im/j69cb21g","slide":1,"name":"","alt":"Stroque mural hero artwork","bbox":[704,0,576,720]}
+{"kind":"notes","id":"nt/bvulz5","slide":1,"text":""}
+{"kind":"slide","id":"sl/570fx3","slide":2,"title":"PRODUCT IDEA","textShapes":10}
+{"kind":"textbox","id":"sh/7uho7mt0","slide":2,"name":"kicker-2","text":"PRODUCT IDEA","textPreview":"PRODUCT IDEA","textChars":12,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/svqpgrul","slide":2,"name":"title-2","text":"The website turns art buying into a guided workflow.","textPreview":"The website turns art buying into a guided workflow.","textChars":52,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/twz69cb6","slide":2,"name":"body-2","text":"The portal is built for businesses that need custom artwork and artists who need a structured way to present their services and manage inquiries.","textPreview":"The portal is built for businesses that need custom artwork and artists who need a structured way to present their services and manage in...","textChars":145,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/uxs7ihcb","slide":2,"name":"footer-rule-2","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/fy1obmtw","slide":2,"name":"footer-label-2","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/gzapkruh","slide":2,"name":"footer-page-2","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"shape","id":"sh/h0j6dwb2","slide":2,"name":"buyer-panel","bbox":[72,306,500,238]}
+{"kind":"shape","id":"sh/a1on6xc7","slide":2,"name":"artist-panel","bbox":[708,306,500,238]}
+{"kind":"textbox","id":"sh/v2xoz2ds","slide":2,"name":"buyer-head","text":"For businesses","textPreview":"For businesses","textChars":14,"textLines":1,"bbox":[106,342,360,38]}
+{"kind":"textbox","id":"sh/valcrqh8","slide":2,"name":"buyer-copy","text":"Browse by fit, review price and services, then send a request with budget, timeline, style, and space details.","textPreview":"Browse by fit, review price and services, then send a request with budget, timeline, style, and space details.","textChars":110,"textLines":1,"bbox":[106,396,400,96]}
+{"kind":"textbox","id":"sh/a9cbyl0n","slide":2,"name":"artist-head","text":"For artists","textPreview":"For artists","textChars":11,"textLines":1,"bbox":[742,342,360,38]}
+{"kind":"textbox","id":"sh/xc3ut0ze","slide":2,"name":"artist-copy","text":"Maintain a profile, show portfolio images, publish services and starting price, and update request status.","textPreview":"Maintain a profile, show portfolio images, publish services and starting price, and update request status.","textChars":106,"textLines":1,"bbox":[742,396,400,96]}
+{"kind":"textbox","id":"sh/wbut0vit","slide":2,"name":"middle-arrow","text":"Discovery -> Request -> Follow-up","textPreview":"Discovery -> Request -> Follow-up","textChars":33,"textLines":1,"bbox":[438,572,404,38]}
+{"kind":"notes","id":"nt/570fx3","slide":2,"text":""}
+{"kind":"slide","id":"sl/6j6ioo","slide":3,"title":"DISCOVERY","textShapes":8}
+{"kind":"textbox","id":"sh/f21obyxs","slide":3,"name":"kicker-3","text":"DISCOVERY","textPreview":"DISCOVERY","textChars":9,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/g3a5k3yd","slide":3,"name":"title-3","text":"Artist search is organized around real project constraints.","textPreview":"Artist search is organized around real project constraints.","textChars":59,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/h4j6d8fi","slide":3,"name":"body-3","text":"The directory gives buyers practical filters instead of asking them to browse an undifferentiated gallery.","textPreview":"The directory gives buyers practical filters instead of asking them to browse an undifferentiated gallery.","textChars":106,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/25s7mdg3","slide":3,"name":"footer-rule-3","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/361ofixo","slide":3,"name":"footer-label-3","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/47apony9","slide":3,"name":"footer-page-3","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"shape","id":"sh/i9ona9gz","slide":3,"name":"filter-panel","bbox":[74,296,588,250]}
+{"kind":"textbox","id":"sh/jaxo3ehk","slide":3,"name":"filter-title","text":"Search and filter signals","textPreview":"Search and filter signals","textChars":25,"textLines":1,"bbox":[110,324,420,34]}
+{"kind":"textbox","id":"sh/fyl0zipw","slide":3,"name":"filter-list","text":"Search term\nStyle\nLocation\nService type\nMaximum budget","textPreview":"Search term | Style | Location | Service type | Maximum budget","textChars":54,"textLines":5,"bbox":[110,386,260,140]}
+{"kind":"textbox","id":"sh/uxczqd8b","slide":3,"name":"filter-meaning","text":"These map directly to the artist profile fields, so every result can be judged on project fit.","textPreview":"These map directly to the artist profile fields, so every result can be judged on project fit.","textChars":94,"textLines":1,"bbox":[390,388,220,108]}
+{"kind":"image","id":"im/wry9s3e1","slide":3,"name":"","alt":"Restaurant interior mural","bbox":[760,296,390,250]}
+{"kind":"notes","id":"nt/6j6ioo","slide":3,"text":""}
+{"kind":"slide","id":"sl/wfp48z","slide":4,"title":"ARTIST PROFILES","textShapes":7}
+{"kind":"textbox","id":"sh/z6tw3e10","slide":4,"name":"kicker-4","text":"ARTIST PROFILES","textPreview":"ARTIST PROFILES","textChars":15,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/072xczil","slide":4,"name":"title-4","text":"Profiles package style, proof, and commercial fit on one page.","textPreview":"Profiles package style, proof, and commercial fit on one page.","textChars":62,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/18be54zq","slide":4,"name":"body-4","text":"A buyer can move from visual evidence to decision criteria without leaving the artist detail page.","textPreview":"A buyer can move from visual evidence to decision criteria without leaving the artist detail page.","textChars":98,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/mt4fe90b","slide":4,"name":"footer-rule-4","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/nudw7ehw","slide":4,"name":"footer-label-4","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/ovmxgjih","slide":4,"name":"footer-page-4","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"shape","id":"sh/2x0v2p07","slide":4,"name":"profile-details","bbox":[556,286,610,254]}
+{"kind":"textbox","id":"sh/3y9wva1s","slide":4,"name":"profile-head","text":"Profile information shown to buyers","textPreview":"Profile information shown to buyers","textChars":35,"textLines":1,"bbox":[592,320,460,34]}
+{"kind":"textbox","id":"sh/fetkn65s","slide":4,"name":"profile-list","text":"Portfolio images\nLocation and display name\nArtist bio\nStarting price\nServices and styles\nProject request entry point","textPreview":"Portfolio images | Location and display name | Artist bio | Starting price | Services and styles | Project request entry point","textChars":116,"textLines":6,"bbox":[592,376,470,150]}
+{"kind":"image","id":"im/wv2d0je5","slide":4,"name":"","alt":"Office mural artwork","bbox":[76,290,424,246]}
+{"kind":"notes","id":"nt/wfp48z","slide":4,"text":""}
+{"kind":"slide","id":"sl/x4cccq","slide":5,"title":"PROJECT REQUESTS","textShapes":14}
+{"kind":"textbox","id":"sh/476ho3mt","slide":5,"name":"kicker-5","text":"PROJECT REQUESTS","textPreview":"PROJECT REQUESTS","textChars":16,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/j6xgvy58","slide":5,"name":"title-5","text":"The request form makes the first inquiry actionable.","textPreview":"The request form makes the first inquiry actionable.","textChars":52,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/ilofmt4n","slide":5,"name":"body-5","text":"Instead of a vague contact message, businesses submit the details artists need to evaluate fit, timing, and pricing.","textPreview":"Instead of a vague contact message, businesses submit the details artists need to evaluate fit, timing, and pricing.","textChars":116,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/tczy1sna","slide":5,"name":"footer-rule-5","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/sbqhsnmp","slide":5,"name":"footer-label-5","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/raxgzi54","slide":5,"name":"footer-page-5","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"textbox","id":"sh/69ozqd4j","slide":5,"name":"number-01","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[82,300,60,36]}
+{"kind":"textbox","id":"sh/1gzy5s36","slide":5,"name":"row-title-01","text":"Space type","textPreview":"Space type","textChars":10,"textLines":1,"bbox":[158,298,330,36]}
+{"kind":"textbox","id":"sh/0fqhwnm1","slide":5,"name":"row-body-01","text":"Examples include restaurant wall, lobby, office suite, or feature installation.","textPreview":"Examples include restaurant wall, lobby, office suite, or feature installation.","textChars":79,"textLines":1,"bbox":[530,300,590,54]}
+{"kind":"shape","id":"sh/ad8nm9ob","slide":5,"name":"row-rule-01","bbox":[82,370,1056,1]}
+{"kind":"textbox","id":"sh/behovepw","slide":5,"name":"number-02","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[82,395,60,36]}
+{"kind":"textbox","id":"sh/wfq5oj6h","slide":5,"name":"row-title-02","text":"Budget and timeline","textPreview":"Budget and timeline","textChars":19,"textLines":1,"bbox":[158,393,330,36]}
+{"kind":"textbox","id":"sh/xgz6xo72","slide":5,"name":"row-body-02","text":"Artists can understand scope and availability before responding.","textPreview":"Artists can understand scope and availability before responding.","textChars":64,"textLines":1,"bbox":[530,395,590,54]}
+{"kind":"shape","id":"sh/yhsnqto7","slide":5,"name":"row-rule-02","bbox":[82,465,1056,1]}
+{"kind":"textbox","id":"sh/ji1ozyps","slide":5,"name":"number-03","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[82,490,60,36]}
+{"kind":"textbox","id":"sh/kjapsj6d","slide":5,"name":"row-title-03","text":"Style and description","textPreview":"Style and description","textChars":21,"textLines":1,"bbox":[158,488,330,36]}
+{"kind":"textbox","id":"sh/lkj61o7y","slide":5,"name":"row-body-03","text":"The form captures aesthetic preference, goals, constraints, and installation context.","textPreview":"The form captures aesthetic preference, goals, constraints, and installation context.","textChars":85,"textLines":1,"bbox":[530,490,590,54]}
+{"kind":"shape","id":"sh/elonep83","slide":5,"name":"row-rule-03","bbox":[82,560,1056,1]}
+{"kind":"notes","id":"nt/x4cccq","slide":5,"text":""}
+{"kind":"slide","id":"sl/calbrn","slide":6,"title":"DASHBOARDS","textShapes":9}
+{"kind":"textbox","id":"sh/sveporex","slide":6,"name":"kicker-6","text":"DASHBOARDS","textPreview":"DASHBOARDS","textChars":10,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/rulofmdc","slide":6,"name":"title-6","text":"Role-based dashboards keep each side focused after submission.","textPreview":"Role-based dashboards keep each side focused after submission.","textChars":62,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/6tc7mhwr","slide":6,"name":"body-6","text":"Businesses track sent requests. Artists manage their public profile and update incoming request status.","textPreview":"Businesses track sent requests. Artists manage their public profile and update incoming request status.","textChars":103,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/5s36dcv6","slide":6,"name":"footer-rule-6","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/47upk7el","slide":6,"name":"footer-label-6","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/j6lob2d0","slide":6,"name":"footer-page-6","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"shape","id":"sh/i5c7ixwv","slide":6,"name":"business-track","bbox":[70,306,520,240]}
+{"kind":"shape","id":"sh/h4369cva","slide":6,"name":"artist-track","bbox":[690,306,520,240]}
+{"kind":"textbox","id":"sh/w3a5g7ep","slide":6,"name":"business-title","text":"Business dashboard","textPreview":"Business dashboard","textChars":18,"textLines":1,"bbox":[104,342,380,34]}
+{"kind":"textbox","id":"sh/mpk3ahwn","slide":6,"name":"business-body","text":"Edit business name, industry, and location. Review requests already sent to artists with budget, timeline, style, description, and status.","textPreview":"Edit business name, industry, and location. Review requests already sent to artists with budget, timeline, style, description, and status.","textChars":138,"textLines":1,"bbox":[104,396,412,112]}
+{"kind":"textbox","id":"sh/7qt4jmd8","slide":6,"name":"artist-title","text":"Artist dashboard","textPreview":"Artist dashboard","textChars":16,"textLines":1,"bbox":[724,342,380,34]}
+{"kind":"textbox","id":"sh/8rmlcret","slide":6,"name":"artist-body","text":"Update display profile, bio, styles, services, price, and portfolio. Move requests through pending, accepted, declined, and completed.","textPreview":"Update display profile, bio, styles, services, price, and portfolio. Move requests through pending, accepted, declined, and completed.","textChars":134,"textLines":1,"bbox":[724,396,412,112]}
+{"kind":"notes","id":"nt/calbrn","slide":6,"text":""}
+{"kind":"slide","id":"sl/q7ztn1","slide":7,"title":"PLATFORM FEATURES","textShapes":13}
+{"kind":"textbox","id":"sh/3218fe1g","slide":7,"name":"kicker-7","text":"PLATFORM FEATURES","textPreview":"PLATFORM FEATURES","textChars":17,"textLines":1,"bbox":[42,38,520,28]}
+{"kind":"textbox","id":"sh/43apoj21","slide":7,"name":"title-7","text":"The technical foundation supports demos and production-style use.","textPreview":"The technical foundation supports demos and production-style use.","textChars":65,"textLines":1,"bbox":[42,76,820,92]}
+{"kind":"textbox","id":"sh/543qhojm","slide":7,"name":"body-7","text":"The app separates local demonstration from database-backed operation, while keeping forms validated and routes role-aware.","textPreview":"The app separates local demonstration from database-backed operation, while keeping forms validated and routes role-aware.","textChars":122,"textLines":1,"bbox":[42,176,700,78]}
+{"kind":"shape","id":"sh/q5crqtkr","slide":7,"name":"footer-rule-7","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/r6l8je1c","slide":7,"name":"footer-label-7","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/sru9sj2x","slide":7,"name":"footer-page-7","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"shape","id":"sh/ds3qloji","slide":7,"name":"tech-panel-0","bbox":[74,308,526,118]}
+{"kind":"textbox","id":"sh/6987epkn","slide":7,"name":"tech-title-0","text":"Authentication","textPreview":"Authentication","textChars":14,"textLines":1,"bbox":[102,332,260,30]}
+{"kind":"textbox","id":"sh/7ah87u18","slide":7,"name":"tech-body-0","text":"Signup and login support artist and business roles with protected dashboards.","textPreview":"Signup and login support artist and business roles with protected dashboards.","textChars":77,"textLines":1,"bbox":[102,372,420,44]}
+{"kind":"shape","id":"sh/nmdcfmd0","slide":7,"name":"tech-panel-1","bbox":[680,308,526,118]}
+{"kind":"textbox","id":"sh/ml4b6hcf","slide":7,"name":"tech-title-1","text":"Validated forms","textPreview":"Validated forms","textChars":15,"textLines":1,"bbox":[708,332,260,30]}
+{"kind":"textbox","id":"sh/9ovuhwvq","slide":7,"name":"tech-body-1","text":"Zod and React Hook Form enforce required profile and request fields.","textPreview":"Zod and React Hook Form enforce required profile and request fields.","textChars":68,"textLines":1,"bbox":[708,372,420,44]}
+{"kind":"shape","id":"sh/8nmt8ru5","slide":7,"name":"tech-panel-2","bbox":[74,478,526,118]}
+{"kind":"textbox","id":"sh/zitcbmdo","slide":7,"name":"tech-title-2","text":"Data modes","textPreview":"Data modes","textChars":10,"textLines":1,"bbox":[102,502,260,30]}
+{"kind":"textbox","id":"sh/yhkb2hc3","slide":7,"name":"tech-body-2","text":"In-memory test data supports demos; MongoDB and Mongoose support persistent storage.","textPreview":"In-memory test data supports demos; MongoDB and Mongoose support persistent storage.","textChars":84,"textLines":1,"bbox":[102,542,420,44]}
+{"kind":"shape","id":"sh/lkbudcvu","slide":7,"name":"tech-panel-3","bbox":[680,478,526,118]}
+{"kind":"textbox","id":"sh/0j2t47u9","slide":7,"name":"tech-title-3","text":"Image uploads","textPreview":"Image uploads","textChars":13,"textLines":1,"bbox":[708,502,260,30]}
+{"kind":"textbox","id":"sh/butc72ds","slide":7,"name":"tech-body-3","text":"Artist portfolios can use Cloudinary-backed uploads when credentials are configured.","textPreview":"Artist portfolios can use Cloudinary-backed uploads when credentials are configured.","textChars":84,"textLines":1,"bbox":[708,542,420,44]}
+{"kind":"notes","id":"nt/q7ztn1","slide":7,"text":""}
+{"kind":"slide","id":"sl/z8336r","slide":8,"title":"FEATURE SUMMARY","textShapes":6}
+{"kind":"textbox","id":"sh/103a58fa","slide":8,"name":"close-kicker","text":"FEATURE SUMMARY","textPreview":"FEATURE SUMMARY","textChars":15,"textLines":1,"bbox":[552,84,460,28]}
+{"kind":"textbox","id":"sh/0zu9w3ep","slide":8,"name":"close-title","text":"Stroque is a complete early-stage commissioning portal.","textPreview":"Stroque is a complete early-stage commissioning portal.","textChars":55,"textLines":1,"bbox":[552,142,600,118]}
+{"kind":"textbox","id":"sh/n2ls7ixg","slide":8,"name":"close-body","text":"The website covers the core path from discovery to project request management: searchable artists, rich profiles, structured intake, role-based dashboards, status tracking, validation, demo data, database models, and upload-ready portfolio support.","textPreview":"The website covers the core path from discovery to project request management: searchable artists, rich profiles, structured intake, role...","textChars":248,"textLines":1,"bbox":[552,306,592,170]}
+{"kind":"textbox","id":"sh/m1cbydwv","slide":8,"name":"close-note","text":"Best next exposition focus: live demo the buyer path first, then show the artist dashboard.","textPreview":"Best next exposition focus: live demo the buyer path first, then show the artist dashboard.","textChars":91,"textLines":1,"bbox":[552,548,560,48]}
+{"kind":"shape","id":"sh/943a98f6","slide":8,"name":"footer-rule-8","bbox":[42,674,1196,1]}
+{"kind":"textbox","id":"sh/o3ut03e1","slide":8,"name":"footer-label-8","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[42,684,300,22]}
+{"kind":"textbox","id":"sh/bq5sbixc","slide":8,"name":"footer-page-8","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1180,684,58,22]}
+{"kind":"image","id":"im/fi98j654","slide":8,"name":"","alt":"Bar interior mural","bbox":[42,52,432,560]}
+{"kind":"notes","id":"nt/z8336r","slide":8,"text":""}

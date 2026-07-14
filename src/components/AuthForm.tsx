@@ -40,7 +40,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
       return;
     }
 
-    router.push(data.role === "artist" ? "/dashboard/artist" : "/dashboard/business");
+    const dashboard = data.role === "admin" ? "/dashboard/admin" : `/dashboard/${data.role}`;
+    router.push(dashboard);
     router.refresh();
   }
 

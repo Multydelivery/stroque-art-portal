@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export default async function ArtistDashboardPage() {
   const user = await getSessionUser();
   if (!user) redirect("/auth/login");
-  if (user.role !== "artist") redirect("/dashboard/business");
+  if (user.role !== "artist") redirect(`/dashboard/${user.role}`);
 
   if (isTestDataEnabled()) {
     const profile = getTestArtistProfile(user.id) as ArtistProfileType;

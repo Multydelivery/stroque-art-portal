@@ -1,0 +1,116 @@
+{"kind":"deck","id":"pr/4lr29d","name":"Deck"}
+{"kind":"layout","layoutId":"20c157d5-f68c-49d0-87b7-a01d427e9f06","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"90cb948c-4748-46ca-8354-d1d19b5c117f","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/i4za4l","slide":1,"title":"PRO PRESENTATION","textShapes":4}
+{"kind":"shape","id":"sh/pwfyhori","slide":1,"name":"cover-left","bbox":[0,0,680,720]}
+{"kind":"textbox","id":"sh/ovmx8jax","slide":1,"name":"cover-eyebrow","text":"PRO PRESENTATION","textPreview":"PRO PRESENTATION","textChars":16,"textLines":1,"bbox":[64,62,450,28]}
+{"kind":"textbox","id":"sh/fqdwbe9g","slide":1,"name":"cover-title","text":"Stroque Art Portal","textPreview":"Stroque Art Portal","textChars":18,"textLines":1,"bbox":[64,178,540,128]}
+{"kind":"textbox","id":"sh/ep4f29sv","slide":1,"name":"cover-body","text":"A test-mode website walkthrough using live screenshots of the public pages, authentication screens, dashboards, and project request workflow.","textPreview":"A test-mode website walkthrough using live screenshots of the public pages, authentication screens, dashboards, and project request workf...","textChars":141,"textLines":1,"bbox":[64,330,520,112]}
+{"kind":"textbox","id":"sh/1svedor6","slide":1,"name":"cover-note","text":"Evidence captured from the deployed site and local test-mode dashboard.","textPreview":"Evidence captured from the deployed site and local test-mode dashboard.","textChars":71,"textLines":1,"bbox":[64,600,500,48]}
+{"kind":"image","id":"im/vu58j2t4","slide":1,"name":"","alt":"homepage hero screenshot","bbox":[680,0,600,720]}
+{"kind":"notes","id":"nt/i4za4l","slide":1,"text":""}
+{"kind":"slide","id":"sl/lkbws4","slide":2,"title":"NAVIGATION AND HERO","textShapes":7}
+{"kind":"textbox","id":"sh/dk7q5gbi","slide":2,"name":"eyebrow-2","text":"NAVIGATION AND HERO","textPreview":"NAVIGATION AND HERO","textChars":19,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/qhgru1cr","slide":2,"name":"title-2","text":"The first screen positions Stroque as a marketplace for commercial art projects.","textPreview":"The first screen positions Stroque as a marketplace for commercial art projects.","textChars":80,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/rip836tc","slide":2,"name":"body-2","text":"The navigation keeps the primary routes visible while the hero explains who the product serves and what action to take next.","textPreview":"The navigation keeps the primary routes visible while the hero explains who the product serves and what action to take next.","textChars":124,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/4fy9sru1","slide":2,"name":"footer-rule-2","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/5g7q1wbm","slide":2,"name":"footer-source-2","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/idwrqhcv","slide":2,"name":"footer-page-2","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"shape","id":"sh/obi94vu5","slide":2,"name":"nav-box","bbox":[78,300,560,238]}
+{"kind":"textbox","id":"sh/pcrad0bq","slide":2,"name":"nav-heading","text":"What the screen proves","textPreview":"What the screen proves","textChars":22,"textLines":1,"bbox":[100,320,516,30]}
+{"kind":"textbox","id":"sh/98ni1cn2","slide":2,"name":"nav-body","text":"Navbar: brand, Artists, Log in, Sign up.\nHero: clear business-space positioning.\nCalls to action: Find Artists and Join as Artist.","textPreview":"Navbar: brand, Artists, Log in, Sign up. | Hero: clear business-space positioning. | Calls to action: Find Artists and Join as Artist.","textChars":130,"textLines":3,"bbox":[100,360,516,160]}
+{"kind":"image","id":"im/61orehs7","slide":2,"name":"","alt":"navbar hero","bbox":[730,62,456,414]}
+{"kind":"notes","id":"nt/lkbws4","slide":2,"text":""}
+{"kind":"slide","id":"sl/oajj6b","slide":3,"title":"HOMEPAGE PROOF POINTS","textShapes":6}
+{"kind":"textbox","id":"sh/ut47ydsv","slide":3,"name":"eyebrow-3","text":"HOMEPAGE PROOF POINTS","textPreview":"HOMEPAGE PROOF POINTS","textChars":21,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/hwfqtsrm","slide":3,"name":"title-3","text":"The homepage uses market signals and local events to make discovery feel active.","textPreview":"The homepage uses market signals and local events to make discovery feel active.","textChars":80,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/wv6p0na1","slide":3,"name":"body-3","text":"The content is not only a landing page; it gives buyers categories, local context, and reasons to continue exploring.","textPreview":"The content is not only a landing page; it gives buyers categories, local context, and reasons to continue exploring.","textChars":117,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/3yx8v29s","slide":3,"name":"footer-rule-3","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/ixo72xs7","slide":3,"name":"footer-source-3","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/5kfqxcri","slide":3,"name":"footer-page-3","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"textbox","id":"sh/k3qpsbqd","slide":3,"name":"home-labels","text":"Project demand categories          Local art calendar          Artist of the week","textPreview":"Project demand categories          Local art calendar          Artist of the week","textChars":81,"textLines":1,"bbox":[92,616,1040,28]}
+{"kind":"image","id":"im/l4fe10z2","slide":3,"name":"","alt":"marketplace pulse","bbox":[72,294,350,300]}
+{"kind":"image","id":"im/m5ofu5gn","slide":3,"name":"","alt":"artist events","bbox":[466,294,350,300]}
+{"kind":"image","id":"im/n6xg3ahs","slide":3,"name":"","alt":"artist of week","bbox":[860,294,350,300]}
+{"kind":"notes","id":"nt/oajj6b","slide":3,"text":""}
+{"kind":"slide","id":"sl/6usx6h","slide":4,"title":"HOMEPAGE EDUCATION","textShapes":7}
+{"kind":"textbox","id":"sh/ahwby58v","slide":4,"name":"eyebrow-4","text":"HOMEPAGE EDUCATION","textPreview":"HOMEPAGE EDUCATION","textChars":18,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/xk7u9kr6","slide":4,"name":"title-4","text":"The lower homepage turns browsing into a simple buyer workflow.","textPreview":"The lower homepage turns browsing into a simple buyer workflow.","textChars":63,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/wjet0fq1","slide":4,"name":"body-4","text":"Art news explains why local art matters, and the process section reduces the commissioning path to three clear steps.","textPreview":"Art news explains why local art matters, and the process section reduces the commissioning path to three clear steps.","textChars":117,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/jmpcbu9c","slide":4,"name":"footer-rule-4","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/ylgb2p8r","slide":4,"name":"footer-source-4","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/lo7udkri","slide":4,"name":"footer-page-4","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"shape","id":"sh/6pgv6p83","slide":4,"name":"workflow-meaning-box","bbox":[392,604,496,52]}
+{"kind":"textbox","id":"sh/4f6hs7yx","slide":4,"name":"workflow-meaning-heading","text":"Presentation takeaway","textPreview":"Presentation takeaway","textChars":21,"textLines":1,"bbox":[414,624,452,30]}
+{"kind":"textbox","id":"sh/5gfy1czi","slide":4,"name":"workflow-meaning-body","text":"This is useful for a demo because it lets the presenter move from brand story to concrete product workflow without leaving the homepage.","textPreview":"This is useful for a demo because it lets the presenter move from brand story to concrete product workflow without leaving the homepage.","textChars":136,"textLines":1,"bbox":[414,664,452,-26]}
+{"kind":"image","id":"im/xwrydsbm","slide":4,"name":"","alt":"art news","bbox":[74,286,520,306]}
+{"kind":"image","id":"im/ix0z6xc7","slide":4,"name":"","alt":"how it works","bbox":[666,286,520,306]}
+{"kind":"notes","id":"nt/6usx6h","slide":4,"text":""}
+{"kind":"slide","id":"sl/nijjjn","slide":5,"title":"ARTIST DISCOVERY","textShapes":5}
+{"kind":"textbox","id":"sh/1cnaxora","slide":5,"name":"eyebrow-5","text":"ARTIST DISCOVERY","textPreview":"ARTIST DISCOVERY","textChars":16,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/e9cr29sj","slide":5,"name":"title-5","text":"The directory makes artist selection filterable instead of purely visual.","textPreview":"The directory makes artist selection filterable instead of purely visual.","textChars":73,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/fa5sve94","slide":5,"name":"body-5","text":"Buyers can search by term, style, service, location, and budget. The result cards summarize the fields needed for a first shortlist.","textPreview":"Buyers can search by term, style, service, location, and budget. The result cards summarize the fields needed for a first shortlist.","textChars":132,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/ofet83ql","slide":5,"name":"footer-rule-5","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/pgna1or6","slide":5,"name":"footer-source-5","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/2dwb6tsf","slide":5,"name":"footer-page-5","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"image","id":"im/qlcvm1or","slide":5,"name":"","alt":"directory filters","bbox":[64,286,526,320]}
+{"kind":"image","id":"im/x47ytk7m","slide":5,"name":"","alt":"directory cards","bbox":[650,286,526,320]}
+{"kind":"notes","id":"nt/nijjjn","slide":5,"text":""}
+{"kind":"slide","id":"sl/w0mo8a","slide":6,"title":"ARTIST PROFILE AND REQUEST","textShapes":5}
+{"kind":"textbox","id":"sh/m543q1oj","slide":6,"name":"eyebrow-6","text":"ARTIST PROFILE AND REQUEST","textPreview":"ARTIST PROFILE AND REQUEST","textChars":26,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/98vmlgna","slide":6,"name":"title-6","text":"The artist profile connects visual proof to a structured project request.","textPreview":"The artist profile connects visual proof to a structured project request.","textChars":73,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/87mlsb6p","slide":6,"name":"body-6","text":"The page shows portfolio evidence, services, price, location, styles, and a demo request form with the project details artists need.","textPreview":"The page shows portfolio evidence, services, price, location, styles, and a demo request form with the project details artists need.","textChars":132,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/vad4nq50","slide":6,"name":"footer-rule-6","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/u943ulov","slide":6,"name":"footer-source-6","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/hwfmp0n6","slide":6,"name":"footer-page-6","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"image","id":"im/lc329kn6","slide":6,"name":"","alt":"artist profile","bbox":[64,280,526,330]}
+{"kind":"image","id":"im/i5w3a94z","slide":6,"name":"","alt":"demo request","bbox":[650,280,526,330]}
+{"kind":"notes","id":"nt/w0mo8a","slide":6,"text":""}
+{"kind":"slide","id":"sl/gry2ch","slide":7,"title":"AUTHENTICATION","textShapes":6}
+{"kind":"textbox","id":"sh/1sz69o3i","slide":7,"name":"eyebrow-7","text":"AUTHENTICATION","textPreview":"AUTHENTICATION","textChars":14,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/eponytkr","slide":7,"name":"title-7","text":"Sign up and login separate the two sides of the marketplace.","textPreview":"Sign up and login separate the two sides of the marketplace.","textChars":60,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/zqxo7ylc","slide":7,"name":"body-7","text":"The auth screens establish role selection for new users and provide demo credentials in the footer for portfolio review.","textPreview":"The auth screens establish role selection for new users and provide demo credentials in the footer for portfolio review.","textChars":120,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/cn65wj2l","slide":7,"name":"footer-rule-7","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/dof65o36","slide":7,"name":"footer-source-7","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/qlonu9kf","slide":7,"name":"footer-page-7","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"textbox","id":"sh/pkf6143a","slide":7,"name":"auth-labels","text":"Sign up captures name, email, password, and role.                       Login opens the right dashboard for the account.","textPreview":"Sign up captures name, email, password, and role.                       Login opens the right dashboard for the account.","textChars":120,"textLines":1,"bbox":[118,612,980,30]}
+{"kind":"image","id":"im/qtw3qls7","slide":7,"name":"","alt":"signup screen","bbox":[92,292,486,300]}
+{"kind":"image","id":"im/1k7mpkbu","slide":7,"name":"","alt":"login screen","bbox":[702,292,486,300]}
+{"kind":"notes","id":"nt/gry2ch","slide":7,"text":""}
+{"kind":"slide","id":"sl/wxg7jl","slide":8,"title":"BUSINESS DASHBOARD","textShapes":5}
+{"kind":"textbox","id":"sh/7el4bal0","slide":8,"name":"eyebrow-8","text":"BUSINESS DASHBOARD","textPreview":"BUSINESS DASHBOARD","textChars":18,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/8fulkf2l","slide":8,"name":"title-8","text":"Businesses can maintain profile context and track sent requests.","textPreview":"Businesses can maintain profile context and track sent requests.","textChars":64,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/903mdk36","slide":8,"name":"body-8","text":"The test-mode business account shows saved business data and a request card with artist, space type, description, status, budget, timeline, and style.","textPreview":"The test-mode business account shows saved business data and a request card with artist, space type, description, status, budget, timelin...","textChars":150,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/y9s3elkj","slide":8,"name":"footer-rule-8","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/za147ql4","slide":8,"name":"footer-source-8","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/kbalgv2p","slide":8,"name":"footer-page-8","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"image","id":"im/wba987el","slide":8,"name":"","alt":"business profile dashboard","bbox":[70,282,520,330]}
+{"kind":"image","id":"im/reh8nydw","slide":8,"name":"","alt":"business request dashboard","bbox":[650,282,520,330]}
+{"kind":"notes","id":"nt/wxg7jl","slide":8,"text":""}
+{"kind":"slide","id":"sl/jjkdk9","slide":9,"title":"ARTIST DASHBOARD","textShapes":5}
+{"kind":"textbox","id":"sh/f2xcfm10","slide":9,"name":"eyebrow-9","text":"ARTIST DASHBOARD","textPreview":"ARTIST DASHBOARD","textChars":16,"textLines":1,"bbox":[44,36,600,26]}
+{"kind":"textbox","id":"sh/gn6t872l","slide":9,"name":"title-9","text":"Artists manage profiles and incoming requests.","textPreview":"Artists manage profiles and incoming requests.","textChars":46,"textLines":1,"bbox":[44,78,710,96]}
+{"kind":"textbox","id":"sh/hofuhcjq","slide":9,"name":"body-9","text":"The artist dashboard supports profile updates, portfolio images, pricing, services, and request status management in test mode.","textPreview":"The artist dashboard supports profile updates, portfolio images, pricing, services, and request status management in test mode.","textChars":127,"textLines":1,"bbox":[44,186,650,62]}
+{"kind":"shape","id":"sh/6x4b2xk3","slide":9,"name":"footer-rule-9","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/7ydcb21o","slide":9,"name":"footer-source-9","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/szmt4729","slide":9,"name":"footer-page-9","text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"image","id":"im/4jm1oz21","slide":9,"name":"","alt":"artist dashboard profile","bbox":[70,282,520,330]}
+{"kind":"image","id":"im/zm903q1c","slide":9,"name":"","alt":"artist dashboard requests","bbox":[650,282,520,330]}
+{"kind":"notes","id":"nt/jjkdk9","slide":9,"text":""}
+{"kind":"slide","id":"sl/jbhrjt","slide":10,"title":"SYNTHESIS","textShapes":11}
+{"kind":"textbox","id":"sh/utcz2xsz","slide":10,"name":"close-eyebrow","text":"SYNTHESIS","textPreview":"SYNTHESIS","textChars":9,"textLines":1,"bbox":[72,56,500,28]}
+{"kind":"textbox","id":"sh/hw3yxsra","slide":10,"name":"close-title","text":"The test-mode site is ready to present as an end-to-end marketplace prototype.","textPreview":"The test-mode site is ready to present as an end-to-end marketplace prototype.","textChars":78,"textLines":1,"bbox":[72,128,820,116]}
+{"kind":"shape","id":"sh/gvuh4nap","slide":10,"name":"close-1-box","bbox":[96,314,328,170]}
+{"kind":"textbox","id":"sh/7q1gri98","slide":10,"name":"close-1-heading","text":"Buyer path","textPreview":"Buyer path","textChars":10,"textLines":1,"bbox":[118,334,284,30]}
+{"kind":"textbox","id":"sh/6pszydsn","slide":10,"name":"close-1-body","text":"Homepage framing -> artist discovery -> profile review -> structured project request.","textPreview":"Homepage framing -> artist discovery -> profile review -> structured project request.","textChars":85,"textLines":1,"bbox":[118,374,284,92]}
+{"kind":"shape","id":"sh/ts3ytsre","slide":10,"name":"close-2-box","bbox":[476,314,328,170]}
+{"kind":"textbox","id":"sh/8rah0nat","slide":10,"name":"close-2-heading","text":"Artist path","textPreview":"Artist path","textChars":11,"textLines":1,"bbox":[498,334,284,30]}
+{"kind":"textbox","id":"sh/z21gnytc","slide":10,"name":"close-2-body","text":"Signup/login -> profile and portfolio management -> incoming request status updates.","textPreview":"Signup/login -> profile and portfolio management -> incoming request status updates.","textChars":84,"textLines":1,"bbox":[498,374,284,92]}
+{"kind":"shape","id":"sh/y1szudsr","slide":10,"name":"close-3-box","bbox":[856,314,328,170]}
+{"kind":"textbox","id":"sh/gn6l8bqd","slide":10,"name":"close-3-heading","text":"Demo value","textPreview":"Demo value","textChars":10,"textLines":1,"bbox":[878,334,284,30]}
+{"kind":"textbox","id":"sh/1of21gry","slide":10,"name":"close-3-body","text":"Test-mode data makes the core workflow presentable without production accounts or a database setup.","textPreview":"Test-mode data makes the core workflow presentable without production accounts or a database setup.","textChars":99,"textLines":1,"bbox":[878,374,284,92]}
+{"kind":"textbox","id":"sh/elo36l8n","slide":10,"name":"close-note","text":"Recommended live demo order: hero, artist directory, artist profile, request form, business dashboard, artist dashboard.","textPreview":"Recommended live demo order: hero, artist directory, artist profile, request form, business dashboard, artist dashboard.","textChars":120,"textLines":1,"bbox":[96,570,1000,52]}
+{"kind":"shape","id":"sh/fmxkzq98","slide":10,"name":"footer-rule-10","bbox":[44,674,1192,1]}
+{"kind":"textbox","id":"sh/sj6l4bqh","slide":10,"name":"footer-source-10","text":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textPreview":"Source: stroque-art-portal.vercel.app and test-mode local dashboard","textChars":67,"textLines":1,"bbox":[44,686,650,22]}
+{"kind":"textbox","id":"sh/tkf2xgr2","slide":10,"name":"footer-page-10","text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1170,686,66,22]}
+{"kind":"notes","id":"nt/jbhrjt","slide":10,"text":""}

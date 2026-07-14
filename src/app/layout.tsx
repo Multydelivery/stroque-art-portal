@@ -27,9 +27,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <>
                   <Link
                     className="rounded-lg px-3 py-2 hover:bg-stone-100"
-                    href={user.role === "artist" ? "/dashboard/artist" : "/dashboard/business"}
+                    href={`/dashboard/${user.role}`}
                   >
-                    Dashboard
+                    {user.role === "admin" ? "Admin" : "Dashboard"}
                   </Link>
                   <form action="/api/auth/logout" method="post">
                     <button className="rounded-lg border border-stone-300 px-3 py-2 hover:bg-white" type="submit">
@@ -78,7 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div>
               <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-blush">Demo mode</h2>
               <p className="mt-4 text-sm leading-6 text-stone-300">
-                Use test data locally with artist@example.com or business@example.com and password123.
+                Use test data locally with artist@example.com, business@example.com, or admin@example.com and password123.
               </p>
             </div>
           </div>
