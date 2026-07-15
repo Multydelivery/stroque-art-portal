@@ -10,12 +10,16 @@ import type { BusinessProfile } from "@/types/entities";
 
 type Values = z.infer<typeof businessProfileSchema>;
 
-export function BusinessProfileForm({ profile }: { profile: BusinessProfile }) {
+export function BusinessProfileForm({ profile }: { profile: BusinessProfile | null }) {
   const router = useRouter();
   const [message, setMessage] = useState("");
   const form = useForm<Values>({
     resolver: zodResolver(businessProfileSchema),
-    defaultValues: profile
+    defaultValues: profile ?? {
+      businessName: "",
+      industry: "",
+      location: ""
+    }
   });
 
   async function onSubmit(values: Values) {

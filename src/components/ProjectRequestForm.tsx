@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
 import { projectRequestSchema } from "@/lib/validation";
+import type { ArtistProfile } from "@/types/entities";
 
 type Values = z.infer<typeof projectRequestSchema>;
 
@@ -13,10 +14,12 @@ const timelineOptions = ["ASAP", "2-4 weeks", "4-6 weeks", "6-8 weeks", "2-3 mon
 
 export function ProjectRequestForm({
   artistId,
+  artists,
   demoMode = false,
   stayOnSuccess = false
 }: {
-  artistId: string;
+  artistId?: string;
+  artists?: ArtistProfile[];
   demoMode?: boolean;
   stayOnSuccess?: boolean;
 }) {
@@ -26,7 +29,7 @@ export function ProjectRequestForm({
   const form = useForm<Values>({
     resolver: zodResolver(projectRequestSchema),
     defaultValues: {
-      artistId,
+      artistId: artistId ?? "",
       spaceType: demoMode ? "Hotel lobby feature wall" : "",
       budget: demoMode ? 4200 : 2500,
       timeline: demoMode ? "6-8 weeks" : "",
@@ -63,7 +66,22 @@ export function ProjectRequestForm({
 
   return (
     <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
-      <input type="hidden" {...form.register("artistId")} />
+      {artists ? (
+        <div className="field">
+          <label htmlFor="artistId">Artist</label>
+          <select id="artistId" {...form.register("artistId")}>
+            <option value="">Select an artist</option>
+            {artists.map((artist) => (
+              <option key={artist._id} value={artist._id}>
+                {artist.displayName} — {artist.location}
+              </option>
+            ))}
+          </select>
+          <p className="error">{form.formState.errors.artistId?.message}</p>
+        </div>
+      ) : (
+        <input type="hidden" {...form.register("artistId")} />
+      )}
       <div className="grid gap-5 md:grid-cols-2">
         <div className="field">
           <label>Space type</label>
