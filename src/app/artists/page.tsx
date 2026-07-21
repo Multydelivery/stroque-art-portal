@@ -16,6 +16,9 @@ export default async function ArtistsPage({
   const params = await searchParams;
   if (isTestDataEnabled()) {
     const artists = getTestArtists(params);
+    const artistNames = [...new Set(getTestArtists().map((artist) => artist.displayName))].sort();
+    const artistStyles = [...new Set(getTestArtists().flatMap((artist) => artist.styles))].sort();
+    const artistLocations = [...new Set(getTestArtists().map((artist) => artist.location))].sort();
     const serviceTypes = [...new Set(getTestArtists().flatMap((artist) => artist.services))].sort();
 
     return (
@@ -27,9 +30,24 @@ export default async function ArtistsPage({
           </div>
         </div>
         <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
-          <input name="q" placeholder="Search artists" defaultValue={params.q} />
-          <input name="style" placeholder="Style" defaultValue={params.style} />
-          <input name="location" placeholder="Location" defaultValue={params.location} />
+          <div>
+            <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} />
+            <datalist id="artist-name-suggestions">
+              {artistNames.map((name) => <option key={name} value={name} />)}
+            </datalist>
+          </div>
+          <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
+            <option value="">All artist styles</option>
+            {artistStyles.map((style) => (
+              <option key={style} value={style}>{style}</option>
+            ))}
+          </select>
+          <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""}>
+            <option value="">All artist locations</option>
+            {artistLocations.map((location) => (
+              <option key={location} value={location}>{location}</option>
+            ))}
+          </select>
           <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
             <option value="">All service types</option>
             {serviceTypes.map((service) => (
@@ -63,8 +81,11 @@ export default async function ArtistsPage({
   if (params.service) filters.services = params.service;
   if (params.maxBudget) filters.startingPrice = { $lte: Number(params.maxBudget) };
 
-  const [artistRows, serviceTypes] = await Promise.all([
+  const [artistRows, artistNames, artistStyles, artistLocations, serviceTypes] = await Promise.all([
     ArtistProfile.find(filters).sort({ updatedAt: -1 }).lean(),
+    ArtistProfile.distinct("displayName") as Promise<string[]>,
+    ArtistProfile.distinct("styles") as Promise<string[]>,
+    ArtistProfile.distinct("location") as Promise<string[]>,
     ArtistProfile.distinct("services") as Promise<string[]>
   ]);
   const artists = JSON.parse(JSON.stringify(artistRows)) as ArtistProfileType[];
@@ -78,9 +99,24 @@ export default async function ArtistsPage({
         </div>
       </div>
       <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
-        <input name="q" placeholder="Search artists" defaultValue={params.q} />
-        <input name="style" placeholder="Style" defaultValue={params.style} />
-        <input name="location" placeholder="Location" defaultValue={params.location} />
+        <div>
+          <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} />
+          <datalist id="artist-name-suggestions">
+            {artistNames.sort().map((name) => <option key={name} value={name} />)}
+          </datalist>
+        </div>
+        <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
+          <option value="">All artist styles</option>
+          {artistStyles.sort().map((style) => (
+            <option key={style} value={style}>{style}</option>
+          ))}
+        </select>
+        <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""}>
+          <option value="">All artist locations</option>
+          {artistLocations.sort().map((location) => (
+            <option key={location} value={location}>{location}</option>
+          ))}
+        </select>
         <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
           <option value="">All service types</option>
           {serviceTypes.sort().map((service) => (
