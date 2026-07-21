@@ -16,6 +16,7 @@ export default async function ArtistsPage({
   const params = await searchParams;
   if (isTestDataEnabled()) {
     const artists = getTestArtists(params);
+    const serviceTypes = [...new Set(getTestArtists().flatMap((artist) => artist.services))].sort();
 
     return (
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -29,7 +30,12 @@ export default async function ArtistsPage({
           <input name="q" placeholder="Search artists" defaultValue={params.q} />
           <input name="style" placeholder="Style" defaultValue={params.style} />
           <input name="location" placeholder="Location" defaultValue={params.location} />
-          <input name="service" placeholder="Service type" defaultValue={params.service} />
+          <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
+            <option value="">All service types</option>
+            {serviceTypes.map((service) => (
+              <option key={service} value={service}>{service}</option>
+            ))}
+          </select>
           <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
           <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
             Apply filters
@@ -58,7 +64,11 @@ export default async function ArtistsPage({
   if (params.service) filters.services = params.service;
   if (params.maxBudget) filters.startingPrice = { $lte: Number(params.maxBudget) };
 
-  const artists = JSON.parse(JSON.stringify(await ArtistProfile.find(filters).sort({ updatedAt: -1 }).lean())) as ArtistProfileType[];
+  const [artistRows, serviceTypes] = await Promise.all([
+    ArtistProfile.find(filters).sort({ updatedAt: -1 }).lean(),
+    ArtistProfile.distinct("services") as Promise<string[]>
+  ]);
+  const artists = JSON.parse(JSON.stringify(artistRows)) as ArtistProfileType[];
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
@@ -72,7 +82,12 @@ export default async function ArtistsPage({
         <input name="q" placeholder="Search artists" defaultValue={params.q} />
         <input name="style" placeholder="Style" defaultValue={params.style} />
         <input name="location" placeholder="Location" defaultValue={params.location} />
-        <input name="service" placeholder="Service type" defaultValue={params.service} />
+        <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
+          <option value="">All service types</option>
+          {serviceTypes.sort().map((service) => (
+            <option key={service} value={service}>{service}</option>
+          ))}
+        </select>
         <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
         <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
           Apply filters

@@ -69,7 +69,7 @@ export default function HomePage() {
           <div className="space-y-5">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">Art for business spaces</p>
             <h1 className="max-w-3xl text-5xl font-semibold tracking-tight sm:text-6xl">
-              Commission artists who make commercial spaces feel alive.
+              artists and businesses who make spaces feel alive.
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-stone-700">
               Stroque helps restaurants, offices, hotels, and retail teams discover artists by style,
@@ -167,7 +167,7 @@ export default function HomePage() {
               <dl className="mt-6 grid gap-4 sm:grid-cols-3">
                 <div>
                   <dt className="text-sm text-stone-500">Location</dt>
-                  <dd className="mt-1 font-semibold">Brooklyn, NY</dd>
+                  <dd className="mt-1 font-semibold">Indianapolis, IN</dd>
                 </div>
                 <div>
                   <dt className="text-sm text-stone-500">Starts at</dt>

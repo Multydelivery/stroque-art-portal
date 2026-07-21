@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <header className="sticky top-0 z-20 border-b border-stone-200 bg-paper/90 backdrop-blur">
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <Link href="/" className="text-lg font-semibold tracking-tight">
-              Stroque
+              Indy Art Portal By Stroque
             </Link>
             <div className="flex items-center gap-2 text-sm">
               <Link className="rounded-lg px-3 py-2 hover:bg-stone-100" href="/artists">
