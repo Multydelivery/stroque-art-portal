@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import { businessProfileSchema } from "@/lib/validation";
+import { businessProfileSchema, indianaBusinessLocations } from "@/lib/validation";
 import type { BusinessProfile } from "@/types/entities";
 
 type Values = z.infer<typeof businessProfileSchema>;
@@ -18,7 +18,7 @@ export function BusinessProfileForm({ profile }: { profile: BusinessProfile | nu
     defaultValues: profile ?? {
       businessName: "",
       industry: "",
-      location: ""
+      location: "Indianapolis, IN"
     }
   });
 
@@ -46,7 +46,11 @@ export function BusinessProfileForm({ profile }: { profile: BusinessProfile | nu
       </div>
       <div className="field">
         <label>Location</label>
-        <input {...form.register("location")} />
+        <select {...form.register("location")}>
+          {indianaBusinessLocations.map((location) => (
+            <option key={location} value={location}>{location}</option>
+          ))}
+        </select>
         <p className="error">{form.formState.errors.location?.message}</p>
       </div>
       <div className="md:col-span-3">

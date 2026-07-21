@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       userId: user._id,
       businessName: user.name,
       industry: "Hospitality",
-      location: "Add your location"
+      location: "Indianapolis, IN"
     });
   }
 

@@ -52,7 +52,7 @@ function createStore(): TestStore {
       userId: "test-user-business",
       businessName: "Stroque Hotel Group",
       industry: "Hospitality",
-      location: "New York, NY"
+      location: "Indianapolis, IN"
     }
   ];
 
@@ -157,7 +157,7 @@ export function createTestUser(data: z.infer<typeof signupSchema>) {
       userId: user.id,
       businessName: user.name,
       industry: "Hospitality",
-      location: "Add your location"
+      location: "Indianapolis, IN"
     });
   }
 

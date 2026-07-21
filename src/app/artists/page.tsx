@@ -23,10 +23,10 @@ export default async function ArtistsPage({
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
-            <p className="mt-2 text-stone-700">Search by style, city, service, and starting price.</p>
+            <p className="mt-2 text-stone-700">Search by style, city, and service.</p>
           </div>
         </div>
-        <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-5">
+        <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
           <input name="q" placeholder="Search artists" defaultValue={params.q} />
           <input name="style" placeholder="Style" defaultValue={params.style} />
           <input name="location" placeholder="Location" defaultValue={params.location} />
@@ -36,8 +36,7 @@ export default async function ArtistsPage({
               <option key={service} value={service}>{service}</option>
             ))}
           </select>
-          <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
-          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
+          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
             Apply filters
           </button>
         </form>
@@ -75,10 +74,10 @@ export default async function ArtistsPage({
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
-          <p className="mt-2 text-stone-700">Search by style, city, service, and starting price.</p>
+          <p className="mt-2 text-stone-700">Search by style, city, and service.</p>
         </div>
       </div>
-      <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-5">
+      <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
         <input name="q" placeholder="Search artists" defaultValue={params.q} />
         <input name="style" placeholder="Style" defaultValue={params.style} />
         <input name="location" placeholder="Location" defaultValue={params.location} />
@@ -88,8 +87,7 @@ export default async function ArtistsPage({
             <option key={service} value={service}>{service}</option>
           ))}
         </select>
-        <input name="maxBudget" placeholder="Max budget" type="number" defaultValue={params.maxBudget} />
-        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-5" type="submit">
+        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
           Apply filters
         </button>
       </form>

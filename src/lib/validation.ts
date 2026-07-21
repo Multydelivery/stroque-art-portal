@@ -1,5 +1,16 @@
 import { z } from "zod";
 
+export const indianaBusinessLocations = [
+  "Indianapolis, IN",
+  "Fishers, IN",
+  "Carmel, IN",
+  "Fort Wayne, IN",
+  "Bloomington, IN",
+  "South Bend, IN",
+  "Evansville, IN",
+  "Lafayette, IN"
+] as const;
+
 export const roleSchema = z.enum(["artist", "business"]);
 
 export const signupSchema = z.object({
@@ -27,7 +38,10 @@ export const artistProfileSchema = z.object({
 export const businessProfileSchema = z.object({
   businessName: z.string().min(2, "Business name is required."),
   industry: z.string().min(2, "Industry is required."),
-  location: z.string().min(2, "Location is required.")
+  location: z.string().refine(
+    (location) => indianaBusinessLocations.some((indianaLocation) => indianaLocation === location),
+    "Choose an Indiana city."
+  )
 });
 
 export const projectRequestSchema = z.object({

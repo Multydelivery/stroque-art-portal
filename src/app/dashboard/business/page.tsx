@@ -31,11 +31,17 @@ export default async function BusinessDashboardPage({
   let profile: BusinessProfileType | null;
   let requests: ProjectRequestType[];
   let artists: ArtistProfileType[];
+  let artistStyles: string[];
+  let indianaLocations: string[];
 
   if (testMode) {
     profile = getTestBusinessProfile(user.id) as BusinessProfileType | null;
     requests = getTestBusinessRequests(user.id);
     artists = getTestArtists(params);
+    artistStyles = [...new Set(getTestArtists().flatMap((artist) => artist.styles))].sort();
+    indianaLocations = [...new Set(getTestArtists().map((artist) => artist.location))]
+      .filter((location) => location.endsWith(", IN"))
+      .sort();
   } else {
     await connectToDatabase();
     profile = JSON.parse(JSON.stringify(await BusinessProfile.findOne({ userId: user.id }).lean())) as BusinessProfileType | null;
@@ -52,9 +58,16 @@ export default async function BusinessDashboardPage({
     if (params.style) artistFilters.styles = new RegExp(params.style, "i");
     if (params.location) artistFilters.location = new RegExp(params.location, "i");
     if (params.maxBudget) artistFilters.startingPrice = { $lte: Number(params.maxBudget) };
-    artists = JSON.parse(
-      JSON.stringify(await ArtistProfile.find(artistFilters).sort({ updatedAt: -1 }).lean())
-    ) as ArtistProfileType[];
+    const [artistRows, availableStyles, availableLocations] = await Promise.all([
+      ArtistProfile.find(artistFilters).sort({ updatedAt: -1 }).lean(),
+      ArtistProfile.distinct("styles") as Promise<string[]>,
+      ArtistProfile.distinct("location") as Promise<string[]>
+    ]);
+    artists = JSON.parse(JSON.stringify(artistRows)) as ArtistProfileType[];
+    artistStyles = availableStyles.sort();
+    indianaLocations = availableLocations
+      .filter((location) => location.endsWith(", IN"))
+      .sort();
   }
 
   return (
@@ -74,8 +87,18 @@ export default async function BusinessDashboardPage({
         </div>
         <form className="mt-4 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
           <input name="q" aria-label="Search artists" placeholder="Name or keyword" defaultValue={params.q} />
-          <input name="style" aria-label="Art style" placeholder="Style" defaultValue={params.style} />
-          <input name="location" aria-label="Artist location" placeholder="Location" defaultValue={params.location} />
+          <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
+            <option value="">All artist styles</option>
+            {artistStyles.map((style) => (
+              <option key={style} value={style}>{style}</option>
+            ))}
+          </select>
+          <select name="location" aria-label="Indiana artist location" defaultValue={params.location ?? ""}>
+            <option value="">All Indiana locations</option>
+            {indianaLocations.map((location) => (
+              <option key={location} value={location}>{location}</option>
+            ))}
+          </select>
           <input name="maxBudget" aria-label="Maximum starting price" placeholder="Max starting price" type="number" defaultValue={params.maxBudget} />
           <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
             Search artists
