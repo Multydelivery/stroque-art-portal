@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { SiteNavbar } from "@/components/SiteNavbar";
 import { getSessionUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -14,42 +15,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        <header className="sticky top-0 z-20 border-b border-stone-200 bg-paper/90 backdrop-blur">
-          <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <Link href="/" className="text-lg font-semibold tracking-tight">
-              Indy Art Portal By Stroque
-            </Link>
-            <div className="flex items-center gap-2 text-sm">
-              <Link className="rounded-lg px-3 py-2 hover:bg-stone-100" href="/artists">
-                Artists
-              </Link>
-              {user ? (
-                <>
-                  <Link
-                    className="rounded-lg px-3 py-2 hover:bg-stone-100"
-                    href={`/dashboard/${user.role}`}
-                  >
-                    {user.role === "admin" ? "Admin" : "Dashboard"}
-                  </Link>
-                  <form action="/api/auth/logout" method="post">
-                    <button className="rounded-lg border border-stone-300 px-3 py-2 hover:bg-white" type="submit">
-                      Log out
-                    </button>
-                  </form>
-                </>
-              ) : (
-                <>
-                  <Link className="rounded-lg px-3 py-2 hover:bg-stone-100" href="/auth/login">
-                    Log in
-                  </Link>
-                  <Link className="rounded-lg bg-ink px-4 py-2 text-white" href="/auth/signup">
-                    Sign up
-                  </Link>
-                </>
-              )}
-            </div>
-          </nav>
-        </header>
+        <SiteNavbar user={user} />
         {children}
         <footer className="border-t border-stone-200 bg-ink text-white">
           <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8">
