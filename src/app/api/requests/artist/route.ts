@@ -22,6 +22,7 @@ export async function GET() {
   if (!artist) return NextResponse.json({ requests: [] });
 
   const requests = await ProjectRequest.find({ artistId: artist._id })
+    .populate("projectId")
     .populate("businessId")
     .sort({ createdAt: -1 })
     .lean();

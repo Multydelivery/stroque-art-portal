@@ -3,14 +3,16 @@ import { notFound, redirect } from "next/navigation";
 import { ProjectRequestForm } from "@/components/ProjectRequestForm";
 import { getSessionUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
-import { getTestArtist } from "@/lib/test-data";
+import { getTestArtist, getTestProjectById } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
 import ArtistProfile from "@/models/ArtistProfile";
-import type { ArtistProfile as ArtistProfileType } from "@/types/entities";
+import Project from "@/models/Project";
+import type { ArtistProfile as ArtistProfileType, Project as ProjectType } from "@/types/entities";
 
 export const dynamic = "force-dynamic";
 
 type RequestPageSearchParams = {
+  projectId?: string;
   spaceType?: string;
   budgetMin?: string;
   budgetMax?: string;
@@ -35,13 +37,31 @@ export default async function RequestPage({
   const { id } = await params;
   const query = await searchParams;
 
+  let selectedProject: ProjectType | null = null;
+  if (query.projectId) {
+    if (demoMode) {
+      selectedProject = getTestProjectById(query.projectId) as ProjectType | null;
+    } else {
+      await connectToDatabase();
+      selectedProject = JSON.parse(JSON.stringify(await Project.findById(query.projectId).lean())) as ProjectType | null;
+    }
+  }
+
+  const projectId = query.projectId ?? selectedProject?._id;
+
   const minBudget = Number(query.budgetMin ?? 0);
   const maxBudget = Number(query.budgetMax ?? 0);
-  const midpointBudget = minBudget > 0 && maxBudget >= minBudget ? Math.round((minBudget + maxBudget) / 2) : undefined;
+  const selectedProjectBudget =
+    selectedProject && selectedProject.budgetMin > 0 && selectedProject.budgetMax >= selectedProject.budgetMin
+      ? Math.round((selectedProject.budgetMin + selectedProject.budgetMax) / 2)
+      : undefined;
+  const midpointBudget = minBudget > 0 && maxBudget >= minBudget ? Math.round((minBudget + maxBudget) / 2) : selectedProjectBudget;
   const descriptionWithDueDate =
     query.description && query.dueDate
       ? `${query.description.trim()}\n\nRequested due date: ${query.dueDate}`
-      : query.description;
+      : selectedProject
+        ? `${selectedProject.description.trim()}\n\nRequested due date: ${selectedProject.dueDate}`
+        : query.description;
 
   const artist = demoMode
     ? getTestArtist(id)
@@ -58,14 +78,16 @@ export default async function RequestPage({
         <p className="mt-2 text-sm text-stone-600">Give the artist enough context to decide fit, timing, and next steps.</p>
         <div className="mt-8">
           <ProjectRequestForm
+            projectId={projectId}
             artistId={artist._id}
             demoMode={demoMode}
             stayOnSuccess={demoMode && !user}
             initialValues={{
-              spaceType: query.spaceType,
+              projectId,
+              spaceType: query.spaceType ?? selectedProject?.spaceType,
               budget: midpointBudget,
-              timeline: query.timeline,
-              stylePreference: query.stylePreference,
+              timeline: query.timeline ?? selectedProject?.timeline,
+              stylePreference: query.stylePreference ?? selectedProject?.stylePreference,
               description: descriptionWithDueDate
             }}
           />

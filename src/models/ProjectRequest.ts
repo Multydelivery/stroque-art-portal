@@ -2,6 +2,7 @@ import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 
 const projectRequestSchema = new Schema(
   {
+    projectId: { type: Schema.Types.ObjectId, ref: "Project", required: true },
     businessId: { type: Schema.Types.ObjectId, ref: "BusinessProfile", required: true },
     artistId: { type: Schema.Types.ObjectId, ref: "ArtistProfile", required: true },
     spaceType: { type: String, required: true, trim: true },

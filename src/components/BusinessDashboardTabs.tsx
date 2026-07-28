@@ -7,6 +7,10 @@ export function BusinessDashboardTabs({
 }: {
   active: "dashboard" | "project" | "artists";
 }) {
+  const projectCurrent = active === "project" ? "page" : undefined;
+  const artistsCurrent = active === "artists" ? "page" : undefined;
+  const dashboardCurrent = active === "dashboard" ? "page" : undefined;
+
   const dashboardClasses =
     active === "dashboard"
       ? `${baseClasses} bg-ink text-white`
@@ -21,16 +25,24 @@ export function BusinessDashboardTabs({
       : `${baseClasses} border border-stone-300 bg-white text-stone-800 hover:bg-stone-100`;
 
   return (
-    <nav aria-label="Business workflow" className="flex flex-wrap gap-2">
-      <Link className={dashboardClasses} href="/dashboard/business">
-        Dashboard
-      </Link>
-      <Link className={projectClasses} href="/dashboard/business/project">
-        1. Project details
-      </Link>
-      <Link className={artistsClasses} href="/dashboard/business/project/artists">
-        2. Find artist
-      </Link>
+    <nav aria-label="Business workflow">
+      <ol className="flex flex-wrap gap-2">
+        <li>
+          <Link aria-current={projectCurrent} className={projectClasses} href="/dashboard/business/project">
+            1. Create project
+          </Link>
+        </li>
+        <li>
+          <Link aria-current={artistsCurrent} className={artistsClasses} href="/dashboard/business/project/artists">
+            2. Find artist
+          </Link>
+        </li>
+        <li>
+          <Link aria-current={dashboardCurrent} className={dashboardClasses} href="/dashboard/business">
+            3. Dashboard
+          </Link>
+        </li>
+      </ol>
     </nav>
   );
 }

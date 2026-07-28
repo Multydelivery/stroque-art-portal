@@ -5,6 +5,7 @@ import { createTestProjectRequest } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
 import { projectRequestSchema } from "@/lib/validation";
 import BusinessProfile from "@/models/BusinessProfile";
+import Project from "@/models/Project";
 import ProjectRequest from "@/models/ProjectRequest";
 
 export async function POST(request: Request) {
@@ -32,6 +33,11 @@ export async function POST(request: Request) {
   const business = await BusinessProfile.findOne({ userId: user.id });
   if (!business) {
     return NextResponse.json({ error: "Create your business profile first." }, { status: 400 });
+  }
+
+  const project = await Project.findById(parsed.data.projectId);
+  if (!project || project.businessId.toString() !== business._id.toString()) {
+    return NextResponse.json({ error: "Project not found." }, { status: 404 });
   }
 
   const created = await ProjectRequest.create({

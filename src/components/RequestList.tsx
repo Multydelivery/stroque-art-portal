@@ -1,6 +1,7 @@
 import { currency } from "@/lib/format";
 import type { ProjectRequest } from "@/types/entities";
 import { EmptyState } from "@/components/EmptyState";
+import { CancelRequestButton } from "@/components/CancelRequestButton";
 import { RequestStatusSelect } from "@/components/RequestStatusSelect";
 
 export function RequestList({
@@ -45,6 +46,11 @@ export function RequestList({
           {mode === "artist" && (
             <div className="mt-5 max-w-xs">
               <RequestStatusSelect request={request} />
+            </div>
+          )}
+          {mode === "business" && (
+            <div className="mt-5 max-w-xs">
+              <CancelRequestButton requestId={request._id} />
             </div>
           )}
         </article>

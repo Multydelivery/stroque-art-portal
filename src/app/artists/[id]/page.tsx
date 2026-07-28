@@ -72,7 +72,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             This prefilled test form submits an in-memory request without MongoDB or login.
           </p>
           <div className="mt-8">
-            <ProjectRequestForm artistId={artist._id} demoMode stayOnSuccess />
+            <ProjectRequestForm artistId={artist._id} demoMode stayOnSuccess initialValues={{ projectId: "test-project-1" }} />
           </div>
         </section>
       )}

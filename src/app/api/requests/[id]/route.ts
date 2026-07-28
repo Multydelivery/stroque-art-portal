@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
-import { updateTestRequestStatus } from "@/lib/test-data";
+import { cancelTestBusinessRequest, updateTestRequestStatus } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
 import { requestStatusSchema } from "@/lib/validation";
 import ArtistProfile from "@/models/ArtistProfile";
+import BusinessProfile from "@/models/BusinessProfile";
 import ProjectRequest from "@/models/ProjectRequest";
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -38,4 +39,30 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   await existing.save();
 
   return NextResponse.json({ request: existing });
+}
+
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const user = await requireUser("business");
+  if (!user) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+
+  const { id } = await params;
+  if (isTestDataEnabled()) {
+    const removed = cancelTestBusinessRequest(user.id, id);
+    if (!removed) {
+      return NextResponse.json({ error: "Request not found." }, { status: 404 });
+    }
+
+    return NextResponse.json({ ok: true });
+  }
+
+  await connectToDatabase();
+  const business = await BusinessProfile.findOne({ userId: user.id });
+  const existing = await ProjectRequest.findById(id);
+
+  if (!business || !existing || existing.businessId.toString() !== business._id.toString()) {
+    return NextResponse.json({ error: "Request not found." }, { status: 404 });
+  }
+
+  await existing.deleteOne();
+  return NextResponse.json({ ok: true });
 }

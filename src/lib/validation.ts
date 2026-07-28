@@ -44,7 +44,23 @@ export const businessProfileSchema = z.object({
   )
 });
 
+export const projectSchema = z
+  .object({
+    spaceType: z.string().min(2, "Project name or space type is required."),
+    budgetMin: z.coerce.number().min(1, "Minimum pay is required."),
+    budgetMax: z.coerce.number().min(1, "Maximum pay is required."),
+    timeline: z.string().min(2, "Timeline is required."),
+    dueDate: z.string().min(1, "Due date is required."),
+    stylePreference: z.string().min(2, "Type of art is required."),
+    description: z.string().min(20, "Share at least 20 characters.")
+  })
+  .refine((value) => value.budgetMax >= value.budgetMin, {
+    message: "Maximum pay must be greater than or equal to minimum pay.",
+    path: ["budgetMax"]
+  });
+
 export const projectRequestSchema = z.object({
+  projectId: z.string().min(1, "Project is required."),
   artistId: z.string().min(1, "Artist is required."),
   spaceType: z.string().min(2, "Space type is required."),
   budget: z.coerce.number().min(1, "Budget is required."),

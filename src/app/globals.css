@@ -12,6 +12,19 @@ body {
   background: #fbfaf7;
 }
 
+a,
+button {
+  @apply outline-none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  @apply ring-2 ring-ink/40 ring-offset-2 ring-offset-paper;
+}
+
 input,
 select,
 textarea {

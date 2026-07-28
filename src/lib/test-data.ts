@@ -1,7 +1,7 @@
-import type { ArtistProfile, BusinessProfile, ProjectRequest } from "@/types/entities";
+import type { ArtistProfile, BusinessProfile, Project, ProjectRequest } from "@/types/entities";
 import type { SessionUser } from "@/lib/auth";
 import type { z } from "zod";
-import type { artistProfileSchema, businessProfileSchema, projectRequestSchema, requestStatusSchema, signupSchema } from "@/lib/validation";
+import type { artistProfileSchema, businessProfileSchema, projectRequestSchema, projectSchema, requestStatusSchema, signupSchema } from "@/lib/validation";
 
 type TestUser = SessionUser & {
   password: string;
@@ -11,6 +11,7 @@ type TestStore = {
   users: TestUser[];
   artists: (ArtistProfile & { userId: string })[];
   businesses: (BusinessProfile & { userId: string })[];
+  projects: Project[];
   requests: ProjectRequest[];
 };
 
@@ -56,6 +57,22 @@ function createStore(): TestStore {
     }
   ];
 
+  const projects: Project[] = [
+    {
+      _id: "test-project-1",
+      businessId: businesses[0],
+      spaceType: "Hotel lobby feature wall",
+      budgetMin: 3000,
+      budgetMax: 5500,
+      timeline: "6-8 weeks",
+      dueDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 45).toISOString().slice(0, 10),
+      stylePreference: "Warm botanical mural with contemporary details",
+      description: "Large hospitality lobby focal piece with installation support and brand color constraints.",
+      status: "open",
+      createdAt: new Date().toISOString()
+    }
+  ];
+
   return {
     users: [
       { id: "test-user-artist", name: "Mara Ellis", email: "artist@example.com", password: "password123", role: "artist" },
@@ -64,9 +81,11 @@ function createStore(): TestStore {
     ],
     artists,
     businesses,
+    projects,
     requests: [
       {
         _id: "test-request-1",
+        projectId: projects[0],
         businessId: businesses[0],
         artistId: artists[0],
         spaceType: "Hotel lobby",
@@ -83,6 +102,12 @@ function createStore(): TestStore {
 
 function store() {
   globalForTestData.stroqueTestStore ??= createStore();
+
+  // Hydrate cached stores from older shapes after hot reloads.
+  if (!globalForTestData.stroqueTestStore.projects) {
+    globalForTestData.stroqueTestStore.projects = [];
+  }
+
   return globalForTestData.stroqueTestStore;
 }
 
@@ -122,6 +147,7 @@ export function getTestAdminDashboard() {
     users: data.users.map(({ id, name, email, role }) => ({ id, name, email, role })),
     artists: data.artists,
     businesses: data.businesses,
+    projects: data.projects,
     requests: data.requests
   };
 }
@@ -196,6 +222,77 @@ export function upsertTestBusinessProfile(userId: string, data: z.infer<typeof b
   return profile;
 }
 
+export function getTestBusinessProjects(userId: string) {
+  const business = getTestBusinessProfile(userId);
+  if (!business) return [];
+  return store().projects.filter((project) => project.businessId._id === business._id);
+}
+
+export function getTestBusinessProjectById(userId: string, id: string) {
+  const business = getTestBusinessProfile(userId);
+  if (!business) return null;
+  return store().projects.find((project) => project._id === id && project.businessId._id === business._id) ?? null;
+}
+
+export function getTestProjectById(id: string) {
+  return store().projects.find((project) => project._id === id) ?? null;
+}
+
+export function createTestProject(userId: string, data: z.infer<typeof projectSchema>) {
+  const business = getTestBusinessProfile(userId);
+  if (!business) return null;
+
+  const created: Project = {
+    _id: `test-project-${Date.now()}`,
+    businessId: business,
+    spaceType: data.spaceType,
+    budgetMin: data.budgetMin,
+    budgetMax: data.budgetMax,
+    timeline: data.timeline,
+    dueDate: data.dueDate,
+    stylePreference: data.stylePreference,
+    description: data.description,
+    status: "open",
+    createdAt: new Date().toISOString()
+  };
+  store().projects.unshift(created);
+  return created;
+}
+
+export function updateTestProject(userId: string, id: string, data: z.infer<typeof projectSchema>) {
+  const project = getTestBusinessProjectById(userId, id);
+  if (!project) return null;
+
+  project.spaceType = data.spaceType;
+  project.budgetMin = data.budgetMin;
+  project.budgetMax = data.budgetMax;
+  project.timeline = data.timeline;
+  project.dueDate = data.dueDate;
+  project.stylePreference = data.stylePreference;
+  project.description = data.description;
+  return project;
+}
+
+export function updateTestProjectStatus(userId: string, id: string, status: Project["status"]) {
+  const project = getTestBusinessProjectById(userId, id);
+  if (!project) return null;
+
+  project.status = status;
+  return project;
+}
+
+export function deleteTestProject(userId: string, id: string) {
+  const business = getTestBusinessProfile(userId);
+  if (!business) return false;
+
+  const projectIndex = store().projects.findIndex((item) => item._id === id && item.businessId._id === business._id);
+  if (projectIndex < 0) return false;
+
+  store().projects.splice(projectIndex, 1);
+  store().requests = store().requests.filter((request) => request.projectId._id !== id);
+  return true;
+}
+
 export function getTestArtistRequests(userId: string) {
   const artist = getTestArtistProfile(userId);
   if (!artist) return [];
@@ -211,10 +308,12 @@ export function getTestBusinessRequests(userId: string) {
 export function createTestProjectRequest(userId: string, data: z.infer<typeof projectRequestSchema>) {
   const business = getTestBusinessProfile(userId);
   const artist = getTestArtist(data.artistId);
-  if (!business || !artist) return null;
+  const project = getTestBusinessProjectById(userId, data.projectId);
+  if (!business || !artist || !project) return null;
 
   const created: ProjectRequest = {
     _id: `test-request-${Date.now()}`,
+    projectId: project,
     businessId: business,
     artistId: artist,
     spaceType: data.spaceType,
@@ -236,4 +335,15 @@ export function updateTestRequestStatus(userId: string, id: string, data: z.infe
 
   request.status = data.status;
   return request;
+}
+
+export function cancelTestBusinessRequest(userId: string, id: string) {
+  const business = getTestBusinessProfile(userId);
+  if (!business) return false;
+
+  const index = store().requests.findIndex((item) => item._id === id && item.businessId._id === business._id);
+  if (index < 0) return false;
+
+  store().requests.splice(index, 1);
+  return true;
 }

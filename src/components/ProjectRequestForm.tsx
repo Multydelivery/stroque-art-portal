@@ -14,12 +14,14 @@ type InitialValues = Partial<Values>;
 const timelineOptions = ["ASAP", "2-4 weeks", "4-6 weeks", "6-8 weeks", "2-3 months", "Flexible"];
 
 export function ProjectRequestForm({
+  projectId,
   artistId,
   artists,
   demoMode = false,
   stayOnSuccess = false,
   initialValues
 }: {
+  projectId?: string;
   artistId?: string;
   artists?: ArtistProfile[];
   demoMode?: boolean;
@@ -32,6 +34,7 @@ export function ProjectRequestForm({
   const form = useForm<Values>({
     resolver: zodResolver(projectRequestSchema),
     defaultValues: {
+      projectId: initialValues?.projectId ?? projectId ?? "",
       artistId: initialValues?.artistId ?? artistId ?? "",
       spaceType: initialValues?.spaceType ?? (demoMode ? "Hotel lobby feature wall" : ""),
       budget: initialValues?.budget ?? (demoMode ? 4200 : 2500),
@@ -71,6 +74,7 @@ export function ProjectRequestForm({
 
   return (
     <form className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
+      <input type="hidden" {...form.register("projectId")} />
       {artists ? (
         <div className="field">
           <label htmlFor="artistId">Artist</label>

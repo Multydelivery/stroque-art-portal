@@ -16,8 +16,23 @@ export type BusinessProfile = {
   location: string;
 };
 
+export type Project = {
+  _id: string;
+  businessId: BusinessProfile;
+  spaceType: string;
+  budgetMin: number;
+  budgetMax: number;
+  timeline: string;
+  dueDate: string;
+  stylePreference: string;
+  description: string;
+  status: "open" | "closed";
+  createdAt: string;
+};
+
 export type ProjectRequest = {
   _id: string;
+  projectId: Project;
   businessId: BusinessProfile;
   artistId: ArtistProfile;
   spaceType: string;
