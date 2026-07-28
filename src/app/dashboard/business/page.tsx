@@ -1,47 +1,35 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { BusinessProfileForm } from "@/components/BusinessProfileForm";
-import { ArtistCard } from "@/components/ArtistCard";
+import { BusinessDashboardTabs } from "@/components/BusinessDashboardTabs";
 import { EmptyState } from "@/components/EmptyState";
-import { ProjectRequestForm } from "@/components/ProjectRequestForm";
 import { RequestList } from "@/components/RequestList";
 import { getSessionUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
-import { getTestArtists, getTestBusinessProfile, getTestBusinessRequests } from "@/lib/test-data";
+import { getTestBusinessProfile, getTestBusinessRequests } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
 import ArtistProfile from "@/models/ArtistProfile";
 import BusinessProfile from "@/models/BusinessProfile";
 import ProjectRequest from "@/models/ProjectRequest";
-import type { ArtistProfile as ArtistProfileType, BusinessProfile as BusinessProfileType, ProjectRequest as ProjectRequestType } from "@/types/entities";
+import type { BusinessProfile as BusinessProfileType, ProjectRequest as ProjectRequestType } from "@/types/entities";
 
 void ArtistProfile;
 
 export const dynamic = "force-dynamic";
 
 export default async function BusinessDashboardPage({
-  searchParams
-}: {
-  searchParams: Promise<Record<string, string | undefined>>;
-}) {
+}: Record<string, never>) {
   const user = await getSessionUser();
   if (!user) redirect("/auth/login");
   if (user.role !== "business") redirect(`/dashboard/${user.role}`);
 
-  const params = await searchParams;
   const testMode = isTestDataEnabled();
   let profile: BusinessProfileType | null;
   let requests: ProjectRequestType[];
-  let artists: ArtistProfileType[];
-  let artistStyles: string[];
-  let indianaLocations: string[];
 
   if (testMode) {
     profile = getTestBusinessProfile(user.id) as BusinessProfileType | null;
     requests = getTestBusinessRequests(user.id);
-    artists = getTestArtists(params);
-    artistStyles = [...new Set(getTestArtists().flatMap((artist) => artist.styles))].sort();
-    indianaLocations = [...new Set(getTestArtists().map((artist) => artist.location))]
-      .filter((location) => location.endsWith(", IN"))
-      .sort();
   } else {
     await connectToDatabase();
     profile = JSON.parse(JSON.stringify(await BusinessProfile.findOne({ userId: user.id }).lean())) as BusinessProfileType | null;
@@ -52,79 +40,30 @@ export default async function BusinessDashboardPage({
         )
       ) as ProjectRequestType[])
       : [];
-
-    const artistFilters: Record<string, unknown> = {};
-    if (params.q) artistFilters.$text = { $search: params.q };
-    if (params.style) artistFilters.styles = new RegExp(params.style, "i");
-    if (params.location) artistFilters.location = new RegExp(params.location, "i");
-    if (params.maxBudget) artistFilters.startingPrice = { $lte: Number(params.maxBudget) };
-    const [artistRows, availableStyles, availableLocations] = await Promise.all([
-      ArtistProfile.find(artistFilters).sort({ updatedAt: -1 }).lean(),
-      ArtistProfile.distinct("styles") as Promise<string[]>,
-      ArtistProfile.distinct("location") as Promise<string[]>
-    ]);
-    artists = JSON.parse(JSON.stringify(artistRows)) as ArtistProfileType[];
-    artistStyles = availableStyles.sort();
-    indianaLocations = availableLocations
-      .filter((location) => location.endsWith(", IN"))
-      .sort();
   }
 
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
       <section>
         <h1 className="text-4xl font-semibold tracking-tight">Business dashboard</h1>
-        <p className="mt-2 text-stone-700">Find artists, post project opportunities, and track your requests.</p>
+        <p className="mt-2 text-stone-700">Create project details first, then match with the right artist.</p>
+        <div className="mt-5">
+          <BusinessDashboardTabs active="dashboard" />
+        </div>
       </section>
       <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
         <h2 className="mb-6 text-2xl font-semibold">Business profile</h2>
         <BusinessProfileForm profile={profile} />
       </section>
-      <section id="find-artists">
-        <div>
-          <h2 className="text-2xl font-semibold">Find an artist</h2>
-          <p className="mt-1 text-stone-700">Search by name, specialty, location, or budget.</p>
-        </div>
-        <form className="mt-4 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
-          <input name="q" aria-label="Search artists" placeholder="Name or keyword" defaultValue={params.q} />
-          <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
-            <option value="">All artist styles</option>
-            {artistStyles.map((style) => (
-              <option key={style} value={style}>{style}</option>
-            ))}
-          </select>
-          <select name="location" aria-label="Indiana artist location" defaultValue={params.location ?? ""}>
-            <option value="">All Indiana locations</option>
-            {indianaLocations.map((location) => (
-              <option key={location} value={location}>{location}</option>
-            ))}
-          </select>
-          <input name="maxBudget" aria-label="Maximum starting price" placeholder="Max starting price" type="number" defaultValue={params.maxBudget} />
-          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
-            Search artists
-          </button>
-        </form>
-        <div className="mt-6">
-          {artists.length ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {artists.map((artist) => <ArtistCard artist={artist} key={artist._id} />)}
-            </div>
-          ) : (
-            <EmptyState title="No artists found" body="Try removing a filter or searching with a broader term." />
-          )}
-        </div>
-      </section>
-      <section id="post-job" className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
-        <h2 className="text-2xl font-semibold">Post a job</h2>
-        <p className="mb-6 mt-1 text-stone-700">Choose an artist and share the project scope, budget, and timeline.</p>
+      <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
+        <h2 className="text-2xl font-semibold">Start a new project</h2>
+        <p className="mb-6 mt-1 text-stone-700">Step 1: define pay range, art type, timeline, and due date before searching artists.</p>
         {profile ? (
-          artists.length ? (
-            <ProjectRequestForm artists={artists} demoMode={testMode} />
-          ) : (
-            <EmptyState title="Choose an artist first" body="Clear your search filters to see artists available for a project." />
-          )
+          <Link className="inline-flex rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white" href="/dashboard/business/project">
+            Create project details
+          </Link>
         ) : (
-          <EmptyState title="Complete your business profile" body="Save your business details above before posting a job." />
+          <EmptyState title="Complete your business profile" body="Save your business details above before creating a project." />
         )}
       </section>
       <section>

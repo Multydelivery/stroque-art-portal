@@ -9,6 +9,7 @@ import { projectRequestSchema } from "@/lib/validation";
 import type { ArtistProfile } from "@/types/entities";
 
 type Values = z.infer<typeof projectRequestSchema>;
+type InitialValues = Partial<Values>;
 
 const timelineOptions = ["ASAP", "2-4 weeks", "4-6 weeks", "6-8 weeks", "2-3 months", "Flexible"];
 
@@ -16,12 +17,14 @@ export function ProjectRequestForm({
   artistId,
   artists,
   demoMode = false,
-  stayOnSuccess = false
+  stayOnSuccess = false,
+  initialValues
 }: {
   artistId?: string;
   artists?: ArtistProfile[];
   demoMode?: boolean;
   stayOnSuccess?: boolean;
+  initialValues?: InitialValues;
 }) {
   const router = useRouter();
   const [serverError, setServerError] = useState("");
@@ -29,14 +32,16 @@ export function ProjectRequestForm({
   const form = useForm<Values>({
     resolver: zodResolver(projectRequestSchema),
     defaultValues: {
-      artistId: artistId ?? "",
-      spaceType: demoMode ? "Hotel lobby feature wall" : "",
-      budget: demoMode ? 4200 : 2500,
-      timeline: demoMode ? "6-8 weeks" : "",
-      stylePreference: demoMode ? "Warm botanical mural with contemporary details" : "",
-      description: demoMode
-        ? "This is a demo request for a lobby artwork concept. The space needs a welcoming focal point that reflects the brand and works well for guest photos."
-        : ""
+      artistId: initialValues?.artistId ?? artistId ?? "",
+      spaceType: initialValues?.spaceType ?? (demoMode ? "Hotel lobby feature wall" : ""),
+      budget: initialValues?.budget ?? (demoMode ? 4200 : 2500),
+      timeline: initialValues?.timeline ?? (demoMode ? "6-8 weeks" : ""),
+      stylePreference: initialValues?.stylePreference ?? (demoMode ? "Warm botanical mural with contemporary details" : ""),
+      description:
+        initialValues?.description ??
+        (demoMode
+          ? "This is a demo request for a lobby artwork concept. The space needs a welcoming focal point that reflects the brand and works well for guest photos."
+          : "")
     }
   });
 

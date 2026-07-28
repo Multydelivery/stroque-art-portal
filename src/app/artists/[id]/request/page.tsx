@@ -10,13 +10,39 @@ import type { ArtistProfile as ArtistProfileType } from "@/types/entities";
 
 export const dynamic = "force-dynamic";
 
-export default async function RequestPage({ params }: { params: Promise<{ id: string }> }) {
+type RequestPageSearchParams = {
+  spaceType?: string;
+  budgetMin?: string;
+  budgetMax?: string;
+  timeline?: string;
+  dueDate?: string;
+  stylePreference?: string;
+  description?: string;
+};
+
+export default async function RequestPage({
+  params,
+  searchParams
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<RequestPageSearchParams>;
+}) {
   const demoMode = isTestDataEnabled();
   const user = await getSessionUser();
   if (!user && !demoMode) redirect("/auth/login");
   if (user && user.role !== "business") redirect("/artists");
 
   const { id } = await params;
+  const query = await searchParams;
+
+  const minBudget = Number(query.budgetMin ?? 0);
+  const maxBudget = Number(query.budgetMax ?? 0);
+  const midpointBudget = minBudget > 0 && maxBudget >= minBudget ? Math.round((minBudget + maxBudget) / 2) : undefined;
+  const descriptionWithDueDate =
+    query.description && query.dueDate
+      ? `${query.description.trim()}\n\nRequested due date: ${query.dueDate}`
+      : query.description;
+
   const artist = demoMode
     ? getTestArtist(id)
     : (JSON.parse(JSON.stringify(await connectToDatabase().then(() => ArtistProfile.findById(id).lean()))) as ArtistProfileType | null);
@@ -31,7 +57,18 @@ export default async function RequestPage({ params }: { params: Promise<{ id: st
         <h1 className="text-3xl font-semibold">Request a project with {artist.displayName}</h1>
         <p className="mt-2 text-sm text-stone-600">Give the artist enough context to decide fit, timing, and next steps.</p>
         <div className="mt-8">
-          <ProjectRequestForm artistId={artist._id} demoMode={demoMode} stayOnSuccess={demoMode && !user} />
+          <ProjectRequestForm
+            artistId={artist._id}
+            demoMode={demoMode}
+            stayOnSuccess={demoMode && !user}
+            initialValues={{
+              spaceType: query.spaceType,
+              budget: midpointBudget,
+              timeline: query.timeline,
+              stylePreference: query.stylePreference,
+              description: descriptionWithDueDate
+            }}
+          />
         </div>
       </div>
     </main>
