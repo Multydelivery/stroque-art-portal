@@ -77,6 +77,16 @@ export default async function ArtistDashboardPage() {
   const pendingCount = requests.filter((request) => request.status === "pending").length;
   const profileReady = isProfileReady(profile);
   const firstAction = buildFirstAction(profile, pendingCount);
+  const profileForForm: ArtistProfileType = profile ?? {
+    _id: "",
+    displayName: "",
+    bio: "",
+    location: "",
+    styles: [],
+    services: [],
+    startingPrice: 0,
+    portfolioImages: []
+  };
 
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
@@ -120,7 +130,7 @@ export default async function ArtistDashboardPage() {
 
       <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft" id="artist-profile">
         <h2 className="mb-6 text-2xl font-semibold">Profile</h2>
-        <ArtistProfileForm profile={profile} />
+        <ArtistProfileForm profile={profileForForm} />
       </section>
       <section id="incoming-requests">
         <h2 className="mb-4 text-2xl font-semibold">Incoming requests</h2>
