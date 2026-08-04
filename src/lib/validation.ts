@@ -41,12 +41,20 @@ export const businessProfileSchema = z.object({
   location: z.string().refine(
     (location) => indianaBusinessLocations.some((indianaLocation) => indianaLocation === location),
     "Choose an Indiana city."
-  )
+  ),
+  logoUrl: z.union([z.string().url("Use a valid image URL."), z.literal("")]).default("")
 });
 
 export const projectSchema = z
   .object({
     spaceType: z.string().min(2, "Project name or space type is required."),
+    dimensions: z
+      .string()
+      .regex(/^\d{1,2}x\d{1,2}$/i, "Dimensions must use HxW format, such as 10x20.")
+      .refine((value) => {
+        const [height, width] = value.toLowerCase().split("x").map(Number);
+        return height >= 5 && height <= 50 && width >= 5 && width <= 50;
+      }, "Height and width must each be between 5 and 50."),
     budgetMin: z.coerce.number().min(1, "Minimum pay is required."),
     budgetMax: z.coerce.number().min(1, "Maximum pay is required."),
     timeline: z.string().min(2, "Timeline is required."),

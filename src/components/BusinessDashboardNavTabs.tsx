@@ -9,11 +9,9 @@ function tabClasses(active: boolean) {
 }
 
 export function BusinessDashboardNavTabs({
-  activeTab,
-  findArtistHref
+  activeTab
 }: {
   activeTab: "business-profile" | "posted-projects" | "sent-requests";
-  findArtistHref: string;
 }) {
   return (
     <nav aria-label="Business dashboard tabs">
@@ -21,11 +19,6 @@ export function BusinessDashboardNavTabs({
         <li>
           <Link className={tabClasses(false)} href="/dashboard/business/project">
             Create project
-          </Link>
-        </li>
-        <li>
-          <Link className={tabClasses(false)} href={findArtistHref}>
-            Find artist
           </Link>
         </li>
         <li>

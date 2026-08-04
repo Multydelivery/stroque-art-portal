@@ -14,6 +14,7 @@ export const dynamic = "force-dynamic";
 type RequestPageSearchParams = {
   projectId?: string;
   spaceType?: string;
+  dimensions?: string;
   budgetMin?: string;
   budgetMax?: string;
   timeline?: string;
@@ -48,6 +49,7 @@ export default async function RequestPage({
   }
 
   const projectId = query.projectId ?? selectedProject?._id;
+  const dimensions = query.dimensions ?? selectedProject?.dimensions;
 
   const minBudget = Number(query.budgetMin ?? 0);
   const maxBudget = Number(query.budgetMax ?? 0);
@@ -76,6 +78,12 @@ export default async function RequestPage({
       <div className="mt-6 rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
         <h1 className="text-3xl font-semibold">Request a project with {artist.displayName}</h1>
         <p className="mt-2 text-sm text-stone-600">Give the artist enough context to decide fit, timing, and next steps.</p>
+        {dimensions ? (
+          <div className="mt-4 inline-flex items-center gap-2 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-sm">
+            <span className="font-medium text-stone-600">Project dimensions:</span>
+            <span className="font-semibold text-stone-900">{dimensions}</span>
+          </div>
+        ) : null}
         <div className="mt-8">
           <ProjectRequestForm
             projectId={projectId}

@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import type { SessionUser } from "@/lib/auth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 function navLinkClasses(active: boolean) {
   return active
@@ -26,7 +28,9 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
       <nav aria-label="Primary" className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-soft">
           <Link className="group flex items-center gap-2" href="/">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-sm font-bold text-white">S</span>
+            <span className="relative h-8 w-8 overflow-hidden rounded-lg">
+              <Image src="/images/S_LogoTM.png" alt="Stroque logo" fill sizes="32px" className="object-contain" priority />
+            </span>
             <span className="text-sm font-semibold tracking-tight text-stone-800 sm:text-base">Indy Art Portal</span>
             <span className="hidden rounded-full bg-moss/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-moss sm:inline-flex">
               by Stroque
@@ -52,7 +56,12 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
             )}
           </button>
 
+          <div className="md:hidden">
+            <ThemeToggle />
+          </div>
+
           <div className="hidden items-center gap-2 md:flex">
+            <ThemeToggle />
             <Link aria-current={onArtists ? "page" : undefined} className={navLinkClasses(onArtists)} href="/artists">
               Artists
             </Link>
@@ -83,6 +92,7 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
         {menuOpen ? (
           <div className="mt-3 rounded-xl border border-stone-200 bg-white p-3 shadow-soft md:hidden" id="mobile-nav-menu">
             <div className="grid gap-2">
+              <ThemeToggle compact />
               <Link className={navLinkClasses(onArtists)} href="/artists" onClick={() => setMenuOpen(false)}>
                 Artists
               </Link>

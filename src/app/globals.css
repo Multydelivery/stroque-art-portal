@@ -4,12 +4,29 @@
 
 :root {
   color: #111111;
-  background: #fbfaf7;
+  background: radial-gradient(circle at 15% 18%, #fff2a3 0%, transparent 36%),
+    radial-gradient(circle at 82% 22%, #58bde0 0%, transparent 30%),
+    linear-gradient(160deg, #ffffff 0%, #f28bd4 58%, #111111 100%);
 }
 
 body {
   min-height: 100vh;
-  background: #fbfaf7;
+  background: radial-gradient(circle at 15% 18%, #fff2a3 0%, transparent 36%),
+    radial-gradient(circle at 82% 22%, #58bde0 0%, transparent 30%),
+    linear-gradient(160deg, #ffffff 0%, #f28bd4 58%, #111111 100%);
+  background-attachment: fixed;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  color: #f7f7f8;
+  background: radial-gradient(circle at 12% 16%, #1d9fc9 0%, transparent 30%),
+    radial-gradient(circle at 84% 20%, #e774c8 0%, transparent 28%),
+    linear-gradient(160deg, #111111 0%, #18141f 52%, #090909 100%);
+  background-attachment: fixed;
 }
 
 a,
@@ -22,13 +39,13 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  @apply ring-2 ring-ink/40 ring-offset-2 ring-offset-paper;
+  @apply ring-2 ring-blush/55 ring-offset-2 ring-offset-paper;
 }
 
 input,
 select,
 textarea {
-  @apply w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-ink focus:ring-2 focus:ring-ink/10;
+  @apply w-full rounded-lg border border-clay/80 bg-white/95 px-4 py-3 text-sm outline-none transition focus:border-moss focus:ring-2 focus:ring-moss/20;
 }
 
 label {
@@ -41,4 +58,39 @@ label {
 
 .error {
   @apply text-sm text-red-700;
+}
+
+html.dark .bg-white {
+  background-color: rgba(18, 18, 20, 0.96) !important;
+}
+
+html.dark .bg-white\/90,
+html.dark .bg-paper\/90 {
+  background-color: rgba(18, 18, 20, 0.9) !important;
+}
+
+html.dark .bg-stone-50 {
+  background-color: #17171a !important;
+}
+
+html.dark .bg-stone-100 {
+  background-color: #202025 !important;
+}
+
+html.dark .border-stone-200,
+html.dark .border-stone-200\/80,
+html.dark .border-stone-300 {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+html.dark .text-stone-900,
+html.dark .text-stone-800,
+html.dark .text-stone-700,
+html.dark .text-stone-600,
+html.dark .text-stone-500 {
+  color: #e7e7eb !important;
+}
+
+html.dark .hover\:bg-stone-100:hover {
+  background-color: #25252b !important;
 }

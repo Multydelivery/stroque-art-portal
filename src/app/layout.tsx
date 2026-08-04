@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import { BottomDock } from "@/components/BottomDock";
 import { SiteNavbar } from "@/components/SiteNavbar";
 import { getSessionUser } from "@/lib/auth";
 
@@ -13,8 +14,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const user = await getSessionUser();
 
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <body className="pb-24 font-sans antialiased md:pb-0">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+  try {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const useDark = savedTheme ? savedTheme === "dark" : prefersDark;
+    document.documentElement.classList.toggle("dark", useDark);
+  } catch {
+    document.documentElement.classList.remove("dark");
+  }
+})();`
+          }}
+        />
         <SiteNavbar user={user} />
         {children}
         <footer className="border-t border-stone-200 bg-ink text-white">
@@ -55,6 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </div>
         </footer>
+        <BottomDock user={user} />
       </body>
     </html>
   );

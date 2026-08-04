@@ -9,7 +9,7 @@ cloudinary.config({
 });
 
 export async function POST(request: Request) {
-  const user = await requireUser("artist");
+  const user = await requireUser();
   if (!user) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
 
   const formData = await request.formData();

@@ -4,6 +4,7 @@ const projectSchema = new Schema(
   {
     businessId: { type: Schema.Types.ObjectId, ref: "BusinessProfile", required: true },
     spaceType: { type: String, required: true, trim: true },
+    dimensions: { type: String, required: true, trim: true },
     budgetMin: { type: Number, required: true, min: 1 },
     budgetMax: { type: Number, required: true, min: 1 },
     timeline: { type: String, required: true, trim: true },

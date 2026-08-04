@@ -5,7 +5,8 @@ const businessProfileSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true, unique: true },
     businessName: { type: String, required: true, trim: true },
     industry: { type: String, required: true, trim: true },
-    location: { type: String, required: true, trim: true }
+    location: { type: String, required: true, trim: true },
+    logoUrl: { type: String, trim: true, default: "" }
   },
   { timestamps: true }
 );

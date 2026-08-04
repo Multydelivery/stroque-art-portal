@@ -14,12 +14,14 @@ export type BusinessProfile = {
   businessName: string;
   industry: string;
   location: string;
+  logoUrl?: string;
 };
 
 export type Project = {
   _id: string;
   businessId: BusinessProfile;
   spaceType: string;
+  dimensions: string;
   budgetMin: number;
   budgetMax: number;
   timeline: string;

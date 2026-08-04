@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { BusinessDashboardTabs } from "@/components/BusinessDashboardTabs";
+import { BusinessSidePanel } from "@/components/BusinessSidePanel";
 import { BusinessProjectDetailsForm } from "@/components/BusinessProjectDetailsForm";
 import { EmptyState } from "@/components/EmptyState";
 import { getSessionUser } from "@/lib/auth";
@@ -21,27 +21,28 @@ export default async function BusinessProjectDetailsPage() {
     : await connectToDatabase().then(() => BusinessProfile.findOne({ userId: user.id }).lean());
 
   return (
-    <main className="mx-auto max-w-4xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <section>
         <h1 className="text-4xl font-semibold tracking-tight">Create project</h1>
-        <p className="mt-2 text-stone-700">Step 1 of 2: add project details before searching for artists.</p>
-        <div className="mt-5">
-          <BusinessDashboardTabs active="project" />
-        </div>
+        <p className="mt-2 text-stone-700">Add project details first, then view matched artists for that project.</p>
       </section>
 
-      {profile ? (
-        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
-          <h2 className="text-2xl font-semibold">Project details</h2>
-          <p className="mt-1 text-stone-700">Provide pay range, art type, timeline, and due date to continue.</p>
-          <BusinessProjectDetailsForm />
-        </section>
-      ) : (
-        <EmptyState
-          title="Complete your business profile"
-          body="Save your business details on the dashboard before creating a project."
-        />
-      )}
+      <section className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
+        <BusinessSidePanel active="create-project" profileName={user.name} profileImageUrl={profile?.logoUrl} />
+
+        {profile ? (
+          <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
+            <h2 className="text-2xl font-semibold">Project details</h2>
+            <p className="mt-1 text-stone-700">Provide pay range, art type, timeline, and due date to continue.</p>
+            <BusinessProjectDetailsForm />
+          </section>
+        ) : (
+          <EmptyState
+            title="Complete your business profile"
+            body="Save your business details on the dashboard before creating a project."
+          />
+        )}
+      </section>
     </main>
   );
 }

@@ -2,14 +2,15 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         ink: "#111111",
-        paper: "#fbfaf7",
-        clay: "#d6c7b8",
-        moss: "#7b8672",
-        blush: "#d9b8ad"
+        paper: "#fffdf6",
+        clay: "#fff2a3",
+        moss: "#1d9fc9",
+        blush: "#e774c8"
       },
       boxShadow: {
         soft: "0 18px 50px rgba(17, 17, 17, 0.08)"

@@ -62,6 +62,7 @@ function createStore(): TestStore {
       _id: "test-project-1",
       businessId: businesses[0],
       spaceType: "Hotel lobby feature wall",
+      dimensions: "10x20",
       budgetMin: 3000,
       budgetMax: 5500,
       timeline: "6-8 weeks",
@@ -246,6 +247,7 @@ export function createTestProject(userId: string, data: z.infer<typeof projectSc
     _id: `test-project-${Date.now()}`,
     businessId: business,
     spaceType: data.spaceType,
+    dimensions: data.dimensions,
     budgetMin: data.budgetMin,
     budgetMax: data.budgetMax,
     timeline: data.timeline,
@@ -264,6 +266,7 @@ export function updateTestProject(userId: string, id: string, data: z.infer<type
   if (!project) return null;
 
   project.spaceType = data.spaceType;
+  project.dimensions = data.dimensions;
   project.budgetMin = data.budgetMin;
   project.budgetMax = data.budgetMax;
   project.timeline = data.timeline;

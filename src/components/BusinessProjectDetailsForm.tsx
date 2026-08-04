@@ -10,6 +10,26 @@ import type { Project } from "@/types/entities";
 
 type Values = z.infer<typeof projectSchema>;
 
+const payRangePresets = [
+  { value: "1500-3000", label: "$1,500 - $3,000", budgetMin: 1500, budgetMax: 3000 },
+  { value: "3000-6000", label: "$3,000 - $6,000", budgetMin: 3000, budgetMax: 6000 },
+  { value: "6000-10000", label: "$6,000 - $10,000", budgetMin: 6000, budgetMax: 10000 },
+  { value: "10000-20000", label: "$10,000 - $20,000", budgetMin: 10000, budgetMax: 20000 }
+] as const;
+
+const artTypeOptions = [
+  "Mural",
+  "Canvas painting",
+  "Digital illustration",
+  "Sculpture",
+  "Mixed media",
+  "Installation art",
+  "Portrait",
+  "Abstract"
+] as const;
+
+const timelineOptions = ["ASAP", "2-4 weeks", "4-6 weeks", "6-8 weeks", "2-3 months", "Flexible"] as const;
+
 export function BusinessProjectDetailsForm({
   project,
   mode = "create"
@@ -19,21 +39,44 @@ export function BusinessProjectDetailsForm({
 }) {
   const router = useRouter();
   const [serverError, setServerError] = useState("");
+  const [defaultHeight, defaultWidth] = (project?.dimensions || "").toLowerCase().split("x");
+  const matchedPreset = payRangePresets.find(
+    (preset) => preset.budgetMin === project?.budgetMin && preset.budgetMax === project?.budgetMax
+  );
+  const [payRangePreset, setPayRangePreset] = useState(matchedPreset?.value ?? "");
+  const [height, setHeight] = useState(defaultHeight && Number(defaultHeight) >= 5 && Number(defaultHeight) <= 50 ? defaultHeight : "10");
+  const [width, setWidth] = useState(defaultWidth && Number(defaultWidth) >= 5 && Number(defaultWidth) <= 50 ? defaultWidth : "20");
 
   const form = useForm<Values>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      spaceType: project?.spaceType ?? "Hotel lobby feature wall",
-      budgetMin: project?.budgetMin ?? 2500,
-      budgetMax: project?.budgetMax ?? 5000,
-      timeline: project?.timeline ?? "6-8 weeks",
+      spaceType: project?.spaceType ?? "",
+      dimensions: project?.dimensions ?? "10x20",
+      budgetMin: project?.budgetMin,
+      budgetMax: project?.budgetMax,
+      timeline: project?.timeline ?? "",
       dueDate: project?.dueDate ?? "",
-      stylePreference: project?.stylePreference ?? "Warm botanical mural with contemporary details",
-      description:
-        project?.description ??
-        "This is a hospitality lobby focal piece designed to increase visual impact and photo moments. Installation support is needed."
+      stylePreference: project?.stylePreference ?? "",
+      description: project?.description ?? ""
     }
   });
+
+  function onDimensionChange(nextHeight: string, nextWidth: string) {
+    setHeight(nextHeight);
+    setWidth(nextWidth);
+    form.setValue("dimensions", `${nextHeight}x${nextWidth}`, { shouldDirty: true, shouldValidate: true });
+  }
+
+  function onPayRangePresetChange(value: string) {
+    setPayRangePreset(value);
+    if (!value) return;
+
+    const selected = payRangePresets.find((preset) => preset.value === value);
+    if (!selected) return;
+
+    form.setValue("budgetMin", selected.budgetMin, { shouldDirty: true, shouldValidate: true });
+    form.setValue("budgetMax", selected.budgetMax, { shouldDirty: true, shouldValidate: true });
+  }
 
   async function onSubmit(values: Values) {
     setServerError("");
@@ -65,6 +108,43 @@ export function BusinessProjectDetailsForm({
 
       <div className="grid gap-5 md:grid-cols-2">
         <div className="field">
+          <label htmlFor="projectHeight">Project height</label>
+          <select id="projectHeight" value={height} onChange={(event) => onDimensionChange(event.target.value, width)}>
+            {Array.from({ length: 46 }, (_, index) => index + 5).map((size) => (
+              <option key={`h-${size}`} value={String(size)}>{size}</option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label htmlFor="projectWidth">Project width</label>
+          <select id="projectWidth" value={width} onChange={(event) => onDimensionChange(height, event.target.value)}>
+            {Array.from({ length: 46 }, (_, index) => index + 5).map((size) => (
+              <option key={`w-${size}`} value={String(size)}>{size}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="field">
+        <label htmlFor="dimensionsPreview">Dimensions</label>
+        <input id="dimensionsPreview" readOnly value={`${height}x${width}`} />
+        <input type="hidden" {...form.register("dimensions")} />
+        <p className="error">{form.formState.errors.dimensions?.message}</p>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="field">
+          <label htmlFor="payRangePreset">Pay range preset</label>
+          <select id="payRangePreset" onChange={(event) => onPayRangePresetChange(event.target.value)} value={payRangePreset}>
+            <option value="">Custom pay range</option>
+            {payRangePresets.map((preset) => (
+              <option key={preset.value} value={preset.value}>{preset.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="field">
           <label htmlFor="budgetMin">Pay range minimum (USD)</label>
           <input id="budgetMin" min={1} type="number" {...form.register("budgetMin")} />
           <p className="error">{form.formState.errors.budgetMin?.message}</p>
@@ -79,19 +159,24 @@ export function BusinessProjectDetailsForm({
       <div className="grid gap-5 md:grid-cols-2">
         <div className="field">
           <label htmlFor="stylePreference">Type of art needed</label>
-          <input id="stylePreference" placeholder="Abstract mural, portrait series, mixed-media wall" {...form.register("stylePreference")} />
+          <select id="stylePreference" {...form.register("stylePreference")}>
+            <option value="">Select type of art</option>
+            {artTypeOptions.map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+            {project?.stylePreference && !artTypeOptions.includes(project.stylePreference as (typeof artTypeOptions)[number]) ? (
+              <option value={project.stylePreference}>{project.stylePreference}</option>
+            ) : null}
+          </select>
           <p className="error">{form.formState.errors.stylePreference?.message}</p>
         </div>
         <div className="field">
           <label htmlFor="timeline">Timeline</label>
           <select id="timeline" {...form.register("timeline")}>
             <option value="">Select timeline</option>
-            <option value="ASAP">ASAP</option>
-            <option value="2-4 weeks">2-4 weeks</option>
-            <option value="4-6 weeks">4-6 weeks</option>
-            <option value="6-8 weeks">6-8 weeks</option>
-            <option value="2-3 months">2-3 months</option>
-            <option value="Flexible">Flexible</option>
+            {timelineOptions.map((timeline) => (
+              <option key={timeline} value={timeline}>{timeline}</option>
+            ))}
           </select>
           <p className="error">{form.formState.errors.timeline?.message}</p>
         </div>
@@ -122,7 +207,7 @@ export function BusinessProjectDetailsForm({
             : "Posting project..."
           : mode === "edit"
             ? "Save project and continue"
-            : "Post project and continue"}
+            : "Post project details and continue"}
       </button>
     </form>
   );
