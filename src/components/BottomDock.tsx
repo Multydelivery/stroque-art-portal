@@ -5,37 +5,45 @@ import { usePathname } from "next/navigation";
 import type { SessionUser } from "@/lib/auth";
 
 type DockItem = {
-  key: "messages" | "search" | "add" | "friends" | "profile";
+  key: "home" | "messages" | "search" | "add" | "profile";
   label: string;
   href: string;
 };
 
 function iconClasses(active: boolean) {
-  return active ? "h-5 w-5 text-ink" : "h-5 w-5 text-stone-600";
+  return active ? "h-5 w-5 text-ink dark:text-stone-100" : "h-5 w-5 text-stone-600 dark:text-stone-300";
 }
 
 function itemClasses(active: boolean) {
   return active
-    ? "flex flex-col items-center gap-1 rounded-xl bg-stone-100 px-2 py-2 text-[11px] font-semibold text-ink"
-    : "flex flex-col items-center gap-1 rounded-xl px-2 py-2 text-[11px] font-medium text-stone-600";
+    ? "flex flex-col items-center gap-1 rounded-xl bg-stone-100 px-2 py-2 text-[11px] font-semibold text-ink dark:bg-stone-800 dark:text-stone-100"
+    : "flex flex-col items-center gap-1 rounded-xl px-2 py-2 text-[11px] font-medium text-stone-600 dark:text-stone-300";
 }
 
 function resolveItems(user: SessionUser | null): DockItem[] {
+  const homeHref = "/";
   const profileHref = user ? `/dashboard/${user.role}` : "/auth/login";
   const messagesHref = user?.role === "business" ? "/dashboard/business?tab=sent-requests" : profileHref;
   const addHref = user?.role === "business" ? "/dashboard/business/project" : user ? `/dashboard/${user.role}` : "/auth/signup";
-  const friendsHref = "/artists";
 
   return [
+    { key: "home", label: "Home", href: homeHref },
     { key: "messages", label: "Messages", href: messagesHref },
     { key: "search", label: "Search", href: "/artists" },
     { key: "add", label: "Add post", href: addHref },
-    { key: "friends", label: "Friends", href: friendsHref },
     { key: "profile", label: "Profile", href: profileHref }
   ];
 }
 
 function DockIcon({ icon, active }: { icon: DockItem["key"]; active: boolean }) {
+  if (icon === "home") {
+    return (
+      <svg aria-hidden="true" className={iconClasses(active)} fill="none" viewBox="0 0 24 24">
+        <path d="m4.5 11.5 7.5-6 7.5 6V19a1.5 1.5 0 0 1-1.5 1.5h-3.75V14h-4.5v6.5H6A1.5 1.5 0 0 1 4.5 19v-7.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+      </svg>
+    );
+  }
+
   if (icon === "messages") {
     return (
       <svg aria-hidden="true" className={iconClasses(active)} fill="none" viewBox="0 0 24 24">
@@ -58,16 +66,6 @@ function DockIcon({ icon, active }: { icon: DockItem["key"]; active: boolean }) 
       <svg aria-hidden="true" className={iconClasses(active)} fill="none" viewBox="0 0 24 24">
         <rect x="4.5" y="4.5" width="15" height="15" rx="3" stroke="currentColor" strokeWidth="1.8" />
         <path d="M12 8v8M8 12h8" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
-      </svg>
-    );
-  }
-
-  if (icon === "friends") {
-    return (
-      <svg aria-hidden="true" className={iconClasses(active)} fill="none" viewBox="0 0 24 24">
-        <circle cx="9" cy="9" r="3" stroke="currentColor" strokeWidth="1.8" />
-        <circle cx="16.5" cy="10.5" r="2.5" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M4.5 18c.6-2.2 2.5-3.5 4.5-3.5s3.9 1.3 4.5 3.5M13.5 18c.4-1.4 1.7-2.3 3.1-2.3 1.4 0 2.7.9 3.1 2.3" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
       </svg>
     );
   }

@@ -42,10 +42,24 @@ textarea:focus-visible {
   @apply ring-2 ring-blush/55 ring-offset-2 ring-offset-paper;
 }
 
+html.dark a:focus-visible,
+html.dark button:focus-visible,
+html.dark input:focus-visible,
+html.dark select:focus-visible,
+html.dark textarea:focus-visible {
+  @apply ring-moss/70 ring-offset-[#121214];
+}
+
 input,
 select,
 textarea {
-  @apply w-full rounded-lg border border-clay/80 bg-white/95 px-4 py-3 text-sm outline-none transition focus:border-moss focus:ring-2 focus:ring-moss/20;
+  @apply w-full rounded-lg border border-clay/80 bg-white/95 px-4 py-3 text-sm text-stone-900 placeholder:text-stone-500 outline-none transition focus:border-moss focus:ring-2 focus:ring-moss/20;
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  @apply border-white/25 bg-[#17171a] text-stone-100 placeholder:text-stone-400 focus:ring-moss/35;
 }
 
 label {
@@ -69,12 +83,30 @@ html.dark .bg-paper\/90 {
   background-color: rgba(18, 18, 20, 0.9) !important;
 }
 
+html.dark .bg-white\/95,
+html.dark .bg-paper\/95 {
+  background-color: rgba(18, 18, 20, 0.95) !important;
+}
+
+html.dark .bg-white\/80,
+html.dark .bg-paper\/80 {
+  background-color: rgba(18, 18, 20, 0.8) !important;
+}
+
+html.dark .bg-paper {
+  background-color: rgba(18, 18, 20, 0.96) !important;
+}
+
 html.dark .bg-stone-50 {
   background-color: #17171a !important;
 }
 
 html.dark .bg-stone-100 {
   background-color: #202025 !important;
+}
+
+html.dark .bg-stone-200 {
+  background-color: #2a2a31 !important;
 }
 
 html.dark .border-stone-200,
@@ -84,11 +116,44 @@ html.dark .border-stone-300 {
 }
 
 html.dark .text-stone-900,
-html.dark .text-stone-800,
-html.dark .text-stone-700,
-html.dark .text-stone-600,
+html.dark .text-stone-800 {
+  color: #f5f5f7 !important;
+}
+
+html.dark .text-stone-700 {
+  color: #dedee5 !important;
+}
+
+html.dark .text-stone-600 {
+  color: #bfc0ca !important;
+}
+
 html.dark .text-stone-500 {
-  color: #e7e7eb !important;
+  color: #9b9cab !important;
+}
+
+html.dark .text-stone-400 {
+  color: #88899b !important;
+}
+
+html.dark .text-stone-300 {
+  color: #d8d8de !important;
+}
+
+html.dark .text-white {
+  color: #f7f7f8 !important;
+}
+
+html.dark .text-ink {
+  color: #f2f2f5 !important;
+}
+
+html.dark .hover\:text-white:hover {
+  color: #ffffff !important;
+}
+
+html.dark .hover\:text-ink:hover {
+  color: #ffffff !important;
 }
 
 html.dark .hover\:bg-stone-100:hover {
