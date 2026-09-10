@@ -76,7 +76,7 @@ export function ProjectCardActions({
       <div className="flex flex-wrap gap-2">
         <button
           aria-label={status === "open" ? `Cancel project ${projectName}` : `Reopen project ${projectName}`}
-          className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 transition hover:bg-stone-100 disabled:opacity-60"
+          className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 transition hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:opacity-60 dark:border-white/20 dark:text-stone-100 dark:hover:bg-[#2b2b33] dark:focus-visible:ring-offset-[#121214]"
           disabled={isLoading}
           onClick={() => updateStatus(status === "open" ? "closed" : "open")}
           type="button"
@@ -85,7 +85,7 @@ export function ProjectCardActions({
         </button>
         <button
           aria-label={`Delete project ${projectName}`}
-          className="rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:opacity-60"
+          className="rounded-lg border border-red-300 px-3 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-50 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:opacity-60 dark:border-red-400/70 dark:text-red-200 dark:hover:bg-red-950/30 dark:focus-visible:ring-offset-[#121214]"
           disabled={isLoading}
           onClick={removeProject}
           type="button"
@@ -93,7 +93,7 @@ export function ProjectCardActions({
           Delete project
         </button>
       </div>
-      {message ? <p aria-live="polite" className="text-sm text-emerald-700">{message}</p> : null}
+      {message ? <p aria-live="polite" className="text-sm text-emerald-700 dark:text-emerald-300">{message}</p> : null}
       {error ? <p className="error">{error}</p> : null}
     </div>
   );

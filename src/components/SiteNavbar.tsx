@@ -16,7 +16,7 @@ function navLinkClasses(active: boolean) {
 export function SiteNavbar({ user }: { user: SessionUser | null }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const navContainerRef = useRef<HTMLElement | null>(null);
 
   const dashboardHref = user ? `/dashboard/${user.role}` : "/auth/login";
   const onArtists = pathname.startsWith("/artists");
@@ -52,8 +52,8 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-stone-200/80 bg-paper/90 backdrop-blur">
-      <nav aria-label="Primary" className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-soft" ref={navContainerRef}>
+      <nav aria-label="Primary" className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8" ref={navContainerRef}>
+        <div className="flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-soft">
           <Link className="group flex items-center gap-2" href="/">
             <span className="relative h-8 w-8 overflow-hidden rounded-lg">
               <Image src="/images/S_LogoTM.png" alt="Stroque logo" fill sizes="32px" className="object-contain" priority />

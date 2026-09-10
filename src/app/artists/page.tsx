@@ -25,36 +25,36 @@ export default async function ArtistsPage({
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
-            <p className="mt-2 text-stone-700">Search by style, city, and service.</p>
+            <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Artist directory</h1>
+            <p className="mt-2 text-stone-200">Search by style, city, and service.</p>
           </div>
         </div>
-        <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
+        <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95 md:grid-cols-4">
           <div>
-            <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} />
+            <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]" />
             <datalist id="artist-name-suggestions">
               {artistNames.map((name) => <option key={name} value={name} />)}
             </datalist>
           </div>
-          <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
+          <select name="style" aria-label="Art style" defaultValue={params.style ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
             <option value="">All artist styles</option>
             {artistStyles.map((style) => (
               <option key={style} value={style}>{style}</option>
             ))}
           </select>
-          <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""}>
+          <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
             <option value="">All artist locations</option>
             {artistLocations.map((location) => (
               <option key={location} value={location}>{location}</option>
             ))}
           </select>
-          <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
+          <select name="service" aria-label="Service type" defaultValue={params.service ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
             <option value="">All service types</option>
             {serviceTypes.map((service) => (
               <option key={service} value={service}>{service}</option>
             ))}
           </select>
-          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
+          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214] md:col-span-4" type="submit">
             Apply filters
           </button>
         </form>
@@ -94,36 +94,36 @@ export default async function ArtistsPage({
     <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="text-4xl font-semibold tracking-tight">Artist directory</h1>
-          <p className="mt-2 text-stone-700">Search by style, city, and service.</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Artist directory</h1>
+          <p className="mt-2 text-stone-200">Search by style, city, and service.</p>
         </div>
       </div>
-      <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft md:grid-cols-4">
+      <form className="mt-8 grid gap-3 rounded-lg border border-stone-200 bg-white p-4 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95 md:grid-cols-4">
         <div>
-          <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} />
+          <input name="q" aria-label="Search artists" placeholder="Search artists" list="artist-name-suggestions" autoComplete="off" defaultValue={params.q} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]" />
           <datalist id="artist-name-suggestions">
             {artistNames.sort().map((name) => <option key={name} value={name} />)}
           </datalist>
         </div>
-        <select name="style" aria-label="Art style" defaultValue={params.style ?? ""}>
+        <select name="style" aria-label="Art style" defaultValue={params.style ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
           <option value="">All artist styles</option>
           {artistStyles.sort().map((style) => (
             <option key={style} value={style}>{style}</option>
           ))}
         </select>
-        <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""}>
+        <select name="location" aria-label="Artist location" defaultValue={params.location ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
           <option value="">All artist locations</option>
           {artistLocations.sort().map((location) => (
             <option key={location} value={location}>{location}</option>
           ))}
         </select>
-        <select name="service" aria-label="Service type" defaultValue={params.service ?? ""}>
+        <select name="service" aria-label="Service type" defaultValue={params.service ?? ""} className="w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]">
           <option value="">All service types</option>
           {serviceTypes.sort().map((service) => (
             <option key={service} value={service}>{service}</option>
           ))}
         </select>
-        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white md:col-span-4" type="submit">
+        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214] md:col-span-4" type="submit">
           Apply filters
         </button>
       </form>

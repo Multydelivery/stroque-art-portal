@@ -92,42 +92,42 @@ export default async function BusinessProjectArtistSearchPage({
   return (
     <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <section>
-        <h1 className="text-4xl font-semibold tracking-tight">Find artist for project</h1>
-        <p className="mt-2 text-stone-700">Choose an artist who matches your project details.</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Find artist for project</h1>
+        <p className="mt-2 text-stone-200">Choose an artist who matches your project details.</p>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
         <BusinessSidePanel active="create-project" profileName={user.name} profileImageUrl={project?.businessId?.logoUrl} />
 
         <div className="space-y-8">
-          <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft">
-            <h2 className="text-2xl font-semibold">Project summary</h2>
+          <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
+            <h2 className="text-2xl font-semibold text-stone-900 dark:text-stone-100">Project summary</h2>
             <dl className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               <div>
-                <dt className="text-xs uppercase tracking-wide text-stone-500">Dimensions</dt>
-                <dd className="mt-1 text-sm font-semibold text-stone-800">{project?.dimensions}</dd>
+                <dt className="text-xs uppercase tracking-wide text-stone-500 dark:text-stone-300">Dimensions</dt>
+                <dd className="mt-1 text-sm font-semibold text-stone-800 dark:text-stone-100">{project?.dimensions}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-stone-500">Pay range</dt>
-                <dd className="mt-1 text-sm font-semibold text-stone-800">
+                <dt className="text-xs uppercase tracking-wide text-stone-500 dark:text-stone-300">Pay range</dt>
+                <dd className="mt-1 text-sm font-semibold text-stone-800 dark:text-stone-100">
                   {currency(Number(project?.budgetMin ?? 0))} - {currency(Number(project?.budgetMax ?? 0))}
                 </dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-stone-500">Type of art</dt>
-                <dd className="mt-1 text-sm font-semibold text-stone-800">{project?.stylePreference}</dd>
+                <dt className="text-xs uppercase tracking-wide text-stone-500 dark:text-stone-300">Type of art</dt>
+                <dd className="mt-1 text-sm font-semibold text-stone-800 dark:text-stone-100">{project?.stylePreference}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-stone-500">Timeline</dt>
-                <dd className="mt-1 text-sm font-semibold text-stone-800">{project?.timeline}</dd>
+                <dt className="text-xs uppercase tracking-wide text-stone-500 dark:text-stone-300">Timeline</dt>
+                <dd className="mt-1 text-sm font-semibold text-stone-800 dark:text-stone-100">{project?.timeline}</dd>
               </div>
               <div>
-                <dt className="text-xs uppercase tracking-wide text-stone-500">Due date</dt>
-                <dd className="mt-1 text-sm font-semibold text-stone-800">{project?.dueDate}</dd>
+                <dt className="text-xs uppercase tracking-wide text-stone-500 dark:text-stone-300">Due date</dt>
+                <dd className="mt-1 text-sm font-semibold text-stone-800 dark:text-stone-100">{project?.dueDate}</dd>
               </div>
             </dl>
             <div className="mt-5">
-              <Link className="text-sm font-semibold text-ink underline-offset-4 hover:underline" href="/dashboard/business/project">
+              <Link className="text-sm font-semibold text-ink underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:text-stone-100 dark:focus-visible:ring-offset-[#121214]" href="/dashboard/business/project">
                 Edit project
               </Link>
             </div>
@@ -135,14 +135,14 @@ export default async function BusinessProjectArtistSearchPage({
 
           <section>
             <div>
-              <h2 className="text-2xl font-semibold">Matched artists</h2>
-              <p className="mt-1 text-stone-700">Artists are filtered automatically by this project&apos;s type of art and pay range.</p>
+              <h2 className="text-2xl font-semibold text-stone-100">Matched artists</h2>
+              <p className="mt-1 text-stone-200">Artists are filtered automatically by this project&apos;s type of art and pay range.</p>
             </div>
             <div className="mt-6">
               {artists.length ? (
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {artists.map((artist) => (
-                    <article key={artist._id} className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-soft">
+                    <article key={artist._id} className="overflow-hidden rounded-lg border border-stone-200 bg-white shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
                       <div className="relative aspect-[4/3] bg-stone-100">
                         <Image
                           src={artist.portfolioImages[0] || fallbackImage}
@@ -153,20 +153,20 @@ export default async function BusinessProjectArtistSearchPage({
                       </div>
                       <div className="space-y-3 p-5">
                         <div>
-                          <h3 className="text-lg font-semibold">{artist.displayName}</h3>
-                          <p className="text-sm text-stone-600">{artist.location}</p>
+                          <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">{artist.displayName}</h3>
+                          <p className="text-sm text-stone-600 dark:text-stone-300">{artist.location}</p>
                         </div>
-                        <p className="line-clamp-2 text-sm text-stone-700">{artist.bio}</p>
+                        <p className="line-clamp-2 text-sm text-stone-700 dark:text-stone-200">{artist.bio}</p>
                         <div className="flex flex-wrap gap-2">
                           {artist.styles.slice(0, 3).map((style) => (
-                            <span className="rounded-full bg-stone-100 px-3 py-1 text-xs" key={style}>
+                            <span className="rounded-full bg-stone-100 px-3 py-1 text-xs text-stone-800 dark:bg-[#262630] dark:text-stone-100" key={style}>
                               {style}
                             </span>
                           ))}
                         </div>
-                        <p className="text-sm font-semibold">Starts at {currency(artist.startingPrice)}</p>
+                        <p className="text-sm font-semibold text-stone-900 dark:text-stone-100">Starts at {currency(artist.startingPrice)}</p>
                         <Link
-                          className="inline-flex rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-white"
+                          className="inline-flex rounded-lg bg-ink px-4 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]"
                           href={buildRequestHref(artist._id, project._id)}
                         >
                           Select this artist

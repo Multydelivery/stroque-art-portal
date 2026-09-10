@@ -31,10 +31,10 @@ type AdminRequest = {
 
 function StatCard({ label, value, note }: { label: string; value: string | number; note: string }) {
   return (
-    <article className="rounded-xl border border-stone-200 bg-white p-5 shadow-soft">
-      <p className="text-sm font-medium text-stone-500">{label}</p>
-      <p className="mt-2 text-3xl font-semibold tracking-tight">{value}</p>
-      <p className="mt-2 text-xs text-stone-500">{note}</p>
+    <article className="rounded-xl border border-stone-200 bg-white p-5 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
+      <p className="text-sm font-medium text-stone-500 dark:text-stone-300">{label}</p>
+      <p className="mt-2 text-3xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">{value}</p>
+      <p className="mt-2 text-xs text-stone-500 dark:text-stone-300">{note}</p>
     </article>
   );
 }
@@ -90,10 +90,10 @@ export default async function AdminDashboardPage() {
       <section className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">Administration</p>
-          <h1 className="mt-2 text-4xl font-semibold tracking-tight">Platform dashboard</h1>
-          <p className="mt-2 text-stone-700">Monitor members, profiles, and commission activity across Stroque.</p>
+          <h1 className="mt-2 text-4xl font-semibold tracking-tight text-stone-100">Platform dashboard</h1>
+          <p className="mt-2 text-stone-200">Monitor members, profiles, and commission activity across Stroque.</p>
         </div>
-        <div className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white">Signed in as {session.name}</div>
+        <div className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]">Signed in as {session.name}</div>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -104,22 +104,22 @@ export default async function AdminDashboardPage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
-        <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-soft">
-          <div className="border-b border-stone-200 px-6 py-5">
-            <h2 className="text-xl font-semibold">Recent users</h2>
-            <p className="mt-1 text-sm text-stone-500">The latest accounts across every role.</p>
+        <div className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
+          <div className="border-b border-stone-200 px-6 py-5 dark:border-white/20">
+            <h2 className="text-xl font-semibold text-stone-900 dark:text-stone-100">Recent users</h2>
+            <p className="mt-1 text-sm text-stone-500 dark:text-stone-300">The latest accounts across every role.</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-stone-50 text-xs uppercase tracking-wider text-stone-500">
+              <thead className="bg-stone-50 text-xs uppercase tracking-wider text-stone-500 dark:bg-[#1f1f26] dark:text-stone-300">
                 <tr><th className="px-6 py-3">User</th><th className="px-6 py-3">Role</th><th className="px-6 py-3">Joined</th></tr>
               </thead>
-              <tbody className="divide-y divide-stone-100">
+              <tbody className="divide-y divide-stone-100 dark:divide-white/10">
                 {users.slice(0, 8).map((user) => (
-                  <tr key={user.id}>
-                    <td className="px-6 py-4"><p className="font-medium">{user.name}</p><p className="text-stone-500">{user.email}</p></td>
-                    <td className="px-6 py-4"><span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium capitalize">{user.role}</span></td>
-                    <td className="whitespace-nowrap px-6 py-4 text-stone-500">{formatDate(user.createdAt)}</td>
+                  <tr key={user.id} className="dark:hover:bg-[#1f1f26]">
+                    <td className="px-6 py-4"><p className="font-medium text-stone-900 dark:text-stone-100">{user.name}</p><p className="text-stone-500 dark:text-stone-300">{user.email}</p></td>
+                    <td className="px-6 py-4"><span className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium capitalize text-stone-800 dark:bg-[#262630] dark:text-stone-100">{user.role}</span></td>
+                    <td className="whitespace-nowrap px-6 py-4 text-stone-500 dark:text-stone-300">{formatDate(user.createdAt)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -127,28 +127,28 @@ export default async function AdminDashboardPage() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-stone-200 bg-ink p-6 text-white shadow-soft">
-          <h2 className="text-xl font-semibold">Request health</h2>
-          <p className="mt-1 text-sm text-stone-400">Status distribution for all commissions.</p>
+        <div className="rounded-xl border border-stone-200 bg-ink p-6 text-white shadow-soft dark:border-white/20">
+          <h2 className="text-xl font-semibold text-stone-100">Request health</h2>
+          <p className="mt-1 text-sm text-stone-200">Status distribution for all commissions.</p>
           <div className="mt-7 space-y-5">
             {statuses.map((status) => {
               const count = requests.filter((request) => request.status === status).length;
               const width = requests.length ? Math.max((count / requests.length) * 100, count ? 6 : 0) : 0;
-              return <div key={status}><div className="mb-2 flex justify-between text-sm"><span className="capitalize text-stone-300">{status}</span><span className="font-semibold">{count}</span></div><div className="h-2 rounded-full bg-white/10"><div className="h-2 rounded-full bg-blush" style={{ width: `${width}%` }} /></div></div>;
+              return <div key={status}><div className="mb-2 flex justify-between text-sm"><span className="capitalize text-stone-200">{status}</span><span className="font-semibold text-stone-100">{count}</span></div><div className="h-2 rounded-full bg-white/10"><div className="h-2 rounded-full bg-blush" style={{ width: `${width}%` }} /></div></div>;
             })}
           </div>
-          <div className="mt-8 border-t border-white/10 pt-5"><p className="text-sm text-stone-400">Combined requested budget</p><p className="mt-1 text-2xl font-semibold">{currency(totalBudget)}</p></div>
+          <div className="mt-8 border-t border-white/10 pt-5"><p className="text-sm text-stone-200">Combined requested budget</p><p className="mt-1 text-2xl font-semibold text-stone-100">{currency(totalBudget)}</p></div>
         </div>
       </section>
 
-      <section className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-soft">
-        <div className="border-b border-stone-200 px-6 py-5"><h2 className="text-xl font-semibold">Recent project activity</h2><p className="mt-1 text-sm text-stone-500">Latest commission requests and their current status.</p></div>
-        {requests.length ? <div className="divide-y divide-stone-100">{requests.slice(0, 6).map((request) => (
-          <article className="grid gap-3 px-6 py-5 sm:grid-cols-[1fr_auto] sm:items-center" key={request._id}>
-            <div><div className="flex flex-wrap items-center gap-2"><h3 className="font-semibold">{request.spaceType}</h3><span className="rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium capitalize">{request.status}</span></div><p className="mt-1 text-sm text-stone-500">{request.businessId?.businessName ?? "Business"} → {request.artistId?.displayName ?? "Artist"}</p></div>
-            <div className="sm:text-right"><p className="font-semibold">{currency(request.budget)}</p><p className="text-xs text-stone-500">{formatDate(request.createdAt)}</p></div>
+      <section className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
+        <div className="border-b border-stone-200 px-6 py-5 dark:border-white/20"><h2 className="text-xl font-semibold text-stone-900 dark:text-stone-100">Recent project activity</h2><p className="mt-1 text-sm text-stone-500 dark:text-stone-300">Latest commission requests and their current status.</p></div>
+        {requests.length ? <div className="divide-y divide-stone-100 dark:divide-white/10">{requests.slice(0, 6).map((request) => (
+          <article className="grid gap-3 px-6 py-5 sm:grid-cols-[1fr_auto] sm:items-center dark:hover:bg-[#1f1f26]" key={request._id}>
+            <div><div className="flex flex-wrap items-center gap-2"><h3 className="font-semibold text-stone-900 dark:text-stone-100">{request.spaceType}</h3><span className="rounded-full bg-stone-100 px-2.5 py-1 text-xs font-medium capitalize text-stone-800 dark:bg-[#262630] dark:text-stone-100">{request.status}</span></div><p className="mt-1 text-sm text-stone-500 dark:text-stone-300">{request.businessId?.businessName ?? "Business"} → {request.artistId?.displayName ?? "Artist"}</p></div>
+            <div className="sm:text-right"><p className="font-semibold text-stone-900 dark:text-stone-100">{currency(request.budget)}</p><p className="text-xs text-stone-500 dark:text-stone-300">{formatDate(request.createdAt)}</p></div>
           </article>
-        ))}</div> : <p className="px-6 py-10 text-center text-stone-500">No project requests yet.</p>}
+        ))}</div> : <p className="px-6 py-10 text-center text-stone-500 dark:text-stone-300">No project requests yet.</p>}
       </section>
     </main>
   );

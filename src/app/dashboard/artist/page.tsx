@@ -104,8 +104,8 @@ export default async function ArtistDashboardPage({
   return (
     <main className="mx-auto max-w-7xl space-y-10 px-4 py-10 sm:px-6 lg:px-8">
       <section>
-        <h1 className="text-4xl font-semibold tracking-tight">Artist dashboard</h1>
-        <p className="mt-2 text-stone-700">Use tabs to manage your profile, respond to businesses, and improve audience communication.</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Artist dashboard</h1>
+        <p className="mt-2 text-stone-200">Use tabs to manage your profile, respond to businesses, and improve audience communication.</p>
         <div className="mt-5">
           <ArtistDashboardNavTabs activeTab={activeTab} />
         </div>
@@ -145,42 +145,42 @@ export default async function ArtistDashboardPage({
       />
 
       {activeTab === "profile" ? (
-        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft" id="artist-profile">
-          <h2 className="mb-6 text-2xl font-semibold">Profile</h2>
-          <p className="mb-6 text-sm text-stone-700">This is what businesses and your broader audience use to evaluate fit and quality.</p>
+        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95" id="artist-profile">
+          <h2 className="mb-6 text-2xl font-semibold text-stone-900 dark:text-stone-100">Profile</h2>
+          <p className="mb-6 text-sm text-stone-700 dark:text-stone-200">This is what businesses and your broader audience use to evaluate fit and quality.</p>
           <ArtistProfileForm profile={profileForForm} />
         </section>
       ) : null}
 
       {activeTab === "requests" ? (
         <section id="incoming-requests">
-          <h2 className="mb-2 text-2xl font-semibold">Incoming requests</h2>
-          <p className="mb-4 text-sm text-stone-700">Respond quickly and keep statuses updated so businesses can move projects forward.</p>
+          <h2 className="mb-2 text-2xl font-semibold text-stone-100">Incoming requests</h2>
+          <p className="mb-4 text-sm text-stone-200">Respond quickly and keep statuses updated so businesses can move projects forward.</p>
           <RequestList requests={requests} mode="artist" />
         </section>
       ) : null}
 
       {activeTab === "communication" ? (
-        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft" id="communication-guide">
-          <h2 className="text-2xl font-semibold">Communication guide</h2>
-          <p className="mt-2 text-sm text-stone-700">Use these templates to communicate clearly with businesses and your audience.</p>
+        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95" id="communication-guide">
+          <h2 className="text-2xl font-semibold text-stone-900 dark:text-stone-100">Communication guide</h2>
+          <p className="mt-2 text-sm text-stone-700 dark:text-stone-200">Use these templates to communicate clearly with businesses and your audience.</p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-              <h3 className="text-lg font-semibold">Accept message template</h3>
-              <p className="mt-2 text-sm text-stone-700">
+            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4 dark:border-white/20 dark:bg-[#1f1f26]">
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">Accept message template</h3>
+              <p className="mt-2 text-sm text-stone-700 dark:text-stone-200">
                 Thanks for the request. I can take this project in your timeline. I will send a concept direction and next steps within 2 business days.
               </p>
             </article>
-            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4">
-              <h3 className="text-lg font-semibold">Decline message template</h3>
-              <p className="mt-2 text-sm text-stone-700">
+            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4 dark:border-white/20 dark:bg-[#1f1f26]">
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">Decline message template</h3>
+              <p className="mt-2 text-sm text-stone-700 dark:text-stone-200">
                 Thanks for reaching out. I am not available for this timeline, but I appreciate the opportunity and wish you success on the project.
               </p>
             </article>
-            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4 md:col-span-2">
-              <h3 className="text-lg font-semibold">Audience-facing update</h3>
-              <p className="mt-2 text-sm text-stone-700">
+            <article className="rounded-lg border border-stone-200 bg-stone-50 p-4 dark:border-white/20 dark:bg-[#1f1f26] md:col-span-2">
+              <h3 className="text-lg font-semibold text-stone-900 dark:text-stone-100">Audience-facing update</h3>
+              <p className="mt-2 text-sm text-stone-700 dark:text-stone-200">
                 Working on a new commissioned piece focused on {profileForForm.styles[0] || "custom art"}. Sharing process snapshots soon.
               </p>
             </article>

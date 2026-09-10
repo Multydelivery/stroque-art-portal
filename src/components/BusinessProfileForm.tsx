@@ -78,16 +78,16 @@ export function BusinessProfileForm({ profile }: { profile: BusinessProfile | nu
       <div className="field md:col-span-3">
         <label>Business profile image</label>
         <input accept="image/*" type="file" onChange={(event) => event.target.files?.[0] && uploadLogo(event.target.files[0])} />
-        <p className="text-xs text-stone-600">This image appears in the Business user logo on the dashboard side panel.</p>
+        <p className="text-xs text-stone-600 dark:text-stone-300">This image appears in the Business user logo on the dashboard side panel.</p>
         <p className="error">{form.formState.errors.logoUrl?.message}</p>
-        {uploading && <p className="text-sm text-stone-600">Uploading...</p>}
+        {uploading && <p className="text-sm text-stone-600 dark:text-stone-300">Uploading...</p>}
         {logoUrl ? (
-          <div className="mt-3 inline-flex items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2">
-            <span className="relative h-12 w-12 overflow-hidden rounded-full border border-stone-200 bg-white">
+          <div className="mt-3 inline-flex items-center gap-3 rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 dark:border-white/20 dark:bg-[#1f1f26]">
+            <span className="relative h-12 w-12 overflow-hidden rounded-full border border-stone-200 bg-white dark:border-white/20 dark:bg-[#262630]">
               <Image src={logoUrl} alt="Business logo preview" fill sizes="48px" className="object-cover" />
             </span>
             <button
-              className="rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-100"
+              className="rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:hover:bg-[#2b2b33] dark:focus-visible:ring-offset-[#121214]"
               onClick={() => form.setValue("logoUrl", "", { shouldDirty: true })}
               type="button"
             >
@@ -97,8 +97,8 @@ export function BusinessProfileForm({ profile }: { profile: BusinessProfile | nu
         ) : null}
       </div>
       <div className="md:col-span-3">
-        {message && <p className="mb-3 text-sm text-stone-700">{message}</p>}
-        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white" type="submit">
+        {message && <p className="mb-3 text-sm text-stone-700 dark:text-stone-200">{message}</p>}
+        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]" type="submit">
           Save business profile
         </button>
       </div>
