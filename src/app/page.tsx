@@ -1,5 +1,8 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
+import { FloatingArtwork } from "@/components/ui/FloatingArtwork";
+import { InteractiveArtCard } from "@/components/ui/InteractiveArtCard";
+import { RevealInView } from "@/components/ui/RevealInView";
 
 const indyEvents = [
   {
@@ -63,83 +66,120 @@ const heroImages = [
 
 export default function HomePage() {
   return (
-    <main>
-      <section className="mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+    <main className="relative z-10">
+      <section className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <div className="space-y-8">
-          <div className="space-y-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">Art for business spaces</p>
-            <h1 className="max-w-3xl text-5xl font-semibold tracking-tight sm:text-6xl">
-              artists and businesses who make spaces feel alive.
+          <RevealInView className="space-y-5">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">Art for business spaces</p>
+            <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+              artists and businesses who make spaces feel
+              <span className="bg-[linear-gradient(105deg,#d67aff_0%,#f18fcb_38%,#f5c16f_72%,#7fcbf1_100%)] bg-clip-text text-transparent"> alive.</span>
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-stone-700">
+            <p className="max-w-2xl text-lg leading-8 text-stone-200">
               Stroque helps restaurants, offices, hotels, and retail teams discover artists by style,
               location, service, and budget, then send clear project requests in minutes.
             </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          </RevealInView>
+          <RevealInView className="flex flex-col gap-3 sm:flex-row" delay={0.12}>
             <ButtonLink href="/artists">Find Artists</ButtonLink>
             <ButtonLink href="/auth/signup" variant="light">
               Join as Artist
             </ButtonLink>
-          </div>
+          </RevealInView>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:gap-4">
-          {heroImages.map((image, index) => (
-            <div className={`relative aspect-[4/5] overflow-hidden rounded-lg shadow-soft ${index % 2 ? "sm:translate-y-8" : ""}`} key={image.src}>
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                priority={index < 2}
-                unoptimized
-                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 44vw, 46vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
+
+        <div className="relative">
+          <div className="pointer-events-none absolute -left-16 -top-10 hidden w-44 lg:block">
+            <FloatingArtwork
+              src="/images/hero-indy-office-mural.png"
+              alt="Framed office mural detail"
+              className="rotate-[-5deg]"
+              delay={0.1}
+            />
+          </div>
+          <div className="pointer-events-none absolute -bottom-12 -right-8 hidden w-48 xl:block">
+            <FloatingArtwork
+              src="/images/hero-statue-mural.png"
+              alt="Framed statue-inspired mural detail"
+              className="rotate-[4deg]"
+              delay={0.32}
+            />
+          </div>
+
+          <RevealInView className="grid grid-cols-2 gap-3 sm:gap-4" delay={0.08}>
+            {heroImages.map((image, index) => {
+              const card = (
+                <div className={`relative aspect-[4/5] overflow-hidden rounded-lg border border-white/20 shadow-[0_22px_48px_rgba(8,8,12,0.36)] ${index % 2 ? "sm:translate-y-8" : ""}`}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    priority={index < 2}
+                    sizes="(min-width: 1024px) 22vw, (min-width: 640px) 44vw, 46vw"
+                    className="object-cover"
+                  />
+                </div>
+              );
+
+              return index < 2 ? (
+                <InteractiveArtCard key={image.src} className="[transform-style:preserve-3d]">
+                  {card}
+                </InteractiveArtCard>
+              ) : (
+                <div key={image.src}>{card}</div>
+              );
+            })}
+          </RevealInView>
         </div>
       </section>
-      <section className="bg-ink text-white">
+
+      <section className="border-y border-white/10 bg-[#16131a]/85 text-white backdrop-blur-sm">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 md:grid-cols-3 lg:px-8">
-          <div>
+          <RevealInView>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blush">Marketplace pulse</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">What businesses are requesting</h2>
-          </div>
+          </RevealInView>
           <div className="md:col-span-2">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {projectTypes.map((type) => (
-                <div className="rounded-lg border border-white/15 bg-white/10 px-4 py-3 text-sm font-semibold" key={type}>
-                  {type}
-                </div>
+              {projectTypes.map((type, index) => (
+                <RevealInView className="h-full" key={type} delay={index * 0.05}>
+                  <div className="h-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-sm font-semibold">
+                    {type}
+                  </div>
+                </RevealInView>
               ))}
             </div>
           </div>
         </div>
       </section>
+
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <RevealInView className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">Indy calendar</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight">Incoming local art events</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">Indy calendar</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">Incoming local art events</h2>
           </div>
-          <p className="max-w-2xl text-stone-700">
+          <p className="max-w-2xl text-stone-200">
             Demo listings for local discovery. Use this area later for real Indianapolis events, open calls, and artist meetups.
           </p>
-        </div>
+        </RevealInView>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {indyEvents.map((event) => (
-            <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft" key={event.title}>
-              <p className="text-sm font-semibold text-moss">{event.date}</p>
-              <h3 className="mt-3 text-xl font-semibold">{event.title}</h3>
-              <p className="mt-1 text-sm font-medium text-stone-500">{event.venue}</p>
-              <p className="mt-4 text-sm leading-6 text-stone-700">{event.description}</p>
-            </article>
+          {indyEvents.map((event, index) => (
+            <RevealInView key={event.title} delay={index * 0.08}>
+              <article className="rounded-lg border border-stone-200 bg-paper/95 p-5 shadow-soft backdrop-blur dark:border-white/20 dark:bg-[#16161c]/95">
+                <p className="text-sm font-semibold text-moss">{event.date}</p>
+                <h3 className="mt-3 text-xl font-semibold text-stone-900 dark:text-stone-100">{event.title}</h3>
+                <p className="mt-1 text-sm font-medium text-stone-600 dark:text-stone-300">{event.venue}</p>
+                <p className="mt-4 text-sm leading-6 text-stone-700 dark:text-stone-200">{event.description}</p>
+              </article>
+            </RevealInView>
           ))}
         </div>
       </section>
-      <section className="border-y border-stone-200 bg-white">
+
+      <section className="border-y border-stone-200 bg-white/95">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
-          <div>
+          <RevealInView>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">Featured profile</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight">Artist of the week</h2>
             <p className="mt-4 text-stone-700">
@@ -148,83 +188,96 @@ export default function HomePage() {
             <div className="mt-6">
               <ButtonLink href="/artists/test-artist-1">View Artist</ButtonLink>
             </div>
-          </div>
-          <article className="grid overflow-hidden rounded-lg border border-stone-200 bg-paper shadow-soft md:grid-cols-[0.85fr_1.15fr]">
-            <div className="relative min-h-72">
-              <Image
-                src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=80"
-                alt="Featured artist studio work"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">Mara Ellis</p>
-              <h3 className="mt-3 text-2xl font-semibold">Botanical murals for warm hospitality spaces</h3>
-              <p className="mt-4 leading-7 text-stone-700">
-                Mara creates mixed-media wall pieces and custom murals for hotels, restaurants, and retail interiors that need a memorable focal point.
-              </p>
-              <dl className="mt-6 grid gap-4 sm:grid-cols-3">
-                <div>
-                  <dt className="text-sm text-stone-500">Location</dt>
-                  <dd className="mt-1 font-semibold">Indianapolis, IN</dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-stone-500">Starts at</dt>
-                  <dd className="mt-1 font-semibold">$1,800</dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-stone-500">Best for</dt>
-                  <dd className="mt-1 font-semibold">Murals</dd>
-                </div>
-              </dl>
-            </div>
-          </article>
+          </RevealInView>
+          <RevealInView delay={0.08}>
+            <article className="grid overflow-hidden rounded-lg border border-stone-200 bg-paper shadow-soft md:grid-cols-[0.85fr_1.15fr]">
+              <div className="relative min-h-72">
+                <Image
+                  src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1200&q=80"
+                  alt="Featured artist studio work"
+                  fill
+                  sizes="(min-width: 1024px) 36vw, 90vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">Mara Ellis</p>
+                <h3 className="mt-3 text-2xl font-semibold">Botanical murals for warm hospitality spaces</h3>
+                <p className="mt-4 leading-7 text-stone-700">
+                  Mara creates mixed-media wall pieces and custom murals for hotels, restaurants, and retail interiors that need a memorable focal point.
+                </p>
+                <dl className="mt-6 grid gap-4 sm:grid-cols-3">
+                  <div>
+                    <dt className="text-sm text-stone-500">Location</dt>
+                    <dd className="mt-1 font-semibold">Indianapolis, IN</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-stone-500">Starts at</dt>
+                    <dd className="mt-1 font-semibold">$1,800</dd>
+                  </div>
+                  <div>
+                    <dt className="text-sm text-stone-500">Best for</dt>
+                    <dd className="mt-1 font-semibold">Murals</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          </RevealInView>
         </div>
       </section>
+
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <RevealInView className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">Art news</p>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight">Notes for buyers and artists</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-clay">Art news</p>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">Notes for buyers and artists</h2>
           </div>
           <ButtonLink href="/artists" variant="light">Explore Directory</ButtonLink>
-        </div>
+        </RevealInView>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {artNews.map((item) => (
-            <article className="rounded-lg border border-stone-200 bg-white p-5 shadow-soft" key={item.title}>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">{item.label}</p>
-              <h3 className="mt-3 text-xl font-semibold">{item.title}</h3>
-              <p className="mt-4 text-sm leading-6 text-stone-700">{item.body}</p>
-            </article>
+          {artNews.map((item, index) => (
+            <RevealInView key={item.title} delay={index * 0.08}>
+              <article className="rounded-lg border border-stone-200 bg-paper/95 p-5 shadow-soft backdrop-blur dark:border-white/20 dark:bg-[#16161c]/95">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">{item.label}</p>
+                <h3 className="mt-3 text-xl font-semibold text-stone-900 dark:text-stone-100">{item.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-stone-700 dark:text-stone-200">{item.body}</p>
+              </article>
+            </RevealInView>
           ))}
         </div>
       </section>
-      <section className="border-y border-stone-200 bg-white">
+
+      <section className="border-y border-stone-200 bg-white/95">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <RevealInView className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-moss">How Stroque works</p>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight">From discovery to a clear project request</h2>
             <p className="mt-4 text-stone-700">
               Keep the early art-buying process organized: compare artists, understand budget fit, and send enough context for a useful response.
             </p>
-          </div>
+          </RevealInView>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
-            <div className="rounded-lg border border-stone-200 bg-paper p-5">
-              <p className="text-sm font-semibold text-moss">01</p>
-              <h3 className="mt-3 text-xl font-semibold">Browse by fit</h3>
-              <p className="mt-3 text-sm leading-6 text-stone-700">Use style, service, location, and budget signals to narrow the artist directory.</p>
-            </div>
-            <div className="rounded-lg border border-stone-200 bg-paper p-5">
-              <p className="text-sm font-semibold text-moss">02</p>
-              <h3 className="mt-3 text-xl font-semibold">Review the profile</h3>
-              <p className="mt-3 text-sm leading-6 text-stone-700">Check portfolio images, starting price, services, and the kind of spaces each artist supports.</p>
-            </div>
-            <div className="rounded-lg border border-stone-200 bg-paper p-5">
-              <p className="text-sm font-semibold text-moss">03</p>
-              <h3 className="mt-3 text-xl font-semibold">Send a request</h3>
-              <p className="mt-3 text-sm leading-6 text-stone-700">Share the space type, timeline, budget, style preference, and project details in one form.</p>
-            </div>
+            <RevealInView delay={0.02}>
+              <div className="rounded-lg border border-stone-200 bg-paper p-5">
+                <p className="text-sm font-semibold text-moss">01</p>
+                <h3 className="mt-3 text-xl font-semibold">Browse by fit</h3>
+                <p className="mt-3 text-sm leading-6 text-stone-700">Use style, service, location, and budget signals to narrow the artist directory.</p>
+              </div>
+            </RevealInView>
+            <RevealInView delay={0.09}>
+              <div className="rounded-lg border border-stone-200 bg-paper p-5">
+                <p className="text-sm font-semibold text-moss">02</p>
+                <h3 className="mt-3 text-xl font-semibold">Review the profile</h3>
+                <p className="mt-3 text-sm leading-6 text-stone-700">Check portfolio images, starting price, services, and the kind of spaces each artist supports.</p>
+              </div>
+            </RevealInView>
+            <RevealInView delay={0.16}>
+              <div className="rounded-lg border border-stone-200 bg-paper p-5">
+                <p className="text-sm font-semibold text-moss">03</p>
+                <h3 className="mt-3 text-xl font-semibold">Send a request</h3>
+                <p className="mt-3 text-sm leading-6 text-stone-700">Share the space type, timeline, budget, style preference, and project details in one form.</p>
+              </div>
+            </RevealInView>
           </div>
         </div>
       </section>

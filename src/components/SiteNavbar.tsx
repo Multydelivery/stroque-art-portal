@@ -9,8 +9,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 function navLinkClasses(active: boolean) {
   return active
-    ? "rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-white"
-    : "rounded-lg px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-100";
+    ? "rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]"
+    : "rounded-lg px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:text-stone-200 dark:hover:bg-[#25252d] dark:focus-visible:ring-offset-[#121214]";
 }
 
 export function SiteNavbar({ user }: { user: SessionUser | null }) {
@@ -68,7 +68,7 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
             aria-controls="mobile-nav-menu"
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="rounded-lg border border-stone-300 p-2 text-stone-700 hover:bg-stone-100 md:hidden"
+            className="rounded-lg border border-stone-300 p-2 text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:text-stone-200 dark:hover:bg-[#25252d] dark:focus-visible:ring-offset-[#121214] md:hidden"
             onClick={() => setMenuOpen((value) => !value)}
             type="button"
           >
@@ -98,7 +98,7 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
                   {user.role === "admin" ? "Admin" : "Dashboard"}
                 </Link>
                 <form action="/api/auth/logout" method="post">
-                  <button className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-100" type="submit">
+                  <button className="rounded-lg border border-stone-300 px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:text-stone-200 dark:hover:bg-[#25252d] dark:focus-visible:ring-offset-[#121214]" type="submit">
                     Log out
                   </button>
                 </form>
@@ -129,7 +129,7 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
                     {user.role === "admin" ? "Admin" : "Dashboard"}
                   </Link>
                   <form action="/api/auth/logout" method="post">
-                    <button className="w-full rounded-lg border border-stone-300 px-3 py-2 text-left text-sm font-semibold text-stone-700 hover:bg-stone-100" type="submit">
+                    <button className="w-full rounded-lg border border-stone-300 px-3 py-2 text-left text-sm font-semibold text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:text-stone-200 dark:hover:bg-[#25252d] dark:focus-visible:ring-offset-[#121214]" type="submit">
                       Log out
                     </button>
                   </form>
