@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { SessionUser } from "@/lib/auth";
@@ -38,9 +39,24 @@ function resolveItems(user: SessionUser | null): DockItem[] {
 function DockIcon({ icon, active }: { icon: DockItem["key"]; active: boolean }) {
   if (icon === "home") {
     return (
-      <svg aria-hidden="true" className={iconClasses(active)} fill="none" viewBox="0 0 24 24">
-        <path d="m4.5 11.5 7.5-6 7.5 6V19a1.5 1.5 0 0 1-1.5 1.5h-3.75V14h-4.5v6.5H6A1.5 1.5 0 0 1 4.5 19v-7.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-      </svg>
+      <span className="relative h-5 w-5 overflow-hidden rounded-md">
+        <Image
+          src="/images/S_Logoforrdarkthem.png"
+          alt=""
+          fill
+          sizes="20px"
+          className="hidden object-contain dark:block"
+          aria-hidden="true"
+        />
+        <Image
+          src="/images/S_LogoTM.png"
+          alt=""
+          fill
+          sizes="20px"
+          className="object-contain dark:hidden"
+          aria-hidden="true"
+        />
+      </span>
     );
   }
 

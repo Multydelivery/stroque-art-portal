@@ -56,7 +56,22 @@ export function SiteNavbar({ user }: { user: SessionUser | null }) {
         <div className="flex items-center justify-between gap-3 rounded-2xl border border-stone-200 bg-white/90 px-4 py-3 shadow-soft">
           <Link className="group flex items-center gap-2" href="/">
             <span className="relative h-8 w-8 overflow-hidden rounded-lg">
-              <Image src="/images/S_LogoTM.png" alt="Stroque logo" fill sizes="32px" className="object-contain" priority />
+              <Image
+                src="/images/S_Logoforrdarkthem.png"
+                alt="Stroque logo"
+                fill
+                sizes="32px"
+                className="hidden object-contain dark:block"
+                priority
+              />
+              <Image
+                src="/images/S_LogoTM.png"
+                alt="Stroque logo"
+                fill
+                sizes="32px"
+                className="object-contain dark:hidden"
+                priority
+              />
             </span>
             <span className="text-sm font-semibold tracking-tight text-stone-800 sm:text-base">Artist Portal</span>
             <span className="hidden rounded-full bg-moss/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-moss sm:inline-flex">

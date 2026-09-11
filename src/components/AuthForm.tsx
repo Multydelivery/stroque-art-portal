@@ -50,18 +50,18 @@ export function AuthForm({ mode }: { mode: Mode }) {
       {isSignup && (
         <div className="field">
           <label htmlFor="name">Name</label>
-          <input id="name" {...form.register("name")} />
+          <input id="name" autoComplete="name" {...form.register("name")} />
           <p className="error">{form.formState.errors.name?.message}</p>
         </div>
       )}
       <div className="field">
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" {...form.register("email")} />
+        <input id="email" type="email" autoComplete="email" {...form.register("email")} />
         <p className="error">{form.formState.errors.email?.message}</p>
       </div>
       <div className="field">
         <label htmlFor="password">Password</label>
-        <input id="password" type="password" {...form.register("password")} />
+        <input id="password" type="password" autoComplete={isSignup ? "new-password" : "current-password"} {...form.register("password")} />
         <p className="error">{form.formState.errors.password?.message}</p>
       </div>
       {isSignup && (
