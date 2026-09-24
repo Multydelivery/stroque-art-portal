@@ -54,8 +54,11 @@ export default async function ArtistsPage({
               <option key={service} value={service}>{service}</option>
             ))}
           </select>
-          <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214] md:col-span-4" type="submit">
-            Apply filters
+          <button
+            className="rounded-full border border-[#c4b5fd] bg-[#f5f3ff] px-5 py-3 text-sm font-semibold text-[#7c3aed] transition hover:bg-[#ede9fe] focus-visible:ring-2 focus-visible:ring-[#c4b5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-[#8b5cf6]/40 dark:bg-[#2b1f49] dark:text-[#ddd6fe] dark:hover:bg-[#37275d] dark:focus-visible:ring-offset-[#121214] md:col-span-4"
+            type="submit"
+          >
+            Search Artist
           </button>
         </form>
         <div className="mt-8">
@@ -123,8 +126,11 @@ export default async function ArtistsPage({
             <option key={service} value={service}>{service}</option>
           ))}
         </select>
-        <button className="rounded-lg bg-ink px-5 py-3 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214] md:col-span-4" type="submit">
-          Apply filters
+        <button
+          className="rounded-full border border-[#c4b5fd] bg-[#f5f3ff] px-5 py-3 text-sm font-semibold text-[#7c3aed] transition hover:bg-[#ede9fe] focus-visible:ring-2 focus-visible:ring-[#c4b5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-[#8b5cf6]/40 dark:bg-[#2b1f49] dark:text-[#ddd6fe] dark:hover:bg-[#37275d] dark:focus-visible:ring-offset-[#121214] md:col-span-4"
+          type="submit"
+        >
+          Search Artist
         </button>
       </form>
       <div className="mt-8">

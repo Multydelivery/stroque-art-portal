@@ -4,13 +4,17 @@
 
 :root {
   color: #111111;
-  --gallery-base: #120f14;
+  --gallery-base: #ffffff;
+  --gallery-surface: #ffffff;
+  --gallery-text: #111111;
+  --gallery-muted: #4b5563;
   --gallery-overlay: rgba(9, 9, 12, 0.58);
 }
 
 body {
   min-height: 100vh;
   background: var(--gallery-base);
+  color: var(--gallery-text);
 }
 
 html.dark {
@@ -32,6 +36,39 @@ html.dark body {
 @media (prefers-reduced-motion: reduce) {
   .living-gallery-grain {
     opacity: 0.35;
+  }
+}
+
+.section-flow-divider {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(196, 181, 253, 0.45), rgba(244, 114, 182, 0.75), rgba(196, 181, 253, 0.45), transparent);
+}
+
+.section-flow-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  filter: blur(1px);
+  animation: divider-glide 4.8s linear infinite;
+}
+
+@keyframes divider-glide {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(360%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-flow-divider::after {
+    animation: none;
   }
 }
 
@@ -164,4 +201,48 @@ html.dark .hover\:text-ink:hover {
 
 html.dark .hover\:bg-stone-100:hover {
   background-color: #25252b !important;
+}
+
+html.dark .bg-white {
+  background-color: rgba(18, 18, 20, 0.96) !important;
+}
+
+html.dark .bg-white\/95,
+html.dark .bg-white\/90,
+html.dark .bg-white\/80 {
+  background-color: rgba(18, 18, 20, 0.92) !important;
+}
+
+html.dark .text-violet-700 {
+  color: #c4b5fd !important;
+}
+
+html.dark .text-moss {
+  color: #9ad4a3 !important;
+}
+
+html.dark .text-clay {
+  color: #f2c6a0 !important;
+}
+
+html.dark .text-blush {
+  color: #f3a7cb !important;
+}
+
+html.dark .border-stone-200,
+html.dark .border-stone-200\/80,
+html.dark .border-stone-300 {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.dark .divide-stone-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+}
+
+html.dark .text-stone-700 {
+  color: #dedee5 !important;
+}
+
+html.dark .text-stone-600 {
+  color: #c2c5d0 !important;
 }

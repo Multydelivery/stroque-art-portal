@@ -82,7 +82,7 @@ export default async function BusinessDashboardPage({
           </div>
           <div className="mb-6">
             <Link
-              className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-800 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:hover:bg-[#2b2b33] dark:focus-visible:ring-offset-[#121214]"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#c4b5fd] bg-[#f5f3ff] px-4 py-2 text-sm font-semibold text-[#5b21b6] hover:bg-[#ede9fe] focus-visible:ring-2 focus-visible:ring-[#c4b5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-[#8b5cf6]/40 dark:bg-[#2b1f49] dark:text-[#ddd6fe] dark:hover:bg-[#37275d] dark:focus-visible:ring-offset-[#121214]"
               href="/dashboard/business/project"
             >
               <span aria-hidden="true" className="text-base leading-none">+</span>
