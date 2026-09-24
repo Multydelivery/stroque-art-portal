@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { ButtonLink } from "@/components/ButtonLink";
+import { WelcomeGate } from "@/components/WelcomeGate";
 import { InteractiveArtCard } from "@/components/ui/InteractiveArtCard";
 import { RevealInView } from "@/components/ui/RevealInView";
+import { getSessionUser } from "@/lib/auth";
 
 const indyEvents = [
   {
@@ -63,7 +65,13 @@ const heroImages = [
   }
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const user = await getSessionUser();
+
+  if (!user) {
+    return <WelcomeGate />;
+  }
+
   return (
     <main className="relative z-10">
       <section className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-10 bg-white px-4 py-12 text-stone-900 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 dark:bg-transparent dark:text-white">

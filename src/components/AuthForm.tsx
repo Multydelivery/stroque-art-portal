@@ -12,6 +12,7 @@ type AuthValues = {
   email: string;
   password: string;
   role?: "artist" | "business";
+  agreeToTerms?: boolean;
 };
 
 export function AuthForm({ mode }: { mode: Mode }) {
@@ -22,7 +23,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const form = useForm<AuthValues>({
     resolver: zodResolver(schema),
     defaultValues: isSignup
-      ? { name: "", email: "", password: "", role: "business" }
+      ? { name: "", email: "", password: "", role: "business", agreeToTerms: false }
       : { email: "", password: "" }
   });
 
@@ -71,6 +72,30 @@ export function AuthForm({ mode }: { mode: Mode }) {
             <option value="business">Business</option>
             <option value="artist">Artist</option>
           </select>
+        </div>
+      )}
+      {isSignup && (
+        <div className="field">
+          <div className="flex items-start gap-3">
+            <input
+              id="agreeToTerms"
+              type="checkbox"
+              className="mt-0.5 h-4 w-auto flex-none rounded border-clay/80 p-0 text-ink accent-ink focus:ring-moss/40"
+              {...form.register("agreeToTerms")}
+            />
+            <label htmlFor="agreeToTerms" className="text-sm font-normal text-stone-700 dark:text-stone-300">
+              I agree to the{" "}
+              <a className="font-semibold underline" href="/terms" target="_blank" rel="noreferrer">
+                Terms of Service
+              </a>{" "}
+              and{" "}
+              <a className="font-semibold underline" href="/privacy" target="_blank" rel="noreferrer">
+                Privacy Policy
+              </a>
+              .
+            </label>
+          </div>
+          <p className="error">{form.formState.errors.agreeToTerms?.message}</p>
         </div>
       )}
       {serverError && <p className="error">{serverError}</p>}

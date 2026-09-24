@@ -17,7 +17,8 @@ export const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   email: z.string().email("Use a valid email address."),
   password: z.string().min(8, "Password must be at least 8 characters."),
-  role: roleSchema
+  role: roleSchema,
+  agreeToTerms: z.boolean().refine((value) => value === true, "You must agree to the Terms and Privacy Policy.")
 });
 
 export const loginSchema = z.object({
