@@ -17,13 +17,13 @@ const options: Option[] = [
 function optionClasses(isActive: boolean, isCreateProject: boolean) {
   if (isCreateProject) {
     return isActive
-      ? "block rounded-lg bg-[#7c3aed] px-3 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-[#c4b5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]"
-      : "block rounded-lg border border-[#c4b5fd] bg-[#f5f3ff] px-3 py-2 text-sm font-semibold text-[#5b21b6] hover:bg-[#ede9fe] focus-visible:ring-2 focus-visible:ring-[#c4b5fd] focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-[#8b5cf6]/40 dark:bg-[#2b1f49] dark:text-[#ddd6fe] dark:hover:bg-[#37275d] dark:focus-visible:ring-offset-[#121214]";
+      ? "block rounded-lg bg-violet-600 px-3 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]"
+      : "block rounded-lg bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-700 hover:bg-violet-100 focus-visible:ring-2 focus-visible:ring-violet-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-white/5 dark:text-violet-200 dark:hover:bg-white/10 dark:focus-visible:ring-offset-[#121214]";
   }
 
   return isActive
-    ? "block rounded-lg bg-ink px-3 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]"
-    : "block rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm font-semibold text-stone-800 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1f1f26] dark:text-stone-100 dark:hover:bg-[#2b2b33] dark:focus-visible:ring-offset-[#121214]";
+    ? "block rounded-lg bg-stone-900 px-3 py-2 text-sm font-semibold text-white focus-visible:ring-2 focus-visible:ring-stone-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-stone-900 dark:text-white dark:focus-visible:ring-offset-[#121214]"
+    : "block rounded-lg bg-stone-100 px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-200 focus-visible:ring-2 focus-visible:ring-stone-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10 dark:focus-visible:ring-offset-[#121214]";
 }
 
 export function BusinessSidePanel({
@@ -36,9 +36,9 @@ export function BusinessSidePanel({
   profileImageUrl?: string;
 }) {
   return (
-    <aside aria-label="Business options" className="h-fit rounded-xl border border-stone-200 bg-white p-4 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95 lg:sticky lg:top-6">
-      <div className="mb-4 inline-flex w-full items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2 dark:border-white/20 dark:bg-[#1f1f26]">
-        <span className="relative h-8 w-8 overflow-hidden rounded-full border border-stone-200 bg-white dark:border-white/20 dark:bg-[#262630]">
+    <aside aria-label="Business options" className="h-fit rounded-2xl bg-stone-50 p-4 dark:bg-[#121418] lg:sticky lg:top-6">
+      <div className="mb-4 inline-flex w-full items-center gap-3 rounded-xl bg-white px-3 py-2 dark:bg-white/5">
+        <span className="relative h-8 w-8 overflow-hidden rounded-full bg-stone-100 dark:bg-white/10">
           {profileImageUrl ? (
             <Image src={profileImageUrl} alt="Business profile logo" fill sizes="32px" className="object-contain p-1" priority />
           ) : (
@@ -63,11 +63,12 @@ export function BusinessSidePanel({
           )}
         </span>
         <div className="min-w-0 leading-tight">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone-500 dark:text-stone-300">Business user</p>
-          <p className="truncate text-sm font-semibold text-stone-900 dark:text-stone-100">{profileName}</p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-600 dark:text-stone-300">Business user</p>
+          <p className="truncate text-sm font-semibold text-stone-900 dark:text-white">{profileName}</p>
         </div>
       </div>
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-300">Business options</h2>
+
+      <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-stone-600 dark:text-stone-300">Business options</h2>
       <nav className="mt-3">
         <ul className="space-y-2">
           {options.map((option) => {

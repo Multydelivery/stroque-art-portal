@@ -4,8 +4,8 @@ const baseClasses = "rounded-lg px-3 py-2 text-sm font-semibold transition";
 
 function tabClasses(active: boolean) {
   return active
-    ? `${baseClasses} bg-ink text-white focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:focus-visible:ring-offset-[#121214]`
-    : `${baseClasses} border border-stone-300 bg-white text-stone-800 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:border-white/20 dark:bg-[#1b1b21] dark:text-stone-100 dark:hover:bg-[#25252d] dark:focus-visible:ring-offset-[#121214]`;
+    ? `${baseClasses} bg-stone-900 text-white focus-visible:ring-2 focus-visible:ring-stone-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-stone-900 dark:text-white dark:focus-visible:ring-offset-[#121214]`
+    : `${baseClasses} bg-stone-100 text-stone-700 hover:bg-stone-200 focus-visible:ring-2 focus-visible:ring-stone-300 focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10 dark:focus-visible:ring-offset-[#121214]`;
 }
 
 export function ArtistDashboardNavTabs({
