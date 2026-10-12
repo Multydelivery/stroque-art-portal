@@ -114,3 +114,9 @@ CLOUDINARY_API_SECRET=your-api-secret
 ```
 
 Cloudinary variables are only needed for image upload features.
+
+## Business Profile Workflow
+
+Open **Business profile** from the business dashboard to edit the business name, industry, location, and optional company photo or logo. The completion indicator tracks the three required fields and distinguishes saved information from unsaved changes.
+
+Choose **Review profile** to validate and preview the information. Use **Edit profile** to make corrections, or **Save & Continue** to save and open project creation. Failed saves stay on the review screen and display an error. Business names and industries containing only whitespace are not accepted. You can return to the business profile at any time to edit it.

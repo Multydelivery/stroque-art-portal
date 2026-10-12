@@ -46,8 +46,8 @@ export const artistProfileSchema = z.object({
 });
 
 export const businessProfileSchema = z.object({
-  businessName: z.string().min(2, "Business name is required."),
-  industry: z.string().min(2, "Industry is required."),
+  businessName: z.string().trim().min(2, "Business name is required."),
+  industry: z.string().trim().min(2, "Industry is required."),
   location: z.string().refine(
     (location) => indianaBusinessLocations.some((indianaLocation) => indianaLocation === location),
     "Choose an Indiana city."
