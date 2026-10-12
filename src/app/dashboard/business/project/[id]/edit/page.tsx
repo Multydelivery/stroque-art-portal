@@ -35,8 +35,8 @@ export default async function EditBusinessProjectPage({ params }: { params: Prom
   return (
     <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <section>
-        <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Edit project</h1>
-        <p className="mt-2 text-stone-200">Update details before finding artists for this project.</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-950 dark:text-stone-100">{project.status === "draft" ? "Edit project draft" : "Edit project"}</h1>
+        <p className="mt-2 text-stone-700 dark:text-stone-200">{project.status === "draft" ? "Update and review the details before saving your private draft." : "Update details before finding artists for this project."}</p>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
@@ -44,7 +44,7 @@ export default async function EditBusinessProjectPage({ params }: { params: Prom
 
         <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
           <h2 className="text-2xl font-semibold text-stone-900 dark:text-stone-100">Project details</h2>
-          <p className="mt-1 text-stone-700 dark:text-stone-200">Save your edits, then continue to artist matching.</p>
+          <p className="mt-1 text-stone-700 dark:text-stone-200">{project.status === "draft" ? "Saving changes does not publish the draft or contact artists." : "Save your edits, then continue to artist matching."}</p>
           <BusinessProjectDetailsForm mode="edit" project={project} />
         </section>
       </section>

@@ -77,6 +77,47 @@ export const projectSchema = z
     path: ["budgetMax"]
   });
 
+export const projectCategories = [
+  "Mural",
+  "Canvas painting",
+  "Digital illustration",
+  "Sculpture",
+  "Mixed media",
+  "Installation art",
+  "Portrait",
+  "Abstract"
+] as const;
+
+export const maxProjectReferenceFiles = 8;
+export const maxProjectReferenceBytes = 10 * 1024 * 1024;
+export const projectReferenceMimeTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
+
+export const projectDraftSchema = z.object({
+  spaceType: z.string().trim().min(2, "Project title is required."),
+  category: z.enum(projectCategories, { errorMap: () => ({ message: "Choose a project category." }) }),
+  description: z.string().trim().min(20, "Describe the project in at least 20 characters."),
+  deliverables: z.string().trim().min(2, "Define the project deliverables."),
+  dimensions: z.string().trim().default(""),
+  timeline: z.string().trim().min(2, "Timeline is required."),
+  dueDate: z.string().refine((value) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+    const date = new Date(`${value}T00:00:00.000Z`);
+    return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+  }, "Choose a valid due date."),
+  budget: z.coerce.number().min(100, "Budget must be at least $100 USD.").max(10000, "Budget cannot exceed $10,000 USD.")
+    .refine((value) => Math.abs(value * 100 - Math.round(value * 100)) < 0.000001, "Use no more than two decimal places."),
+  paymentStructure: z.literal("fixed", { errorMap: () => ({ message: "Payment structure must be fixed price." }) }),
+  specialRequirements: z.string().trim().default(""),
+  stylePreference: z.string().trim().default(""),
+  artistExperience: z.string().trim().default(""),
+  referenceFiles: z.array(z.object({
+    name: z.string().trim().min(1, "Reference file name is required."),
+    url: z.string().url("Use a valid reference file URL.").refine(
+      (value) => /^https?:\/\//i.test(value), "Reference files must use an HTTP or HTTPS URL."
+    )
+  })).max(maxProjectReferenceFiles, `Add no more than ${maxProjectReferenceFiles} reference files.`).default([])
+});
+
 export const projectRequestSchema = z.object({
   projectId: z.string().min(1, "Project is required."),
   artistId: z.string().min(1, "Artist is required."),

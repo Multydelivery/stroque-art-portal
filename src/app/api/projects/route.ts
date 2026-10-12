@@ -3,7 +3,8 @@ import { requireUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
 import { createTestProject, getTestBusinessProjects } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
-import { projectSchema } from "@/lib/validation";
+import { projectDraftSchema } from "@/lib/validation";
+import { projectDraftDetails } from "@/lib/projects";
 import BusinessProfile from "@/models/BusinessProfile";
 import Project from "@/models/Project";
 
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
   const user = await requireUser("business");
   if (!user) return NextResponse.json({ error: "Only businesses can create projects." }, { status: 401 });
 
-  const parsed = projectSchema.safeParse(await request.json());
+  const parsed = projectDraftSchema.safeParse(await request.json());
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
@@ -48,9 +49,9 @@ export async function POST(request: Request) {
   }
 
   const created = await Project.create({
-    ...parsed.data,
+    ...projectDraftDetails(parsed.data),
     businessId: business._id,
-    status: "open"
+    status: "draft"
   });
 
   return NextResponse.json({ project: created }, { status: 201 });

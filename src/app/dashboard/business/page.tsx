@@ -78,8 +78,9 @@ export default async function BusinessDashboardPage({
         ) : activeTab === "posted-projects" ? (
           <section aria-labelledby="posted-projects-title" className="rounded-2xl bg-white p-6 dark:bg-transparent">
             <div className="mb-4">
-              <h2 className="text-2xl font-semibold text-stone-950 dark:text-white" id="posted-projects-title">Posted projects</h2>
-              <p className="mt-1 text-sm text-stone-700 dark:text-stone-200">Manage each project and continue to artist matching.</p>
+              <h2 className="text-2xl font-semibold text-stone-950 dark:text-white" id="posted-projects-title">My Projects</h2>
+              <p className="mt-1 text-sm text-stone-700 dark:text-stone-200">Manage your saved drafts and existing projects. Drafts are private and are not published.</p>
+              {params.saved === "draft" && <p role="status" className="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-300">Project draft saved. You can return to edit it at any time.</p>}
             </div>
 
             <div className="mb-6">
@@ -88,7 +89,7 @@ export default async function BusinessDashboardPage({
                 href="/dashboard/business/project"
               >
                 <span aria-hidden="true" className="text-base leading-none">+</span>
-                <span>Create project</span>
+                <span>Create New Project</span>
               </Link>
             </div>
 
@@ -106,15 +107,15 @@ export default async function BusinessDashboardPage({
                         <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-5">
                           <div>
                             <dt className="text-stone-600 dark:text-stone-300">Dimensions</dt>
-                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{project.dimensions}</dd>
+                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{project.dimensions || "Not specified"}</dd>
                           </div>
                           <div>
-                            <dt className="text-stone-600 dark:text-stone-300">Pay range</dt>
-                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{currency(project.budgetMin)} - {currency(project.budgetMax)}</dd>
+                            <dt className="text-stone-600 dark:text-stone-300">{project.paymentStructure === "fixed" ? "Fixed budget (USD)" : "Pay range"}</dt>
+                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{project.paymentStructure === "fixed" ? currency(project.budget ?? project.budgetMax, 2) : `${currency(project.budgetMin)} - ${currency(project.budgetMax)}`}</dd>
                           </div>
                           <div>
-                            <dt className="text-stone-600 dark:text-stone-300">Type of art</dt>
-                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{project.stylePreference}</dd>
+                            <dt className="text-stone-600 dark:text-stone-300">{project.category ? "Category" : "Type of art"}</dt>
+                            <dd className="mt-1 font-semibold text-stone-900 dark:text-white">{project.category || project.stylePreference}</dd>
                           </div>
                           <div>
                             <dt className="text-stone-600 dark:text-stone-300">Timeline</dt>
@@ -128,12 +129,12 @@ export default async function BusinessDashboardPage({
                       </div>
 
                       <div className="flex flex-col gap-2 lg:items-end">
-                        <Link
+                        {project.status !== "draft" && <Link
                           className="inline-flex rounded-lg bg-stone-900 px-3 py-2 text-sm font-semibold text-white hover:bg-stone-800 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-stone-900 dark:text-white dark:hover:bg-stone-800 dark:focus-visible:ring-offset-[#121214]"
                           href={`/dashboard/business/project/artists?projectId=${project._id}`}
                         >
                           Search artists
-                        </Link>
+                        </Link>}
                         <Link
                           className="inline-flex rounded-lg bg-white px-3 py-2 text-sm font-semibold text-stone-700 hover:bg-stone-100 focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2 focus-visible:ring-offset-paper dark:bg-white/5 dark:text-stone-100 dark:hover:bg-white/10 dark:focus-visible:ring-offset-[#121214]"
                           href={`/dashboard/business/project/${project._id}/edit`}
@@ -147,7 +148,7 @@ export default async function BusinessDashboardPage({
                 ))}
               </div>
             ) : (
-              <EmptyState title="No posted projects yet" body="Create your first project, then search for artists and send requests." />
+              <EmptyState title="No projects yet" body="Create your first project, review the details, and save a private draft." />
             )}
           </section>
         ) : (

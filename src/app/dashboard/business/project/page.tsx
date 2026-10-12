@@ -23,8 +23,8 @@ export default async function BusinessProjectDetailsPage() {
   return (
     <main className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <section>
-        <h1 className="text-4xl font-semibold tracking-tight text-stone-100">Create project</h1>
-        <p className="mt-2 text-stone-200">Add project details first, then view matched artists for that project.</p>
+        <h1 className="text-4xl font-semibold tracking-tight text-stone-950 dark:text-stone-100">Create New Project</h1>
+        <p className="mt-2 text-stone-700 dark:text-stone-200">Describe the work, review the details, and save a private project draft.</p>
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start">
@@ -33,7 +33,7 @@ export default async function BusinessProjectDetailsPage() {
         {profile ? (
           <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-soft dark:border-white/20 dark:bg-[#16161c]/95">
             <h2 className="text-2xl font-semibold text-stone-900 dark:text-stone-100">Project details</h2>
-            <p className="mt-1 text-stone-700 dark:text-stone-200">Provide pay range, art type, timeline, and due date to continue.</p>
+            <p className="mt-1 text-stone-700 dark:text-stone-200">Include scope, deliverables, category, timeline, and a fixed budget of $100-$10,000 USD.</p>
             <BusinessProjectDetailsForm />
           </section>
         ) : (

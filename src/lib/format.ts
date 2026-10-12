@@ -1,8 +1,8 @@
-export function currency(value: number) {
+export function currency(value: number, maximumFractionDigits = 0) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-    maximumFractionDigits: 0
+    maximumFractionDigits
   }).format(value);
 }
 

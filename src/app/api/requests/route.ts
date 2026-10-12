@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
-import { createTestProjectRequest } from "@/lib/test-data";
+import { createTestProjectRequest, getTestBusinessProjectById } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
 import { projectRequestSchema } from "@/lib/validation";
 import BusinessProfile from "@/models/BusinessProfile";
@@ -19,6 +19,9 @@ export async function POST(request: Request) {
   }
 
   if (demoMode) {
+    if (getTestBusinessProjectById(user?.id ?? "test-user-business", parsed.data.projectId)?.status === "draft") {
+      return NextResponse.json({ error: "Draft projects cannot be sent to artists." }, { status: 409 });
+    }
     const created = createTestProjectRequest(user?.id ?? "test-user-business", parsed.data);
     if (!created) {
       return NextResponse.json({ error: "Create your business profile first." }, { status: 400 });
@@ -38,6 +41,9 @@ export async function POST(request: Request) {
   const project = await Project.findById(parsed.data.projectId);
   if (!project || project.businessId.toString() !== business._id.toString()) {
     return NextResponse.json({ error: "Project not found." }, { status: 404 });
+  }
+  if (project.status === "draft") {
+    return NextResponse.json({ error: "Draft projects cannot be sent to artists." }, { status: 409 });
   }
 
   const created = await ProjectRequest.create({

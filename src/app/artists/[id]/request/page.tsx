@@ -48,6 +48,10 @@ export default async function RequestPage({
     }
   }
 
+  if (selectedProject?.status === "draft") {
+    redirect("/dashboard/business?tab=posted-projects");
+  }
+
   const projectId = query.projectId ?? selectedProject?._id;
   const dimensions = query.dimensions ?? selectedProject?.dimensions;
 

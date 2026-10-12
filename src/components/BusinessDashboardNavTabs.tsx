@@ -36,7 +36,7 @@ export function BusinessDashboardNavTabs({
             className={tabClasses(activeTab === "posted-projects")}
             href="/dashboard/business?tab=posted-projects"
           >
-            Posted projects
+            My Projects
           </Link>
         </li>
         <li>

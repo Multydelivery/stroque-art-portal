@@ -3,7 +3,8 @@ import { requireUser } from "@/lib/auth";
 import { connectToDatabase } from "@/lib/db";
 import { deleteTestProject, getTestBusinessProjectById, updateTestProject, updateTestProjectStatus } from "@/lib/test-data";
 import { isTestDataEnabled } from "@/lib/test-mode";
-import { projectSchema } from "@/lib/validation";
+import { projectDraftSchema, projectSchema } from "@/lib/validation";
+import { projectDraftDetails } from "@/lib/projects";
 import BusinessProfile from "@/models/BusinessProfile";
 import Project from "@/models/Project";
 import ProjectRequest from "@/models/ProjectRequest";
@@ -36,42 +37,53 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   const isStatusOnlyUpdate = statusCandidate === "open" || statusCandidate === "closed";
 
   const { id } = await params;
+  const testMode = isTestDataEnabled();
+  if (!testMode) await connectToDatabase();
+  const business = testMode ? null : await BusinessProfile.findOne({ userId: user.id });
+  if (!testMode && !business) return NextResponse.json({ error: "Project not found." }, { status: 404 });
+  const existing = testMode
+    ? getTestBusinessProjectById(user.id, id)
+    : await Project.findOne({ _id: id, businessId: business?._id });
+  if (!existing) return NextResponse.json({ error: "Project not found." }, { status: 404 });
+
   if (isStatusOnlyUpdate) {
-    if (isTestDataEnabled()) {
+    if (existing.status === "draft") {
+      return NextResponse.json({ error: "Draft projects cannot be opened or cancelled. Edit or delete the draft instead." }, { status: 409 });
+    }
+    if (testMode) {
       const updated = updateTestProjectStatus(user.id, id, statusCandidate);
       if (!updated) return NextResponse.json({ error: "Project not found." }, { status: 404 });
       return NextResponse.json({ project: updated });
     }
 
-    await connectToDatabase();
-    const business = await BusinessProfile.findOne({ userId: user.id });
-    const existing = await Project.findOne({ _id: id, businessId: business?._id });
-    if (!existing) return NextResponse.json({ error: "Project not found." }, { status: 404 });
-
-    existing.status = statusCandidate;
-    await existing.save();
-    return NextResponse.json({ project: existing });
+    const updated = await Project.findOneAndUpdate(
+      { _id: id, businessId: business?._id, status: existing.status },
+      { status: statusCandidate },
+      { new: true, runValidators: true }
+    );
+    if (!updated) return NextResponse.json({ error: "Project changed or was deleted. Refresh and try again." }, { status: 409 });
+    return NextResponse.json({ project: updated });
   }
 
-  const parsed = projectSchema.safeParse(payload);
+  const parsed = existing.status === "draft" ? projectDraftSchema.safeParse(payload) : projectSchema.safeParse(payload);
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
   }
 
-  if (isTestDataEnabled()) {
-    const updated = updateTestProject(user.id, id, parsed.data);
+  const details = "budget" in parsed.data ? projectDraftDetails(parsed.data) : parsed.data;
+  if (testMode) {
+    const updated = updateTestProject(user.id, id, details);
     if (!updated) return NextResponse.json({ error: "Project not found." }, { status: 404 });
     return NextResponse.json({ project: updated });
   }
 
-  await connectToDatabase();
-  const business = await BusinessProfile.findOne({ userId: user.id });
-  const existing = await Project.findOne({ _id: id, businessId: business?._id });
-  if (!existing) return NextResponse.json({ error: "Project not found." }, { status: 404 });
-
-  Object.assign(existing, parsed.data);
-  await existing.save();
-  return NextResponse.json({ project: existing });
+  const updated = await Project.findOneAndUpdate(
+    { _id: id, businessId: business?._id, status: existing.status },
+    details,
+    { new: true, runValidators: true }
+  );
+  if (!updated) return NextResponse.json({ error: "Project changed or was deleted. Refresh and try again." }, { status: 409 });
+  return NextResponse.json({ project: updated });
 }
 
 export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {

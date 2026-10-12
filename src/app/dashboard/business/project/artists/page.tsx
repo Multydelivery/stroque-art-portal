@@ -59,7 +59,7 @@ export default async function BusinessProjectArtistSearchPage({
     if (!project) {
       redirect("/dashboard/business/project");
     }
-    if (!isProjectComplete(project)) {
+    if (project.status === "draft" || !isProjectComplete(project)) {
       redirect(`/dashboard/business/project/${project._id}/edit`);
     }
 
@@ -77,7 +77,7 @@ export default async function BusinessProjectArtistSearchPage({
     if (!project) {
       redirect("/dashboard/business/project");
     }
-    if (!isProjectComplete(project)) {
+    if (project.status === "draft" || !isProjectComplete(project)) {
       redirect(`/dashboard/business/project/${project._id}/edit`);
     }
 

@@ -9,7 +9,7 @@ type Option = {
 
 const options: Option[] = [
   { key: "create-project", label: "Create project", href: "/dashboard/business/project" },
-  { key: "posted-projects", label: "Posted projects", href: "/dashboard/business?tab=posted-projects" },
+  { key: "posted-projects", label: "My Projects", href: "/dashboard/business?tab=posted-projects" },
   { key: "business-profile", label: "Business profile", href: "/dashboard/business?tab=business-profile" },
   { key: "sent-requests", label: "Sent requests", href: "/dashboard/business?tab=sent-requests" }
 ];

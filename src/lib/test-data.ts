@@ -1,7 +1,8 @@
 import type { ArtistProfile, BusinessProfile, Project, ProjectRequest } from "@/types/entities";
 import type { SessionUser } from "@/lib/auth";
+import { projectDraftDetails } from "@/lib/projects";
 import type { z } from "zod";
-import type { artistProfileSchema, businessProfileSchema, projectRequestSchema, projectSchema, requestStatusSchema, signupSchema } from "@/lib/validation";
+import type { artistProfileSchema, businessProfileSchema, projectDraftSchema, projectRequestSchema, projectSchema, requestStatusSchema, signupSchema } from "@/lib/validation";
 
 type TestUser = SessionUser & {
   password: string;
@@ -241,46 +242,33 @@ export function getTestProjectById(id: string) {
   return store().projects.find((project) => project._id === id) ?? null;
 }
 
-export function createTestProject(userId: string, data: z.infer<typeof projectSchema>) {
+export function createTestProject(userId: string, data: z.infer<typeof projectDraftSchema>) {
   const business = getTestBusinessProfile(userId);
   if (!business) return null;
 
   const created: Project = {
+    ...projectDraftDetails(data),
     _id: `test-project-${Date.now()}`,
     businessId: business,
-    spaceType: data.spaceType,
-    dimensions: data.dimensions,
-    budgetMin: data.budgetMin,
-    budgetMax: data.budgetMax,
-    timeline: data.timeline,
-    dueDate: data.dueDate,
-    stylePreference: data.stylePreference,
-    description: data.description,
-    status: "open",
+    status: "draft",
     createdAt: new Date().toISOString()
   };
   store().projects.unshift(created);
   return created;
 }
 
-export function updateTestProject(userId: string, id: string, data: z.infer<typeof projectSchema>) {
+export function updateTestProject(userId: string, id: string, data: z.infer<typeof projectSchema> | ReturnType<typeof projectDraftDetails>) {
   const project = getTestBusinessProjectById(userId, id);
   if (!project) return null;
 
-  project.spaceType = data.spaceType;
-  project.dimensions = data.dimensions;
-  project.budgetMin = data.budgetMin;
-  project.budgetMax = data.budgetMax;
-  project.timeline = data.timeline;
-  project.dueDate = data.dueDate;
-  project.stylePreference = data.stylePreference;
-  project.description = data.description;
+  Object.assign(project, data);
   return project;
 }
 
 export function updateTestProjectStatus(userId: string, id: string, status: Project["status"]) {
   const project = getTestBusinessProjectById(userId, id);
   if (!project) return null;
+  if (project.status === "draft") return null;
 
   project.status = status;
   return project;
@@ -314,7 +302,7 @@ export function createTestProjectRequest(userId: string, data: z.infer<typeof pr
   const business = getTestBusinessProfile(userId);
   const artist = getTestArtist(data.artistId);
   const project = getTestBusinessProjectById(userId, data.projectId);
-  if (!business || !artist || !project) return null;
+  if (!business || !artist || !project || project.status === "draft") return null;
 
   const created: ProjectRequest = {
     _id: `test-request-${Date.now()}`,

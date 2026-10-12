@@ -120,3 +120,11 @@ Cloudinary variables are only needed for image upload features.
 Open **Business profile** from the business dashboard to edit the business name, industry, location, and optional company photo or logo. The completion indicator tracks the three required fields and distinguishes saved information from unsaved changes.
 
 Choose **Review profile** to validate and preview the information. Use **Edit profile** to make corrections, or **Save & Continue** to save and open project creation. Failed saves stay on the review screen and display an error. Business names and industries containing only whitespace are not accepted. You can return to the business profile at any time to edit it.
+
+## Project Draft Workflow
+
+Open **My Projects** and choose **Create New Project**. New projects require a title, category, detailed description, deliverables, timeline, due date, and a fixed project budget from **$100 to $10,000 USD**, with at most two decimal places. The initial categories use the existing art types: Mural, Canvas painting, Digital illustration, Sculpture, Mixed media, Installation art, Portrait, and Abstract.
+
+Dimensions, special requirements, preferred artist style/experience, and reference files are optional. Reference uploads support up to eight JPG, PNG, WebP, GIF, or PDF files, up to 10 MB each, and require Cloudinary configuration (including in demo mode).
+
+Choose **Review project** to preview all details, then **Save Draft**. Saved drafts appear in **My Projects** and can be edited or deleted. Drafts are private: they cannot use artist matching, send requests, or be opened through the existing reopen action. Publishing is a separate workflow and is not included yet. Existing open/closed projects retain their original budget-range editing and artist-request flow. MongoDB saves drafts persistently; demo drafts reset when the server restarts.

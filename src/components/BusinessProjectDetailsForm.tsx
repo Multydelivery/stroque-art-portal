@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import { projectSchema } from "@/lib/validation";
+import { projectCategories, projectSchema } from "@/lib/validation";
 import type { Project } from "@/types/entities";
+import { ProjectDraftForm } from "@/components/ProjectDraftForm";
 
 type Values = z.infer<typeof projectSchema>;
 
@@ -17,16 +18,7 @@ const payRangePresets = [
   { value: "10000-20000", label: "$10,000 - $20,000", budgetMin: 10000, budgetMax: 20000 }
 ] as const;
 
-const artTypeOptions = [
-  "Mural",
-  "Canvas painting",
-  "Digital illustration",
-  "Sculpture",
-  "Mixed media",
-  "Installation art",
-  "Portrait",
-  "Abstract"
-] as const;
+const artTypeOptions = projectCategories;
 
 const timelineOptions = ["ASAP", "2-4 weeks", "4-6 weeks", "6-8 weeks", "2-3 months", "Flexible"] as const;
 
@@ -37,6 +29,11 @@ export function BusinessProjectDetailsForm({
   project?: Project | null;
   mode?: "create" | "edit";
 }) {
+  if (!project || project.status === "draft") return <ProjectDraftForm project={project} />;
+  return <LegacyProjectDetailsForm project={project} mode={mode} />;
+}
+
+function LegacyProjectDetailsForm({ project, mode }: { project: Project; mode: "create" | "edit" }) {
   const router = useRouter();
   const [serverError, setServerError] = useState("");
   const [defaultHeight, defaultWidth] = (project?.dimensions || "").toLowerCase().split("x");

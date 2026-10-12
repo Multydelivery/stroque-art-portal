@@ -28,7 +28,14 @@ export type Project = {
   dueDate: string;
   stylePreference: string;
   description: string;
-  status: "open" | "closed";
+  category?: string;
+  deliverables?: string;
+  budget?: number;
+  paymentStructure?: "fixed";
+  specialRequirements?: string;
+  artistExperience?: string;
+  referenceFiles?: { name: string; url: string }[];
+  status: "draft" | "open" | "closed";
   createdAt: string;
 };
 
