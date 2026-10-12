@@ -9,6 +9,7 @@ import { loginSchema, signupSchema } from "@/lib/validation";
 type Mode = "login" | "signup";
 type AuthValues = {
   name?: string;
+  phone?: string;
   email: string;
   password: string;
   role?: "artist" | "business";
@@ -23,7 +24,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const form = useForm<AuthValues>({
     resolver: zodResolver(schema),
     defaultValues: isSignup
-      ? { name: "", email: "", password: "", role: "business", agreeToTerms: false }
+      ? { name: "", email: "", phone: "", password: "", role: "business", agreeToTerms: false }
       : { email: "", password: "" }
   });
 
@@ -60,6 +61,21 @@ export function AuthForm({ mode }: { mode: Mode }) {
         <input id="email" type="email" autoComplete="email" {...form.register("email")} />
         <p className="error">{form.formState.errors.email?.message}</p>
       </div>
+      {isSignup && (
+        <div className="field">
+          <label htmlFor="phone">Phone number (required)</label>
+          <input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            required
+            aria-invalid={Boolean(form.formState.errors.phone)}
+            aria-describedby="phone-error"
+            {...form.register("phone")}
+          />
+          <p id="phone-error" className="error">{form.formState.errors.phone?.message}</p>
+        </div>
+      )}
       <div className="field">
         <label htmlFor="password">Password</label>
         <input id="password" type="password" autoComplete={isSignup ? "new-password" : "current-password"} {...form.register("password")} />

@@ -5,6 +5,7 @@ import type { artistProfileSchema, businessProfileSchema, projectRequestSchema, 
 
 type TestUser = SessionUser & {
   password: string;
+  phone?: string;
 };
 
 type TestStore = {
@@ -161,6 +162,7 @@ export function createTestUser(data: z.infer<typeof signupSchema>) {
     id: `test-user-${Date.now()}`,
     name: data.name,
     email: data.email,
+    phone: data.phone,
     password: data.password,
     role: data.role
   };

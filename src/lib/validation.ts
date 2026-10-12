@@ -16,6 +16,15 @@ export const roleSchema = z.enum(["artist", "business"]);
 export const signupSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   email: z.string().email("Use a valid email address."),
+  phone: z
+    .string({ required_error: "Phone number is required." })
+    .trim()
+    .min(1, "Phone number is required.")
+    .regex(/^\+?[\d\s().-]+$/, "Use a valid phone number.")
+    .refine((value) => {
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    }, "Phone number must contain 7 to 15 digits."),
   password: z.string().min(8, "Password must be at least 8 characters."),
   role: roleSchema,
   agreeToTerms: z.boolean().refine((value) => value === true, "You must agree to the Terms and Privacy Policy.")

@@ -48,6 +48,8 @@ If port `3000` is already in use, Next.js will automatically choose another port
 
 ## Demo Mode
 
+New Business and Artist signups require a phone number containing 7 to 15 digits. An optional leading `+`, spaces, parentheses, periods, and hyphens are accepted. Phone numbers are saved with the account in MongoDB or demo memory; SMS verification is not included. Existing accounts can still log in without a phone number.
+
 When `USE_TEST_DATA=true`, the app uses in-memory demo data instead of connecting to MongoDB. This is useful for testing the UI and main workflows without setting up a database.
 
 Demo data resets when the dev server restarts.
